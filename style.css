@@ -13,26 +13,27 @@ body {
 
 .grass {
     height: 80vh;
-    width: 400vw;
+    width: 7000px;
     background-repeat: repeat-x;
     background-image: url('media/grass.png');
     display: flex;
     background-position-y: 100%;
-    animation: background-defilment 20s infinite linear;
+    animation: background-defilment 15s infinite linear;
 }
 
 .dirt {
     position: absolute;
     height: 20vh;
     width: 100vw;
-    z-index: -1;
+    z-index: 0;
     background-color: #887000;
     bottom: 0;
 }
 
-/* .trees {
+.trees {
     position: fixed;
-    bottom: 80px;
+    top: 80vh;
+    translate: 0px -490px;
     display: flex;
 }
 
@@ -41,25 +42,33 @@ body {
     width: 210px;
     background-image: url('media/tree.png');
     background-repeat: no-repeat;
-    margin-left: 500px;
-
 }
 
 .tree:nth-child(1) {
-    margin-right: 900px;
+    margin-left: 700px;
 }
 
-.tree:nth-child(1) {
-    margin-right: 1600px;
+.tree:nth-child(2) {
+    margin-left: 1100px;
 }
- */
+
+.tree:nth-child(3) {
+    margin-left: 1000px;
+}
+
+.tree:nth-child(4) {
+    margin-left: 1970px;
+}
+
+
+
 
 
 
 .bushes {
     position: fixed;
-top: 80vh;
-translate: 0px -220px;
+    top: 80vh;
+    translate: 0px -220px;
     display: flex;
 }
 
@@ -72,7 +81,7 @@ translate: 0px -220px;
 }
 
 .bush:nth-child(1) {
-    margin-right: 300px;
+    margin-right: 350px;
 }
 
 .bush:nth-child(2) {
@@ -80,27 +89,126 @@ translate: 0px -220px;
 }
 
 .bush:nth-child(3) {
-    margin-left: 2290px;
+    margin-left: 600px;
 }
 
 .bush:nth-child(4) {
-    margin-left: 1265px;
+    margin-left: 1200px;
+}
+
+.bush:nth-child(5) {
+    margin-left: 1180px;
+}
+
+.bush:nth-child(6) {
+    margin-left: 1320px;
 }
 
 .sky {
     position: absolute;
-    height: 80vh;
+    z-index: 0;
+}
+
+.mountain {
+    position: absolute;
+    height: 100vh;
     width: 100vw;
-    background-color: rgb(58, 208, 253);
-    z-index: -1;
+    background-image: url('media/mountain.png');
+    z-index: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @keyframes background-defilment {
     0% {
-        transform: translateX(0%);
+        transform: translateX(0px);
     }
 
     100% {
-        transform: translateX(-196vw);
+        transform: translateX(-4705px);
     }
 }
+
+.clouds {
+    position: fixed;
+    display: flex;
+    animation: cloudscroll 40s linear infinite;
+}
+
+.cloud {
+    height: 100px;
+    width: 230px;
+    background-image: url('media/cloud.png');
+    background-repeat: no-repeat;
+}
+
+.cloud:nth-child(1) {
+    margin-top: 5vh;
+    margin-left: 1000px;
+}
+
+.cloud:nth-child(2) {
+    margin-top: 22vh;
+    margin-left: 1300px;
+}
+
+.cloud:nth-child(3) {
+    margin-top: 5vh;
+    margin-left: 1532px;
+}
+
+.clouds2 {
+    position: fixed;
+    display: flex;
+    animation: cloudscroll 70s linear infinite;
+}
+
+.cloud2 {
+    height: 88px;
+    width: 230px;
+    background-image: url('media/cloud.png');
+    background-repeat: no-repeat;
+    transform: scale(70%);
+}
+
+.cloud2:nth-child(1) {
+    margin-top: 12vh;
+    margin-left: -200px;
+}
+
+.cloud2:nth-child(2) {
+    margin-left: 1890px;
+    margin-top: 14vh;
+}
+
+@keyframes cloudscroll {
+    0% {
+        transform: translateX(0px);
+    }
+
+    100% {
+        transform: translateX(-3290px);
+    }
+}
+
+.bird {
+    width: 76px;
+    height: 64px;
+    background-image: url("../media/fly-duck-hor.png");
+    background-size: 192px 64px;
+    animation: flyAnimation 0.4s steps(1) infinite;
+    position: absolute;
+    z-index: 10;
+  }
+
+  @keyframes flyAnimation {
+    0% {
+      background-position: -7px;
+    }
+    50% {
+      background-position: 88px;
+    }
+    100% {
+
+    }
+  }
