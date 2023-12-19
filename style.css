@@ -191,24 +191,92 @@ body {
     }
 }
 
-.bird {
-    width: 76px;
-    height: 64px;
-    background-image: url("../media/fly-duck-hor.png");
-    background-size: 192px 64px;
-    animation: flyAnimation 0.4s steps(1) infinite;
+.birds {
+    width: 100vw;
+    height: 100vh;
     position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bird {
+    width: 33px;
+    height: 33px;
+    background-image: url("media/duck-1.png");
+    background-size: 314px 33px;
     z-index: 10;
-  }
+    margin-right: 200px;
+    background-repeat: no-repeat;
+    scale: 250%;
+}
 
-  @keyframes flyAnimation {
+.flying-right {
+    animation: flyRightAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyRightAnimation {
     0% {
-      background-position: -7px;
+        background-position: -234px;
     }
-    50% {
-      background-position: 88px;
-    }
-    100% {
 
+    50% {
+        background-position: -188px;
     }
-  }
+}
+
+.flying-top-right {
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyTopRightAnimation {
+    0% {
+        background-position: -30px;
+    }
+
+    50% {
+        background-position: -64px -1px;
+    }
+}
+
+.flying-bottom-right {
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+    rotate: 90deg;
+}
+
+
+
+
+.flying-left {
+    animation: flyLeftAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyLeftAnimation {
+    0% {
+        background-position: -280px;
+    }
+
+    50% {
+        background-position: -142px;
+    }
+}
+
+.flying-top-left {
+    animation: flyTopLeftAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyTopLeftAnimation {
+    0% {
+        background-position: -105px;
+    }
+
+    50% {
+        background-position: 5px 1px;
+    }
+}
+
+.flying-bottom-left {
+    animation: flyTopLeftAnimation 0.4s steps(1) infinite;
+    rotate: -90deg;
+}
