@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <link rel="icon" href="media/logo.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="icon" href="media/logo.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Duck Hunt</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="birds">
-        <div class="bird flying-right"></div>
-        <div class="bird flying-top-right"></div>
+      <div class="bird flying-right"></div>
+      <!-- <div class="bird flying-top-right"></div>
         <div class="bird flying-bottom-right"></div>
         <div class="bird flying-left"></div>
         <div class="bird flying-top-left"></div>
-        <div class="bird flying-bottom-left"></div>
+        <div class="bird flying-bottom-left"></div> -->
     </div>
-
 
     <div class="mountain"></div>
     <div class="dirt"></div>
     <div class="sky">
-        <div class="clouds">
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-        </div>
-        <div class="clouds2">
-            <div class="cloud2"></div>
-            <div class="cloud2"></div>
-        </div>
+      <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+      </div>
+      <div class="clouds2">
+        <div class="cloud2"></div>
+        <div class="cloud2"></div>
+      </div>
     </div>
     <section class="divbackground">
-        <div class="grass">
-            <div class="trees">
-                <div class="tree"></div>
-                <div class="tree"></div>
-                <div class="tree"></div>
-                <div class="tree"></div>
-            </div>
-            <div class="bushes">
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-            </div>
+      <div class="grass">
+        <div class="trees">
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
         </div>
+        <div class="bushes">
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+        </div>
+      </div>
     </section>
 
-</body>
-<script src="script.js"></script>
+    <audio id="clickSound">
+      <source src="audio/shotgun.mp3" type="audio/mp3" />
+      <!-- You can add additional source elements for different audio formats -->
+    </audio>
 
+    <button id="startButton">Start</button>
+  </body>
+
+  <script src="JS/script.js"></script>
 </html>
