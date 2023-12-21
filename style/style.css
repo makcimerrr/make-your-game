@@ -3,6 +3,7 @@
 }
 
 button {
+  background-position-y: 2;
   padding: 30px 50px;
   font-size: 1.2em;
   cursor: pointer;
@@ -212,16 +213,16 @@ body {
   justify-content: center;
 }
 
-/* .bird {
+.bird {
   width: 33px;
   height: 33px;
-  background-image: url("media/duck-1.png");
+  background-image: url("../media/duck-1.png");
   background-size: 314px 33px;
   z-index: 10;
   margin-right: 200px;
   background-repeat: no-repeat;
   scale: 250%;
-} */
+}
 
 .flying-right {
   animation: flyRightAnimation 0.4s steps(1) infinite;
