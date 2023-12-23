@@ -307,8 +307,8 @@ body {
 
   #game-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
-/*     background-color: red; */
+    width: 40vw;
+    height: 40vh;
+    background-color: red;
     overflow: hidden;
   }

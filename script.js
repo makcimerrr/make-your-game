@@ -20,26 +20,22 @@ window.addEventListener('resize', function () {
   screenHeight = window.innerHeight;
 });
 
-
 //function pour avoir un random une valeur entre 0 et 1 et 2
 function leftOrRight() {
   leftOrRightValue = Math.floor(Math.random() * 3);
   return leftOrRightValue;
 }
-
 function upOrDown() {
   upOrDownValue = Math.floor(Math.random() * 3);
   return upOrDownValue;
 }
-
 moveDuck(leftOrRight(), upOrDown());
 
 setInterval(leftOrRight, 1000);
 setInterval(upOrDown, 1000);
-setInterval(function() {
+setInterval(function () {
   duck.classList.remove('flying-top', 'flying-top-right', 'flying-right');
-},400)
-
+}, 400)
 
 //375x267
 function moveDuck(leftOrRightValue, upOrDownValue) {
@@ -47,63 +43,67 @@ function moveDuck(leftOrRightValue, upOrDownValue) {
   const maxX = document.getElementById('game-container').offsetWidth - duckWidth;
   const maxY = document.getElementById('game-container').offsetHeight - duckHeight;
 
-  if (newX <= 0) {
+  let limitTop = false
+  let limitBottom = false
+  let limitLeft = false
+  let limitRight = false
+  let enableLimitFunction = true
+
+
+  if (newX <= 0 && enableLimitFunction) {
     leftOrRightValue = 2;
-    console.log('limit left')
+    limitLeft = true;
+    enableLimitFunction = false;
+    setTimeout(() => {
+      enableLimitFunction = true;
+    }, 1000);
     newX = 0;
-  } else if (newX >= maxX/2) {
+  } else if (newX >= maxX / 2) {
     leftOrRightValue = 0;
-    console.log('limit right')
+    limitRight = true;
   }
 
   if (newY <= 0) {
     upOrDownValue = 0;
-    console.log('limit top')
+    limitTop = true
+    /*     console.log('limit top') */
     newY = 0;
-  } else if (newY >= maxY/2) {
+  } else if (newY >= maxY / 2) {
     upOrDownValue = 2;
-    console.log('limit bottom')
+    limitBottom = true
+    /*     console.log('limit bottom') */
   }
-  console.log(newX - duckWidth, maxX/2)
-  console.log(newY + duckHeight, maxY/2)
-  
-  
+
 
 
   if (leftOrRightValue === 0) {
     newX = newX - speed
-    console.log('left')
+    /*     console.log('left') */
   } else if (leftOrRightValue === 2) {
     newX = newX + speed
-    console.log('right')
+    /*     console.log('right') */
   } else {
     newX = newX
   }
 
-
   if (upOrDownValue === 0) {
-    console.log('bottom')
+    /*     console.log('bottom') */
     newY = newY + speed
   } else if (upOrDownValue === 2) {
-    console.log('top')
+    /*     console.log('top') */
     newY = newY - speed
   } else {
     newY = newY
   }
   console.log(leftOrRightValue, upOrDownValue);
 
-  
 
-  
-//pour le sur place
-if (leftOrRightValue === 1 && upOrDownValue === 1) {
-  
-  duck.classList.add('flying-right')
-  newY = newY - 5
-  newX = newX + 10
-}
-
-
+  //pour le sur place
+  if (leftOrRightValue === 1 && upOrDownValue === 1) {
+    duck.classList.add('flying-right')
+    newY = newY - 5
+    newX = newX + 10
+  }
 
   //top
   if (leftOrRightValue === 1 && upOrDownValue === 2) {
@@ -153,4 +153,5 @@ if (leftOrRightValue === 1 && upOrDownValue === 1) {
 
 setInterval(function () {
   moveDuck(leftOrRightValue, upOrDownValue);
-}, 200);
+}, 100);
+
