@@ -11,8 +11,8 @@ const duck = document.getElementById('bird')
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 //taille du duck
-const duckWidth = 82.5;
-const duckHeight = 82.5;
+const duckWidth = 33;
+const duckHeight = 33;
 
 window.addEventListener('resize', function () {
   screenWidth = window.innerWidth;
@@ -45,27 +45,26 @@ function moveDuck(leftOrRightValue, upOrDownValue) {
   const maxX = document.getElementById('game-container').offsetWidth - duckWidth;
   const maxY = document.getElementById('game-container').offsetHeight - duckHeight;
 
-  if (newX*4 <= 0) {
+  if (newX <= 0) {
     leftOrRightValue = 2; // Set leftOrRightValue to 2 to move right
     console.log('limit left')
     newX = 0; // Reset newX to prevent the duck from going out of bounds
   } else if (newX >= maxX) {
     leftOrRightValue = 0; // Set leftOrRightValue to 0 to move left
-    newX = maxX; // Reset newX to prevent the duck from going out of bounds
     console.log('limit right')
   }
 
-  if (newY*4 <= 0) {
+  if (newY <= 0) {
     upOrDownValue = 0; // Set upOrDownValue to 0 to move down
     console.log('limit top')
     newY = 0; // Reset newY to prevent the duck from going out of bounds
   } else if (newY >= maxY) {
     upOrDownValue = 2; // Set upOrDownValue to 2 to move up
-    newY = maxY; // Reset newY to prevent the duck from going out of bounds
     console.log('limit bottom')
   }
-  console.log(newX*4 - duckWidth, maxX)
-  console.log(newY*4 + duckHeight, maxY)
+  console.log(newX - duckWidth, maxX)
+  console.log(newY + duckHeight, maxY)
+  
   
 
 
@@ -91,6 +90,10 @@ function moveDuck(leftOrRightValue, upOrDownValue) {
   }
   console.log(leftOrRightValue, upOrDownValue);
 
+  
+
+
+  
 //pour le sur place
 if (leftOrRightValue === 1 && upOrDownValue === 1) {
   
