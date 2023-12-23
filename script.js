@@ -49,18 +49,16 @@ function moveDuck(leftOrRightValue, upOrDownValue) {
   let limitRight = false
   let enableLimitFunction = true
 
-
-  if (newX <= 0 && enableLimitFunction) {
+  
+  if (newX <= 0) {
     leftOrRightValue = 2;
-    limitLeft = true;
-    enableLimitFunction = false;
-    setTimeout(() => {
-      enableLimitFunction = true;
-    }, 1000);
+    limitLeft = true
+    /*     console.log('limit left') */
     newX = 0;
   } else if (newX >= maxX / 2) {
     leftOrRightValue = 0;
-    limitRight = true;
+  let limitRight = true
+    /*     console.log('limit right') */
   }
 
   if (newY <= 0) {
@@ -100,6 +98,7 @@ function moveDuck(leftOrRightValue, upOrDownValue) {
 
   //pour le sur place
   if (leftOrRightValue === 1 && upOrDownValue === 1) {
+
     duck.classList.add('flying-right')
     newY = newY - 5
     newX = newX + 10
