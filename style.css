@@ -8,7 +8,7 @@ body {
     position: absolute;
     height: 100vh;
     width: 100vw;
-    /*     z-index: 1; */
+/*         z-index: 100; */
 }
 
 .grass {
@@ -204,94 +204,109 @@ body {
 .bird {
     min-width: 33px;
     min-height: 33px;
-    background-image: url("media/duck-1.png");
-    background-size: 314px 33px;
+    background-image: url("media/duckSprite.png");
+    background-size: 375px 257px;
     z-index: 10;
-    margin-right: 100px;
+    margin-right: 150px;
     background-repeat: no-repeat;
-    scale: 250%;
-    background-color: red;
+    scale: 300%;
+}
+
+.flying-top {
+    animation: flyTopAnimation 0.4s steps(1) infinite;
+}
+.flying-bottom {
+    animation: flyTopAnimation 0.4s steps(1) infinite;
+    transform: scaleY(-1);
+}
+
+@keyframes flyTopAnimation {
+    0% {
+        background-position: -210px -190px;
+    }
+    25% {
+        background-position: -170px -190px;
+    }
+    50% {
+        background-position: -130px -190px;
+    }
+    75% {
+        background-position: -170px -190px;
+    }
 }
 
 .flying-right {
     animation: flyRightAnimation 0.4s steps(1) infinite;
 }
+.flying-left {
+    animation: flyRightAnimation 0.4s steps(1) infinite;
+    transform: scaleX(-1);
+}
 
 @keyframes flyRightAnimation {
     0% {
-        background-position: -234px;
+        background-position: -210px -111px;
     }
-
+    25% {
+        background-position: -170px -111px;
+    }
     50% {
-        background-position: -188px;
+        background-position: -130px -111px;
+    }
+    75% {
+        background-position: -170px -111px;
     }
 }
+
 
 .flying-top-right {
     animation: flyTopRightAnimation 0.4s steps(1) infinite;
 }
+.flying-top-left {
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+    transform: scaleX(-1);
+}
 
 @keyframes flyTopRightAnimation {
     0% {
-        background-position: -30px;
+        background-position: -210px -150px;
     }
-
+    25% {
+        background-position: -170px -150px;
+    }
     50% {
-        background-position: -64px -1px;
+        background-position: -130px -150px;
+    }
+    75% {
+        background-position: -170px -150px;
     }
 }
 
 .flying-bottom-right {
-    transform: rotate(90deg);
     animation: flyTopRightAnimation 0.4s steps(1) infinite;
-    background-color: blue;
+    transform: rotate(90deg);
+    
 }
-
-
-
-
-.flying-left {
-    animation: flyLeftAnimation 0.4s steps(1) infinite;
-}
-
-@keyframes flyLeftAnimation {
-    0% {
-        background-position: -280px;
-    }
-
-    50% {
-        background-position: -142px;
-    }
-}
-
-.flying-top-left {
-    animation: flyTopLeftAnimation 0.4s steps(1) infinite;
-}
-
-@keyframes flyTopLeftAnimation {
-    0% {
-        background-position: -105px;
-    }
-
-    50% {
-        background-position: 5px 1px;
-    }
-}
-
 .flying-bottom-left {
-    animation: flyTopLeftAnimation 0.4s steps(1) infinite;
-    transform: rotate(-90deg);
-    background-color: blue;
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+    transform: rotate(-90deg) scaleX(-1);
 }
 
 #bird {
     min-width: 33px;
     min-height: 33px;
-    background-image: url("media/duck-1.png");
-    background-size: 314px 33px;
+    position: absolute;
+    background-image: url("media/duckSprite.png");
+    background-size: 375px 257px;
+    z-index: 10;
     background-repeat: no-repeat;
     scale: 250%;
+  }
 
-    position: absolute;
-    z-index: 100;
+  #game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: red;
+    overflow: hidden;
   }
