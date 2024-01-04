@@ -1,3 +1,291 @@
 * {
-  background-color: red;
+  cursor: crosshair;
+}
+
+button {
+  background-position-y: 2;
+  padding: 30px 50px;
+  font-size: 1.2em;
+  cursor: pointer;
+  background-color: #000dff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  position: relative;
+
+  z-index: 1; /* Set a higher z-index value */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.divbackground {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.grass {
+  height: 80vh;
+  width: 7000px;
+  background-repeat: repeat-x;
+  background-image: url("../media/grass.png");
+  display: flex;
+  background-position-y: 100%;
+}
+
+.dirt {
+  position: absolute;
+  height: 20vh;
+  width: 100vw;
+  z-index: 0;
+  background-color: #887000;
+  bottom: 0;
+}
+
+.trees {
+  position: fixed;
+  top: 80vh;
+  translate: 0px -490px;
+  display: flex;
+}
+
+.tree {
+  height: 400px;
+  width: 210px;
+  background-image: url("../media/tree.png");
+  background-repeat: no-repeat;
+}
+
+.tree:nth-child(1) {
+  margin-left: 700px;
+}
+
+.tree:nth-child(2) {
+  margin-left: 1100px;
+}
+
+.tree:nth-child(3) {
+  margin-left: 1000px;
+}
+
+.tree:nth-child(4) {
+  margin-left: 1970px;
+}
+
+.bushes {
+  position: fixed;
+  top: 80vh;
+  translate: 0px -220px;
+  display: flex;
+}
+
+.bush {
+  height: 123px;
+  width: 100px;
+  background-image: url("../media/bush.png");
+  background-repeat: no-repeat;
+  margin-left: 300px;
+}
+
+.bush:nth-child(1) {
+  margin-right: 350px;
+}
+
+.bush:nth-child(2) {
+  margin-left: 970px;
+}
+
+.bush:nth-child(3) {
+  margin-left: 600px;
+}
+
+.bush:nth-child(4) {
+  margin-left: 1200px;
+}
+
+.bush:nth-child(5) {
+  margin-left: 1180px;
+}
+
+.bush:nth-child(6) {
+  margin-left: 1320px;
+}
+
+.sky {
+  position: absolute;
+  z-index: 0;
+}
+
+.mountain {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../media/mountain.png");
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes background-defilment {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(-4705px);
+  }
+}
+
+.clouds {
+  position: fixed;
+  display: flex;
+  animation: cloudscroll 40s linear infinite;
+}
+
+.cloud {
+  height: 100px;
+  width: 230px;
+  background-image: url("../media/cloud.png");
+  background-repeat: no-repeat;
+}
+
+.cloud:nth-child(1) {
+  margin-top: 5vh;
+  margin-left: 1000px;
+}
+
+.cloud:nth-child(2) {
+  margin-top: 22vh;
+  margin-left: 1300px;
+}
+
+.cloud:nth-child(3) {
+  margin-top: 5vh;
+  margin-left: 1532px;
+}
+
+.clouds2 {
+  position: fixed;
+  display: flex;
+  animation: cloudscroll 70s linear infinite;
+}
+
+.cloud2 {
+  height: 88px;
+  width: 230px;
+  background-image: url("../media/cloud.png");
+  background-repeat: no-repeat;
+  transform: scale(70%);
+}
+
+.cloud2:nth-child(1) {
+  margin-top: 12vh;
+  margin-left: -200px;
+}
+
+.cloud2:nth-child(2) {
+  margin-left: 1890px;
+  margin-top: 14vh;
+}
+
+@keyframes cloudscroll {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(-3290px);
+  }
+}
+
+.birds {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bird {
+  width: 33px;
+  height: 33px;
+  background-image: url("../media/duck-1.png");
+  background-size: 314px 33px;
+  z-index: 10;
+  margin-right: 200px;
+  background-repeat: no-repeat;
+  scale: 250%;
+}
+
+.flying-right {
+  animation: flyRightAnimation 0.4s steps(1) infinite;
+  position: absolute;
+}
+
+@keyframes flyRightAnimation {
+  0% {
+    background-position: -234px;
+  }
+
+  50% {
+    background-position: -188px;
+  }
+}
+
+.flying-top-right {
+  animation: flyTopRightAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyTopRightAnimation {
+  0% {
+    background-position: -30px;
+  }
+
+  50% {
+    background-position: -64px -1px;
+  }
+}
+
+.flying-bottom-right {
+  animation: flyTopRightAnimation 0.4s steps(1) infinite;
+  rotate: 90deg;
+}
+
+.flying-left {
+  animation: flyLeftAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyLeftAnimation {
+  0% {
+    background-position: -280px;
+  }
+
+  50% {
+    background-position: -142px;
+  }
+}
+
+.flying-top-left {
+  animation: flyTopLeftAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyTopLeftAnimation {
+  0% {
+    background-position: -105px;
+  }
+
+  50% {
+    background-position: 5px 1px;
+  }
+}
+
+.flying-bottom-left {
+  animation: flyTopLeftAnimation 0.4s steps(1) infinite;
+  rotate: -90deg;
 }
