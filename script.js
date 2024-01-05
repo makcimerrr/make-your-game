@@ -40,10 +40,10 @@ let blueCount = 1;
 let redCount = 2;
 
 function isBlackBlueOrRed() {
-  if (blueCount > 0 && Math.random() < 0.1) {
+  if (blueCount > 0 && Math.random() < 0.05) {
     blueCount--;
     return 'blue';
-  } else if (redCount > 0 && Math.random() < 0.2) {
+  } else if (redCount > 0 && Math.random() < 0.1) {
     redCount--;
     return 'red';
   } else {
