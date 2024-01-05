@@ -1,14 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: 'Press Start 2P', system-ui;
 }
+
+/* /////menu///// */
+
+#menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 999;
+    border: 10px solid #f5f5dc;
+    /* Couleur beige */
+    padding: 20px;
+    /* Espace à l'intérieur du carré */
+    background-color: #e8d0d0;
+    /* Couleur de fond blanche à l'intérieur du carré */
+    border-radius: 10px;
+    transition: opacity 0.5s steps(5);
+}
+
+#logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    /* Espacement entre le logo et les boutons */
+}
+
+.button {
+    display: block;
+    /* Assure que les boutons apparaissent sur une nouvelle ligne */
+    width: 200px;
+    /* Ajustez la largeur des boutons selon vos besoins */
+    padding: 10px;
+    margin: 10px auto;
+    /* Centre les boutons horizontalement */
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    font-family: 'Press Start 2P', system-ui;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+#score-form {
+    margin-top: 20px;
+}
+
+#pseudo-input,
+#best-score {
+    width: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* /////////background///////// */
 
 .divbackground {
     position: absolute;
     height: 100vh;
     width: 100vw;
-        z-index: 100;
+    z-index: 100;
+    pointer-events: none;
 }
 
 .grass {
@@ -18,7 +83,11 @@ body {
     background-image: url('media/grass.png');
     display: flex;
     background-position-y: 100%;
-    animation: background-defilment 15s infinite linear;
+    animation: background-defilment 30s infinite linear;
+}
+
+.grass.paused {
+    animation-play-state: paused;
 }
 
 .dirt {
@@ -59,11 +128,6 @@ body {
 .tree:nth-child(4) {
     margin-left: 1970px;
 }
-
-
-
-
-
 
 .bushes {
     position: fixed;
@@ -191,6 +255,9 @@ body {
     }
 }
 
+
+/* //////ducks////// */
+
 .birds {
     width: 100vw;
     height: 100vh;
@@ -220,12 +287,15 @@ body {
     0% {
         background-position: -210px -190px;
     }
+
     25% {
         background-position: -170px -190px;
     }
+
     50% {
         background-position: -130px -190px;
     }
+
     75% {
         background-position: -170px -190px;
     }
@@ -239,12 +309,15 @@ body {
     0% {
         background-position: -210px -111px;
     }
+
     25% {
         background-position: -170px -111px;
     }
+
     50% {
         background-position: -130px -111px;
     }
+
     75% {
         background-position: -170px -111px;
     }
@@ -259,12 +332,15 @@ body {
     0% {
         background-position: -210px -150px;
     }
+
     25% {
         background-position: -170px -150px;
     }
+
     50% {
         background-position: -130px -150px;
     }
+
     75% {
         background-position: -170px -150px;
     }
@@ -279,18 +355,19 @@ body {
     z-index: 0;
     background-repeat: no-repeat;
     scale: 200%;
-  }
+    pointer-events: auto;
+    pointer-events: auto;
+}
 
-  #game-container {
+#game-container {
     position: relative;
     width: 100vw;
     height: 69vh;
-/*     background-color: red; */
     overflow: hidden;
-  }
+}
 
 
-  .flying-top.blue {
+.flying-top.blue {
     animation: flyBlueTopAnimation 0.4s steps(1) infinite;
 }
 
@@ -419,5 +496,142 @@ body {
 
     75% {
         background-position: -300px -150px;
+    }
+}
+
+.dead {
+    animation: deadAnimation 0.4s steps(1) forwards, fallAnimation 2s 0.4s ease-in forwards;
+    background-position: -170px -227px;
+}
+
+.dead.blue {
+    animation: deadBlueAnimation 0.4s steps(1) forwards, fallAnimation 2s 0.4s ease-in forwards;;
+    background-position: -170px -227px;
+}
+
+.dead.red {
+    animation: deadRedAnimation 0.4s steps(1) forwards, fallAnimation 2s 0.4s ease-in forwards;;
+    background-position: -170px -227px;
+}
+
+@keyframes deadAnimation {
+    0% {
+        background-position: -130px -227px;
+    }
+
+    100% {
+        background-position: -170px -227px;
+    }
+}
+
+@keyframes deadBlueAnimation {
+    0% {
+        background-position: 0px -227px;
+    }
+    
+    100% {
+        background-position: -40px -227px;
+    }
+}
+
+@keyframes deadRedAnimation {
+    0% {
+        background-position: -260px -227px;
+    }
+    
+    100% {
+        background-position: -300px -227px;
+    }
+}
+
+@keyframes fallAnimation {
+    0% {
+        transform: translateY(0vh);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* /////chien/////// */
+
+.dog {
+    left: 1vw;
+    height: 50px;
+    width: 60px;
+    background-image: url(/media/duckSprite.png);
+    scale: 200%;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 34vh;
+}
+
+.snif {
+    animation: snifDog 0.5s steps(5) infinite;
+}
+
+@keyframes snifDog {
+    0% {
+        background-position: 0px 0px;
+    }
+
+    100% {
+        background-position: -300px 0px;
+    }
+}
+
+.find {
+    animation: findAnimation 1s steps(2) forwards, fade 0s 1s forwards;
+}
+
+@keyframes fade {
+    0%{
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
+}
+
+@keyframes findAnimation{
+    0% {
+        background-position: 0px -58px;
+        transform: translate(0px,0px);
+    }
+    25% {
+        background-position: 0px -58px;
+        transform: translate(0px,0px);
+    }
+    50%{
+        background-position: 0px -58px;
+        transform: translate(0px,0px);
+    }
+    75%{
+        background-position: -120px -58px;
+        transform: translate(20px,-20px);
+    }
+    100% {
+        background-position: -120px -58px;
+        transform: translate(40px,20px);
+    }
+    
+}
+
+.laugh {
+    animation: laughAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes laughAnimation {
+    0% {
+        background-position: -180px -58px;
+    }
+
+    50% {
+        background-position: -240px -58px;
+    }
+
+    100% {
+        opacity: 0%;
     }
 }
