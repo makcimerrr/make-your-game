@@ -36,10 +36,19 @@ function getRandomValue() {
   console.log(randomValues);
 }
 
+let blueCount = 1;
+let redCount = 2;
+
 function isBlackBlueOrRed() {
-  const colors = ['black', 'blue', 'red'];
-  const randomIndex = Math.floor(Math.random() * 3);
-  return colors[randomIndex];
+  if (blueCount > 0 && Math.random() < 0.1) {
+    blueCount--;
+    return 'blue';
+  } else if (redCount > 0 && Math.random() < 0.2) {
+    redCount--;
+    return 'red';
+  } else {
+    return 'black';
+  }
 }
 
 function createDuck(id, initialX, initialY) {
