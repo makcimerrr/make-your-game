@@ -1,0 +1,264 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: skyblue;
+}
+
+.birds {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bird {
+    min-width: 33px;
+    min-height: 33px;
+    background-image: url("../media/duckSprite.png");
+    background-size: 375px 257px;
+    z-index: 10;
+    margin-right: 150px;
+    background-repeat: no-repeat;
+    scale: 200%;
+}
+
+.flying-top.blue {
+    animation: flyBlueTopAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyBlueTopAnimation {
+    0% {
+        background-position: 0px -190px;
+    }
+
+    25% {
+        background-position: -40px -190px;
+    }
+
+    50% {
+        background-position: -80px -190px;
+    }
+
+    75% {
+        background-position: -40px -190px;
+    }
+}
+
+.flying-right.blue {
+    animation: flyBlueRightAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyBlueRightAnimation {
+    0% {
+        background-position: 0px -111px;
+    }
+
+    25% {
+        background-position: -40px -111px;
+    }
+
+    50% {
+        background-position: -80px -111px;
+    }
+
+    75% {
+        background-position: -40px -111px;
+    }
+}
+
+.flying-top-right.blue {
+    animation: flyBlueTopRightAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyBlueTopRightAnimation {
+    0% {
+        background-position: 0px -150px;
+    }
+
+    25% {
+        background-position: -40px -150px;
+    }
+
+    50% {
+        background-position: -80px -150px;
+    }
+
+    75% {
+        background-position: -40px -150px;
+    }
+}
+
+.flying-top.red {
+    animation: flyRedTopAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyRedTopAnimation {
+    0% {
+        background-position: -260px -190px;
+    }
+
+    25% {
+        background-position: -300px -190px;
+    }
+
+    50% {
+        background-position: -340px -190px;
+    }
+
+    75% {
+        background-position: -300px -190px;
+    }
+}
+
+.flying-right.red {
+    animation: flyRedRightAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyRedRightAnimation {
+    0% {
+        background-position: -260px -111px;
+    }
+
+    25% {
+        background-position: -300px -111px;
+    }
+
+    50% {
+        background-position: -340px -111px;
+    }
+
+    75% {
+        background-position: -300px -111px;
+    }
+}
+
+.flying-top-right.red {
+    animation: flyRedTopRightAnimation 0.4s steps(1) infinite;
+}
+
+@keyframes flyRedTopRightAnimation {
+    0% {
+        background-position: -260px -150px;
+    }
+
+    25% {
+        background-position: -300px -150px;
+    }
+
+    50% {
+        background-position: -340px -150px;
+    }
+
+    75% {
+        background-position: -300px -150px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.flying-top {
+    animation: flyTopAnimation 0.4s steps(1) infinite;
+}
+.flying-bottom {
+    animation: flyTopAnimation 0.4s steps(1) infinite;
+    transform: scaleY(-1);
+}
+
+@keyframes flyTopAnimation {
+    0% {
+        background-position: -210px -190px;
+    }
+    25% {
+        background-position: -170px -190px;
+    }
+    50% {
+        background-position: -130px -190px;
+    }
+    75% {
+        background-position: -170px -190px;
+    }
+}
+
+.flying-right {
+    animation: flyRightAnimation 0.4s steps(1) infinite;
+}
+.flying-left {
+    animation: flyRightAnimation 0.4s steps(1) infinite;
+    transform: scaleX(-1);
+}
+
+@keyframes flyRightAnimation {
+    0% {
+        background-position: -210px -111px;
+    }
+    25% {
+        background-position: -170px -111px;
+    }
+    50% {
+        background-position: -130px -111px;
+    }
+    75% {
+        background-position: -170px -111px;
+    }
+}
+
+
+.flying-top-right {
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+}
+.flying-top-left {
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+    transform: scaleX(-1);
+}
+
+@keyframes flyTopRightAnimation {
+    0% {
+        background-position: -210px -150px;
+    }
+    25% {
+        background-position: -170px -150px;
+    }
+    50% {
+        background-position: -130px -150px;
+    }
+    75% {
+        background-position: -170px -150px;
+    }
+}
+
+.flying-bottom-right {
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+    transform: rotate(90deg);
+    
+}
+.flying-bottom-left {
+    animation: flyTopRightAnimation 0.4s steps(1) infinite;
+    transform: rotate(-90deg) scaleX(-1);
+}
