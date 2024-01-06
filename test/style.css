@@ -58,3 +58,11 @@
         opacity: 0%;
     }
 }
+
+.one-duck {
+    background-position: -320px 0px;
+}
+
+.two-duck {
+    background-position: -320px -58px;
+}

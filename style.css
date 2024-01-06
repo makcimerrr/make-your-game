@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
+    cursor:crosshair;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -582,7 +583,7 @@ body {
 }
 
 .find {
-    animation: findAnimation 1s steps(2) forwards, fade 0s 1s forwards;
+    animation: findAnimation 1s steps(2) forwards/* , fade 0s 1s forwards */;
 }
 
 @keyframes fade {
@@ -615,7 +616,6 @@ body {
         background-position: -120px -58px;
         transform: translate(40px,20px);
     }
-    
 }
 
 .laugh {
@@ -633,5 +633,32 @@ body {
 
     100% {
         opacity: 0%;
+    }
+}
+
+.one-duck {
+    background-position: -320px 0px;
+}
+
+.double-duck {
+    animation: doubleDuck 4s ease-in-out forwards;
+    background-position: -320px -58px;
+}
+
+@keyframes doubleDuck {
+    0% {
+        transform: translateY(50px);
+    }
+    25% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    75% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(50px);
     }
 }

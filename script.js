@@ -59,6 +59,8 @@ var speed = 100;
 const duckWidth = 66;
 const duckHeight = 66;
 
+let deadDucks = 0;
+
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 
@@ -113,9 +115,33 @@ function createDuck(id, initialX, initialY) {
 
   duck.addEventListener('click', function () {
     duck.classList.add('dead')
-    console.log('detruit')
-    /*     removeDuck(duck); */
+
+    deadDucks+=1
+    console.log(deadDucks)
+
+
+    if (deadDucks%2 === 0) {
+      dog.classList.add('double-duck')
+            console.log('double duck')
+      setTimeout(() => {
+        dog.classList.remove('double-duck')
+      }, 4000);
+    }
+    
+    if (deadDucks%1 === 0) {
+      dog.classList.add('one-duck')
+            console.log('one duck')
+      setTimeout(() => {
+        dog.classList.remove('one-duck')
+      }, 4000);
+    }
+
+    setTimeout(() => {
+      removeDuck(duck);
+    },2000)
   });
+
+
   gameContainer.appendChild(duck);
   ducks.push(duck);
 }
@@ -178,8 +204,6 @@ function moveDuck(ducks) {
       '0-0': ['flying-top-right', `scaleX(-1) rotate(90deg)`],//bottom-left
       '1-1': ['flying-right', `scaleY(1) rotate(0deg)`]
     };
-
-
 
     const key = `${leftOrRightValue}-${upOrDownValue}`;
     if (transformations[key]) {
