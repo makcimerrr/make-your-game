@@ -565,7 +565,8 @@ body {
     scale: 200%;
     background-repeat: no-repeat;
     position: absolute;
-    bottom: 34vh;
+    bottom: 20vh;
+    translate: 0 -140px;
 }
 
 .snif {

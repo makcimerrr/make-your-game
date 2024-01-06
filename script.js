@@ -21,8 +21,6 @@ dog.classList.replace('snif', 'find')
   },1000)
 }
 
-
-
 function menuDisapearInGame() { //fait disparaitre le menu quand on clique sur start
   console.log('menu disapear')
   menu.style.opacity = 0
@@ -38,8 +36,6 @@ function showCredits() {
   console.log('Front-End : Enzo')
   console.log('Back-End : Enzo ft. Chat-Gpt')
 }
-
-
 
 
 
