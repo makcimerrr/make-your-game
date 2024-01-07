@@ -39,6 +39,15 @@ function showCredits() {
 
 //////////////game//////////////////
 
+// a faire :
+///if je touche au moins un canard la vitesse augmente
+// relancer la partie automatiquement
+// ecran fail
+//skins ???
+
+
+
+
 const gameContainer = document.getElementById('game-container');
 let duckCount = 0;
 const ducks = [];
@@ -286,10 +295,14 @@ function timerShowUp() {
             gameContainer.removeChild(gameContainer.firstChild)
           }
         }, 10);
-      }, 7000);
+      }, 8000);
     }
     if (seconds <= 0) {
       gameContainer.classList.add('invincible')
+      setInterval(() => {
+        gameContainer.classList.remove('invincible')
+        console.log('operationel pour une deuxieme game')
+      }, 8000);
 
       clearInterval(countdown);
       setTimeout(() => {
