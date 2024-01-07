@@ -1,31 +1,29 @@
-
-//////////////menu//////////////////
-
 ////////////recup divs//////////////
 const menu = document.getElementById('menu')
 const grass = document.querySelector('.grass');
 const dog = document.querySelector('.dog')
 ////////////recup divs//////////////
 
-
+//////////////menu//////////////////
 function startGame() {
   setInterval(function () {
     moveDuck(ducks);
   }, speed);
   startTime = Date.now();
   menuDisapearInGame()
-dog.classList.replace('snif', 'find')
+  timerShowUp()
+  dog.classList.replace('snif', 'find')
   setTimeout(() => {
     startCreatingDucks();
     setInterval(getRandomValue, 1000);
-  },1000)
+  }, 1000)
 }
 
 function menuDisapearInGame() { //fait disparaitre le menu quand on clique sur start
   console.log('menu disapear')
   menu.style.opacity = 0
   grass.classList.toggle('paused');
-  
+
   setTimeout(() => {
     menu.style.zIndex = -999;
   }, 500);
@@ -47,7 +45,7 @@ const ducks = [];
 
 let i = 0;
 var maxDuck = 16;
-var duckStartHeight = 2500
+var duckStartHeight = 3000
 
 var distance = 16;
 var speed = 100;
@@ -65,6 +63,14 @@ let randomValues = [];
 let blueCount = 1;
 let redCount = 2;
 
+let countdown;
+let seconds = 5;
+const timer = document.querySelector('.timer')
+const timediv = document.querySelector('.timediv')
+
+
+
+
 window.addEventListener('resize', () => {
   screenWidth = window.innerWidth;
   screenHeight = window.innerHeight;
@@ -76,7 +82,7 @@ function getRandomValue() {
   const currentTime = Date.now() - startTime;
   ducks.forEach(() => {
     const leftOrRightValue = Math.floor(Math.random() * 3);
-    const upOrDownValue = currentTime < (duckStartHeight+1000) ? 2 : Math.floor(Math.random() * 3);
+    const upOrDownValue = currentTime < (duckStartHeight + 1000) ? 2 : Math.floor(Math.random() * 3);
     randomValues.push({ leftOrRightValue, upOrDownValue });
   });
 }
@@ -93,6 +99,8 @@ function isBlackBlueOrRed() {
     return 'black';
   }
 }
+
+const score = document.querySelector('.score')
 
 function createDuck(id, initialX, initialY) {
   const duck = document.createElement('div');
@@ -112,31 +120,31 @@ function createDuck(id, initialX, initialY) {
   duck.addEventListener('click', function () {
     duck.classList.add('dead')
 
-    deadDucks+=1
-    console.log(deadDucks)
+    deadDucks += 1
+    score.textContent = `${deadDucks}`
 
 
-    if (deadDucks%2 === 0) {
+
+    if (deadDucks % 2 === 0) {
       dog.classList.add('double-duck')
-            console.log('double duck')
+      console.log('double duck')
       setTimeout(() => {
         dog.classList.remove('double-duck')
       }, 4000);
     }
-    
-    if (deadDucks%1 === 0) {
-      dog.classList.add('one-duck')
-            console.log('one duck')
-      setTimeout(() => {
-        dog.classList.remove('one-duck')
-      }, 4000);
-    }
+
+    /*     if (deadDucks % 1 === 0) {
+          dog.classList.add('one-duck')
+          console.log('one duck')
+          setTimeout(() => {
+            dog.classList.remove('one-duck')
+          }, 4000);
+        } */
 
     setTimeout(() => {
       removeDuck(duck);
-    },2000)
+    }, 2000)
   });
-
 
   gameContainer.appendChild(duck);
   ducks.push(duck);
@@ -168,11 +176,29 @@ function moveDuck(ducks) {
     let newX = parseInt(duck.style.left);
     let newY = parseInt(duck.style.top);
 
-    const { leftOrRightValue, upOrDownValue } = randomValues[index];
+    let { leftOrRightValue, upOrDownValue } = randomValues[index];
     if (duck.classList.contains('dead')) {
       newX += 0
       newY += 0
-    } else {
+    } else if (gameContainer.classList.contains('end')) {
+      upOrDownValue = 2;
+      console.log('end')
+      if (leftOrRightValue === 0) {
+        newX = Math.max(newX - distance, /* 0 */);
+      } else if (leftOrRightValue === 2) {
+        newX = Math.min(newX + distance, /* maxX */);
+      }
+      if (upOrDownValue === 0) {
+        newY = Math.min(newY + distance,/*  maxY  */);
+      } else if (upOrDownValue === 2) {
+        newY = Math.max(newY - distance, /* 0 */);
+      }
+      if (leftOrRightValue === 1 && upOrDownValue === 1) {
+        newY -= 5;
+        newX += 10;
+      }
+    }
+    else {
       if (leftOrRightValue === 0) {
         newX = Math.max(newX - distance, /* 0 */);
       } else if (leftOrRightValue === 2) {
@@ -205,7 +231,7 @@ function moveDuck(ducks) {
     if (transformations[key]) {
       const [className, transformValue] = transformations[key];
       duck.classList.remove('flying-top', 'flying-top-right', 'flying-right');
-      if(!duck.classList.contains('dead')) {
+      if (!duck.classList.contains('dead')) {
         duck.classList.add(className);
         duck.style.transform = transformValue;
       } else {
@@ -217,4 +243,51 @@ function moveDuck(ducks) {
     duck.style.top = newY + 'px';
   });
 }
+
+
+
+
+function timerShowUp() {
+  //montre le timer
+  timediv.style.translate = '0px 150px'
+  clearInterval(countdown);
+
+  //timer format 00:00
+  countdown = setInterval(function () {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = seconds % 60;
+    let formattedTime =
+      (minutes < 10 ? '0' : '') + minutes + ':' +
+      (remainingSeconds < 10 ? '0' : '') + remainingSeconds;
+    timer.textContent = formattedTime;
+    if (seconds <= 2) {
+      console.log('byeducks')
+      gameContainer.classList.add('end')
+      setTimeout(() => {
+        gameContainer.classList.remove('end')
+        setInterval(() => {
+          while (gameContainer.firstChild) {
+            gameContainer.removeChild(gameContainer.firstChild)
+          }
+        }, 10);
+      }, 7000);
+    }
+    if (seconds <= 0) {
+      gameContainer.classList.add('invincible')
+
+      clearInterval(countdown);
+      setTimeout(() => {
+        //relance le background
+        grass.classList.toggle('paused');
+      }, 1000);
+      //cache le timer
+      timediv.style.translate = '0px 350px'
+    }
+    seconds--;
+  }, 1000);
+}
+
+
+
+
 
