@@ -68,11 +68,12 @@ body {
 }
 
 .score {
-    height: 10vh;
-    width: 10vw;
+    margin: 30px;
+    right: 0;
     position: absolute;
-    background-color: red;
     text-align: center;
+    color: #ede0d4;
+    font-size: 50px;
 }
 
 /* /////////background///////// */

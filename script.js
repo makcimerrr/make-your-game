@@ -64,7 +64,7 @@ let blueCount = 1;
 let redCount = 2;
 
 let countdown;
-let seconds = 5;
+let seconds = 10;
 const timer = document.querySelector('.timer')
 const timediv = document.querySelector('.timediv')
 
@@ -117,13 +117,20 @@ function createDuck(id, initialX, initialY) {
     duck.classList.add('blue');
   }
 
+  
+
   duck.addEventListener('click', function () {
     duck.classList.add('dead')
+    if (duck.classList.contains('red')) {
+      deadDucks += 2
+    }
+    if (duck.classList.contains('blue')) {
+      deadDucks += 5
+    } else {
+      deadDucks += 1
+    }
 
-    deadDucks += 1
     score.textContent = `${deadDucks}`
-
-
 
     if (deadDucks % 2 === 0) {
       dog.classList.add('double-duck')
@@ -133,13 +140,13 @@ function createDuck(id, initialX, initialY) {
       }, 4000);
     }
 
-    /*     if (deadDucks % 1 === 0) {
+        if (deadDucks % 1 === 0) {
           dog.classList.add('one-duck')
           console.log('one duck')
           setTimeout(() => {
             dog.classList.remove('one-duck')
           }, 4000);
-        } */
+        }
 
     setTimeout(() => {
       removeDuck(duck);
@@ -175,6 +182,15 @@ function moveDuck(ducks) {
 
     let newX = parseInt(duck.style.left);
     let newY = parseInt(duck.style.top);
+
+    if (gameContainer.classList.contains('invincible')) {
+      //a 0 seconde on peu plus cliquer sur les canards
+      duck.style.pointerEvents = 'none'
+      setTimeout(() => {
+        // les rend clicable a nouveau
+        duck.style.pointerEvents = 'auto'
+      }, 4000);
+    }
 
     let { leftOrRightValue, upOrDownValue } = randomValues[index];
     if (duck.classList.contains('dead')) {
