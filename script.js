@@ -6,17 +6,41 @@ const dog = document.querySelector('.dog')
 
 //////////////menu//////////////////
 function startGame() {
-  setInterval(function () {
+  // Start moving ducks at regular intervals
+  const moveDucksInterval = setInterval(function () {
     moveDuck(ducks);
   }, speed);
+  setTimeout(() => {
+    clearInterval(moveDucksInterval);
+  }, 15000);
+
   startTime = Date.now();
-  menuDisapearInGame()
-  timerShowUp()
-  dogAnimation()
+  menuDisapearInGame();
+  timerShowUp();
+  dogAnimation();
   setTimeout(() => {
     startCreatingDucks();
     setInterval(getRandomValue, 1000);
-  }, 1000)
+  }, 1000);
+  if (speed > 30) {
+    speed -= 10
+    duckStartHeight -= 200
+    console.log('next speed: ' + speed)
+  } else if (speed > 10 && speed <= 30) {
+    speed -= 5
+    duckStartHeight -= 200
+    console.log('next speed: ' + speed)
+  } else {
+    console.log('You are max speed')
+  }
+  
+
+  setTimeout(() => {
+    failed();
+  }, 11000);
+
+
+
 }
 
 function menuDisapearInGame() { //fait disparaitre le menu quand on clique sur start
@@ -36,7 +60,6 @@ function showCredits() {
 }
 
 
-
 //////////////game//////////////////
 
 // a faire :
@@ -45,8 +68,7 @@ function showCredits() {
 // ecran fail
 // skins ???
 
-
-
+const failScreen = document.getElementById('fail-screen')
 
 const gameContainer = document.getElementById('game-container');
 let duckCount = 0;
@@ -81,6 +103,8 @@ const timediv = document.querySelector('.timediv')
 const score = document.querySelector('.score')
 
 const divBg = document.querySelector('.divbackground')
+
+let lastScore = 0
 
 
 
@@ -134,6 +158,7 @@ function createDuck(id, initialX, initialY) {
   let alreadyDead = false
 
   duck.addEventListener('click', function () {
+    console.log(deadDucks, lastScore)
     if (!alreadyDead) {
       alreadyDead = true;
       duck.classList.add('dead')
@@ -172,15 +197,17 @@ function createDuck(id, initialX, initialY) {
       }
 
       setTimeout(() => {
+        console.log('removed')
         removeDuck(duck);
       }, 2000)
 
     }
 
   });
-  
+
   gameContainer.appendChild(duck);
   ducks.push(duck);
+  lastScore = deadDucks
 }
 
 function removeDuck(duck) {
@@ -196,12 +223,20 @@ function startCreatingDucks() {
   setInterval(getRandomValue());
   i++;
   if (i < maxDuck) {
+    console.log('created duck')
     setTimeout(startCreatingDucks, 100);
+    console.log(i)
+  }
+  if (i === maxDuck - 1) {
+    setTimeout(() => {
+      i = 0
+    }, 10000);
   }
 }
 
 
 function moveDuck(ducks) {
+  console.log('moved')
   ducks.forEach((duck, index) => {
     /*     const maxX = gameContainer.offsetWidth - duckWidth;
     const maxY = gameContainer.offsetHeight - duckHeight; */
@@ -224,7 +259,6 @@ function moveDuck(ducks) {
       newY += 0
     } else if (gameContainer.classList.contains('end')) {
       upOrDownValue = 2;
-      console.log('end')
       if (leftOrRightValue === 0) {
         newX = Math.max(newX - distance, /* 0 */);
       } else if (leftOrRightValue === 2) {
@@ -284,18 +318,22 @@ function moveDuck(ducks) {
     duck.style.left = newX + 'px';
     duck.style.top = newY + 'px';
   });
+
 }
 
 
 
 
 function timerShowUp() {
-  time = seconde
-  //montre le timer
-  timediv.style.translate = '-152px -150px'
+  let time = seconde;
+
+  // Clear any existing interval
   clearInterval(countdown);
 
-  //timer format 00:00
+  // Show the timer
+  timediv.style.translate = '-152px -150px';
+
+  // Format the timer as 00:00
   countdown = setInterval(function () {
     let minutes = Math.floor(time / 60);
     let remainingtime = time % 60;
@@ -303,46 +341,56 @@ function timerShowUp() {
       (minutes < 10 ? '0' : '') + minutes + ':' +
       (remainingtime < 10 ? '0' : '') + remainingtime;
     timer.textContent = formattedTime;
+
     if (time <= 2) {
-      console.log('byeducks')
-      gameContainer.classList.add('end')
+      gameContainer.classList.add('end');
       setTimeout(() => {
-        gameContainer.classList.remove('end')
-        setInterval(() => {
-          while (gameContainer.firstChild) {
-            gameContainer.removeChild(gameContainer.firstChild)
-          }
-        }, 100);
+        gameContainer.classList.remove('end');
+        while (gameContainer.firstChild) {
+          gameContainer.removeChild(gameContainer.firstChild);
+        }
       }, 8000);
     }
+
     if (time <= 0) {
-      gameContainer.classList.add('invincible')
-      gameContainer.classList.add('oneduck?')
+      gameContainer.classList.add('invincible');
+      gameContainer.classList.add('oneduck?');
 
-      dog.style.translate = '0px -140px'
-      dog.style.opacity = '1'
+      dog.style.translate = '0px -140px';
+      dog.style.opacity = '1';
       setTimeout(() => {
-        gameContainer.classList.remove('invincible')
-        console.log('operationel pour une deuxieme game')
-        timer.textContent = `00:${seconde}`
-
-        startGame()
-
+        gameContainer.classList.remove('invincible');
+        console.log('operationel pour une deuxieme game');
+        timer.textContent = `00:${seconde}`;
+        startGame();
       }, 8000);
 
       clearInterval(countdown);
-      setTimeout(() => {
-        //relance le background
-        grass.classList.toggle('paused');
-        gameContainer.classList.remove('oneduck?')
 
+      setTimeout(() => {
+        // Restart the background
+        grass.classList.toggle('paused');
+        gameContainer.classList.remove('oneduck?');
       }, 1000);
-      //cache le timer
-      timediv.style.translate = '-152px 0px'
+
+      // Hide the timer
+      timediv.style.translate = '-152px 0px';
     }
+
     time--;
   }, 1000);
 }
+
+function menuDisapearInGame() {
+  console.log('menu disapear');
+  menu.style.opacity = 0;
+  grass.classList.toggle('paused');
+
+  setTimeout(() => {
+    menu.style.zIndex = -999;
+  }, 500);
+}
+
 
 function dogAnimation() {
   dog.classList.replace('snif', 'find')
@@ -352,7 +400,19 @@ function dogAnimation() {
     dog.style.translate = '-100px -140px'
   }, 1000);
   if (gameContainer.classList.contains('end')) {
+  }
 
+}
+
+lastDeadDucks = 0
+
+function failed() {
+  lastDeadDucks = deadDucks
+  console.log('Checking deadDucks after 5 seconds:', deadDucks);
+  console.log(lastDeadDucks, deadDucks)
+  if (lastScore === deadDucks) {
+    failScreen.style.zIndex = 999
+    console.log('failed')
   }
 
 
