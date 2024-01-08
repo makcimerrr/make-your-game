@@ -14,7 +14,6 @@ function startGame() {
   timerShowUp()
   dogAnimation()
   setTimeout(() => {
-
     startCreatingDucks();
     setInterval(getRandomValue, 1000);
   }, 1000)
@@ -74,7 +73,7 @@ let blueCount = 1;
 let redCount = 2;
 
 let countdown;
-let seconds = 10;
+let seconde = 10;
 const timer = document.querySelector('.timer')
 const timediv = document.querySelector('.timediv')
 
@@ -291,19 +290,20 @@ function moveDuck(ducks) {
 
 
 function timerShowUp() {
+  time = seconde
   //montre le timer
   timediv.style.translate = '-152px -150px'
   clearInterval(countdown);
 
   //timer format 00:00
   countdown = setInterval(function () {
-    let minutes = Math.floor(seconds / 60);
-    let remainingSeconds = seconds % 60;
+    let minutes = Math.floor(time / 60);
+    let remainingtime = time % 60;
     let formattedTime =
       (minutes < 10 ? '0' : '') + minutes + ':' +
-      (remainingSeconds < 10 ? '0' : '') + remainingSeconds;
+      (remainingtime < 10 ? '0' : '') + remainingtime;
     timer.textContent = formattedTime;
-    if (seconds <= 2) {
+    if (time <= 2) {
       console.log('byeducks')
       gameContainer.classList.add('end')
       setTimeout(() => {
@@ -315,7 +315,7 @@ function timerShowUp() {
         }, 100);
       }, 8000);
     }
-    if (seconds <= 0) {
+    if (time <= 0) {
       gameContainer.classList.add('invincible')
       gameContainer.classList.add('oneduck?')
 
@@ -324,6 +324,10 @@ function timerShowUp() {
       setTimeout(() => {
         gameContainer.classList.remove('invincible')
         console.log('operationel pour une deuxieme game')
+        timer.textContent = `00:${seconde}`
+
+        startGame()
+
       }, 8000);
 
       clearInterval(countdown);
@@ -336,7 +340,7 @@ function timerShowUp() {
       //cache le timer
       timediv.style.translate = '-152px 0px'
     }
-    seconds--;
+    time--;
   }, 1000);
 }
 
