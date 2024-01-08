@@ -266,28 +266,27 @@ body {
 }
 
 .timediv {
-        translate: 0px 350px;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        border: 10px solid #765440;
-        padding: 20px;
-        background-color: #ae8e74;
-        border-radius: 10px;
-        height: 50px;
-        font-size: 50px;
-        color: #ede0d4;
-        transition: 1s ease-in-out translate;
-        display: flex;
+    translate: -152px 0px;
+top: 100vh;
+    position: fixed;
+    transform: translateX(50vw);
+    text-align: center;
+    border: 10px solid #765440;
+    padding: 20px;
+    background-color: #ae8e74;
+    border-radius: 10px;
+    height: 50px;
+    font-size: 50px;
+    color: #ede0d4;
+    transition: 1s ease-in-out translate;
+    display: flex;
 }
 
 .timer-foot {
     position: absolute;
     margin-top: 70px;
     border: 10px solid #765440;
-    height:200px;
+    height: 200px;
     width: 235px;
 }
 
@@ -604,6 +603,20 @@ body {
     position: absolute;
     bottom: 20vh;
     translate: 0 -140px;
+    transition: 1s translate linear;
+}
+
+.counter-dog {
+    left: 1vw;
+    height: 50px;
+    width: 60px;
+    background-image: url(/media/duckSprite.png);
+    scale: 200%;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 20vh;
+    translate: 0 -140px;
+    z-index: -5;
 }
 
 .snif {
@@ -621,9 +634,7 @@ body {
 }
 
 .find {
-    animation: findAnimation 1s steps(2) forwards
-        /* , fade 0s 1s forwards */
-    ;
+    animation: findAnimation 1s steps(2) forwards, fade 0s 1s step-end forwards;
 }
 
 @keyframes fade {
@@ -683,6 +694,7 @@ body {
 
 .one-duck {
     background-position: -320px 0px;
+    animation: doubleDuck 4s ease-in-out forwards;
 }
 
 .double-duck {

@@ -12,8 +12,9 @@ function startGame() {
   startTime = Date.now();
   menuDisapearInGame()
   timerShowUp()
-  dog.classList.replace('snif', 'find')
+  dogAnimation()
   setTimeout(() => {
+
     startCreatingDucks();
     setInterval(getRandomValue, 1000);
   }, 1000)
@@ -43,7 +44,7 @@ function showCredits() {
 ///if je touche au moins un canard la vitesse augmente
 // relancer la partie automatiquement
 // ecran fail
-//skins ???
+// skins ???
 
 
 
@@ -53,7 +54,7 @@ let duckCount = 0;
 const ducks = [];
 
 let i = 0;
-var maxDuck = 16;
+var maxDuck = 15;
 var duckStartHeight = 3000
 
 var distance = 16;
@@ -77,6 +78,10 @@ let seconds = 10;
 const timer = document.querySelector('.timer')
 const timediv = document.querySelector('.timediv')
 
+
+const score = document.querySelector('.score')
+
+const divBg = document.querySelector('.divbackground')
 
 
 
@@ -109,7 +114,6 @@ function isBlackBlueOrRed() {
   }
 }
 
-const score = document.querySelector('.score')
 
 function createDuck(id, initialX, initialY) {
   const duck = document.createElement('div');
@@ -126,42 +130,56 @@ function createDuck(id, initialX, initialY) {
     duck.classList.add('blue');
   }
 
-  
+
+
+  let alreadyDead = false
 
   duck.addEventListener('click', function () {
-    duck.classList.add('dead')
-    if (duck.classList.contains('red')) {
-      deadDucks += 2
-    }
-    if (duck.classList.contains('blue')) {
-      deadDucks += 5
-    } else {
-      deadDucks += 1
-    }
+    if (!alreadyDead) {
+      alreadyDead = true;
+      duck.classList.add('dead')
+      if (duck.classList.contains('red')) {
+        deadDucks += 2
+      }
+      if (duck.classList.contains('blue')) {
+        deadDucks += 5
+      } else {
+        deadDucks += 1
+      }
 
-    score.textContent = `${deadDucks}`
+      score.textContent = `${deadDucks}`
 
-    if (deadDucks % 2 === 0) {
-      dog.classList.add('double-duck')
-      console.log('double duck')
+
+      if (deadDucks % 2 === 0) {
+        const counterDog = document.createElement('div');
+        counterDog.classList.add('counter-dog');
+        counterDog.classList.add('double-duck');
+        counterDog.style.left = `${initialX}px`;
+        divBg.appendChild(counterDog);
+        setTimeout(() => {
+          divBg.removeChild(counterDog);
+        }, 4000);
+      }
+
+      if (deadDucks % 2 !== 0 && gameContainer.classList.contains('end')) {
+        const counterDog = document.createElement('div');
+        counterDog.classList.add('counter-dog');
+        counterDog.classList.add('one-duck');
+        counterDog.style.left = `${initialX}px`;
+        divBg.appendChild(counterDog);
+        setTimeout(() => {
+          divBg.removeChild(counterDog);
+        }, 4000);
+      }
+
       setTimeout(() => {
-        dog.classList.remove('double-duck')
-      }, 4000);
+        removeDuck(duck);
+      }, 2000)
+
     }
 
-        if (deadDucks % 1 === 0) {
-          dog.classList.add('one-duck')
-          console.log('one duck')
-          setTimeout(() => {
-            dog.classList.remove('one-duck')
-          }, 4000);
-        }
-
-    setTimeout(() => {
-      removeDuck(duck);
-    }, 2000)
   });
-
+  
   gameContainer.appendChild(duck);
   ducks.push(duck);
 }
@@ -187,7 +205,7 @@ function startCreatingDucks() {
 function moveDuck(ducks) {
   ducks.forEach((duck, index) => {
     /*     const maxX = gameContainer.offsetWidth - duckWidth;
-        const maxY = gameContainer.offsetHeight - duckHeight; */
+    const maxY = gameContainer.offsetHeight - duckHeight; */
 
     let newX = parseInt(duck.style.left);
     let newY = parseInt(duck.style.top);
@@ -274,7 +292,7 @@ function moveDuck(ducks) {
 
 function timerShowUp() {
   //montre le timer
-  timediv.style.translate = '0px 150px'
+  timediv.style.translate = '-152px -150px'
   clearInterval(countdown);
 
   //timer format 00:00
@@ -294,12 +312,16 @@ function timerShowUp() {
           while (gameContainer.firstChild) {
             gameContainer.removeChild(gameContainer.firstChild)
           }
-        }, 10);
+        }, 100);
       }, 8000);
     }
     if (seconds <= 0) {
       gameContainer.classList.add('invincible')
-      setInterval(() => {
+      gameContainer.classList.add('oneduck?')
+
+      dog.style.translate = '0px -140px'
+      dog.style.opacity = '1'
+      setTimeout(() => {
         gameContainer.classList.remove('invincible')
         console.log('operationel pour une deuxieme game')
       }, 8000);
@@ -308,15 +330,26 @@ function timerShowUp() {
       setTimeout(() => {
         //relance le background
         grass.classList.toggle('paused');
+        gameContainer.classList.remove('oneduck?')
+
       }, 1000);
       //cache le timer
-      timediv.style.translate = '0px 350px'
+      timediv.style.translate = '-152px 0px'
     }
     seconds--;
   }, 1000);
 }
 
+function dogAnimation() {
+  dog.classList.replace('snif', 'find')
+  setTimeout(() => {
+    dog.classList.replace('find', 'snif')
+    dog.style.opacity = '0'
+    dog.style.translate = '-100px -140px'
+  }, 1000);
+  if (gameContainer.classList.contains('end')) {
+
+  }
 
 
-
-
+}
