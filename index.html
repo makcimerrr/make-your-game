@@ -15,10 +15,24 @@
         <img src="media/btn_start.png" alt="Start Button" />
       </div>
       <button class="button" onclick="showCredits()">Credits</button>
-      <button class="button" onclick="setDifficulty()">Difficulty</button>
-    </div>
+      <button class="button" onclick="showDifficulty()">Difficulty</button>
+      <button class="button" onclick="setSkin()">Skin</button>
 
-    <!-- Ajout du menu de pause -->
+      <div class="difficulty">
+        <h2>Choose Difficulty</h2>
+        <input
+          type="range"
+          id="difficulty-slider"
+          min="1"
+          max="4"
+          step="1"
+          value="1"
+        />
+        <p id="difficulty-label">Difficulty: Easy</p>
+        <p id="speed-label">Speed: 100</p>
+        <button onclick="applyDifficulty()">Apply</button>
+      </div>
+    </div>
 
     <div id="overlay" class="overlay"></div>
     <div id="pauseMenu" class="menu">

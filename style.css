@@ -747,3 +747,10 @@ body {
   background-color: rgba(0, 0, 0, 0); /* Rouge avec une opacité de 0.7 */
   z-index: 998; /* Mettre en dessous du menu pause (z-index : 999) */
 }
+
+/* Menu diffuclty */
+
+.difficulty {
+  display: none;
+  /* Autres styles... */
+}

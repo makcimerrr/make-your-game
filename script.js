@@ -17,6 +17,8 @@ function startGame() {
     startCreatingDucks();
     setInterval(getRandomValue, 1000);
   }, 1000);
+
+  console.log(speed);
 }
 
 function menuDisapearInGame() {
@@ -47,7 +49,7 @@ var maxDuck = 16;
 var duckStartHeight = 2500;
 
 var distance = 16;
-var speed = 100;
+let speed = 100;
 
 const duckWidth = 66;
 const duckHeight = 66;
@@ -285,4 +287,58 @@ document.addEventListener("keydown", function (event) {
 
 function Restart() {
   window.location.reload();
+}
+
+/* Menu Difficulty */
+
+// Ajoutez cet événement à votre script
+document
+  .getElementById("difficulty-slider")
+  .addEventListener("input", updateDifficultyLabel);
+
+function showDifficulty() {
+  const difficultyDiv = document.querySelector(".difficulty");
+  difficultyDiv.style.display = "block";
+}
+
+function applyDifficulty() {
+  // Cacher la div "difficulty" après l'application de la difficulté (à ajuster selon vos besoins)
+  const difficultyDiv = document.querySelector(".difficulty");
+  difficultyDiv.style.display = "none";
+}
+
+// Définissez la fonction updateDifficultyLabel
+function updateDifficultyLabel() {
+  const difficultySlider = document.getElementById("difficulty-slider");
+  const difficultyLabel = document.getElementById("difficulty-label");
+  const speedLabel = document.getElementById("speed-label");
+
+  const difficultyValue = parseInt(difficultySlider.value);
+
+  switch (difficultyValue) {
+    case 1:
+      difficultyLabel.textContent = "Difficulty: Easy";
+      speedLabel.textContent = "Speed: 100";
+      speed = 100;
+      break;
+    case 2:
+      difficultyLabel.textContent = "Difficulty: Medium";
+      speedLabel.textContent = "Speed: 75";
+      speed = 75;
+      break;
+    case 3:
+      difficultyLabel.textContent = "Difficulty: Hard";
+      speedLabel.textContent = "Speed: 50";
+      speed = 50;
+      break;
+    case 4:
+      difficultyLabel.textContent = "Difficulty: Extreme";
+      speedLabel.textContent = "";
+      break;
+    default:
+      difficultyLabel.textContent = "Difficulty: Easy";
+      speedLabel.textContent = "Speed: 100";
+      speed = 100;
+      break;
+  }
 }
