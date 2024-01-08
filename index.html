@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <link rel="icon" href="media/logo.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="icon" href="media/logo.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Duck Hunt</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-
-
-
-<body>
+  <body>
     <div id="menu">
-        <img id="logo" src="media/logo.ico" />
-        <button class="button" onclick="startGame()">Start</button>
-        <button class="button" onclick="showCredits()">Credits</button>
-        <button class="button" onclick="setDifficulty()">Difficulty</button>
+      <img id="logo" src="media/logo.ico" />
+      <div class="start-button" onclick="startGame()">
+        <img src="media/btn_start.png" alt="Start Button" />
+      </div>
+      <button class="button" onclick="showCredits()">Credits</button>
+      <button class="button" onclick="setDifficulty()">Difficulty</button>
     </div>
+
+    <!-- Ajout du menu de pause -->
+
+    <div id="overlay" class="overlay"></div>
+    <div id="pauseMenu" class="menu">
+      <h2>Game Paused</h2>
+      <p>Press P to resume</p>
+      <button onclick="Restart()">Restart</button>
+    </div>
+
     <div class="mountain"></div>
     <div class="dirt"></div>
     <div class="sky">
-        <div class="clouds">
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-        </div>
-        <div class="clouds2">
-            <div class="cloud2"></div>
-            <div class="cloud2"></div>
-        </div>
+      <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+      </div>
+      <div class="clouds2">
+        <div class="cloud2"></div>
+        <div class="cloud2"></div>
+      </div>
     </div>
-    
+
     <section class="divbackground">
-        <div class="dog snif"></div>
-        <div class="grass">
-            <div class="trees">
-                <div class="tree"></div>
-                <div class="tree"></div>
-                <div class="tree"></div>
-                <div class="tree"></div>
-            </div>
-            <div class="bushes">
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-            </div>
+      <div class="dog snif"></div>
+      <div class="grass">
+        <div class="trees">
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
         </div>
+        <div class="bushes">
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+        </div>
+      </div>
     </section>
     <div id="game-container"></div>
-
-</body>
-<script src="script.js"></script>
-
+  </body>
+  <script src="script.js"></script>
 </html>
