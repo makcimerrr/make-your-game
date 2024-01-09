@@ -2,6 +2,11 @@
 const menu = document.getElementById('menu')
 const grass = document.querySelector('.grass');
 const dog = document.querySelector('.dog')
+const silencedSound = new Audio('media/music/silenced.mp3');
+const hitmarkerSound = new Audio('media/music/hitmarker.wav');
+const quackSound = new Audio('media/music/quack.mp3');
+
+
 ////////////recup divs//////////////
 
 //////////////menu//////////////////
@@ -34,7 +39,7 @@ function startGame() {
   } else {
     console.log('You are max speed')
   }
-  
+
 
   setTimeout(() => {
     failed();
@@ -141,29 +146,43 @@ function isBlackBlueOrRed() {
 }
 
 
+
 function createDuck(id, initialX, initialY) {
   const duck = document.createElement('div');
   duck.id = `duck${id}`;
   duck.classList.add('bird');
   duck.style.left = `${initialX}px`;
   duck.style.top = `${initialY}px`;
-
+  
   const color = isBlackBlueOrRed();
-
+  
   if (color === 'red') {
     duck.classList.add('red');
   } else if (color === 'blue') {
     duck.classList.add('blue');
   }
-
-
-
+  
   let alreadyDead = false
-
+  
+  
+  document.addEventListener('click', function() {
+    silencedSound.currentTime = 0;
+        silencedSound.play();
+  });
+  
   duck.addEventListener('click', function () {
+    setTimeout(() => {
+    silencedSound.volume = 1
+    }, 50);
+    silencedSound.volume = 0.5
+    
+    
     console.log(deadDucks, lastScore)
     if (!alreadyDead) {
       alreadyDead = true;
+      hitmarkerSound.play();
+      quackSound.currentTime = 0;
+      quackSound.play();
       duck.classList.add('dead')
       if (duck.classList.contains('red')) {
         deadDucks += 2
@@ -173,7 +192,7 @@ function createDuck(id, initialX, initialY) {
       } else {
         deadDucks += 1
       }
-
+      
       score.textContent = `${deadDucks}`
 
 
@@ -181,22 +200,38 @@ function createDuck(id, initialX, initialY) {
         const counterDog = document.createElement('div');
         counterDog.classList.add('counter-dog');
         counterDog.classList.add('double-duck');
+        counterDog.style.pointerEvents = 'auto'
         counterDog.style.left = `${initialX}px`;
         divBg.appendChild(counterDog);
         setTimeout(() => {
           divBg.removeChild(counterDog);
         }, 4000);
+        counterDog.addEventListener('click', function () {
+          counterDog.classList.remove('double-duck')
+          counterDog.classList.add('dead-dog')
+          console.log('feur')
+          killedDog()
+        });
       }
 
       if (deadDucks % 2 !== 0 && gameContainer.classList.contains('end')) {
         const counterDog = document.createElement('div');
         counterDog.classList.add('counter-dog');
         counterDog.classList.add('one-duck');
+        counterDog.style.pointerEvents = 'auto'
         counterDog.style.left = `${initialX}px`;
         divBg.appendChild(counterDog);
         setTimeout(() => {
           divBg.removeChild(counterDog);
         }, 4000);
+
+
+
+
+        counterDog.addEventListener('click', function () {
+
+          killedDog()
+        });
       }
 
       setTimeout(() => {
@@ -407,7 +442,15 @@ function dogAnimation() {
 
 }
 
+
+
+
+
+
 lastDeadDucks = 0
+
+
+
 
 function failed() {
   lastDeadDucks = deadDucks
@@ -416,36 +459,107 @@ function failed() {
   if (lastScore === deadDucks) {
     failScreen.style.zIndex = 999
     console.log('failed')
+    nightModeBtn.style.opacity = 1
   }
-  nightModeBtn.style.opacity = 1
-
-
-
 }
 
+
+
+
+/* Night Mode */
 let nightMode = false;
-const moon = document.querySelector('.moon')
-const cloudBtn = document.querySelector('.cloud-btn')
+const moon = document.querySelector(".moon");
+const cloudBtn = document.querySelector(".cloud-btn");
+const stbtn = document.querySelector('.startBtn')
+const cbtn = document.querySelector('.creditBtn')
+const dbtn = document.querySelector('.difficultyBtn')
+const skbtn = document.querySelector('.skinBtn')
 
-nightModeBtn.addEventListener('click', function () {
-  if (nightMode === false) {
-    cloudBtn.style.transform = 'translateX(10px)'
-    cloudBtn.style.opacity = '0'
-    moon.style.left = '22px'
-    moon.style.backgroundColor = 'rgb(220, 215, 215)'
-    nightModeBtn.style.backgroundColor = '#001f54';
-    nightMode = true;
-    console.log('Night Mode activated');
-  } else {
-    cloudBtn.style.transform = 'translateX(0px)'
-    cloudBtn.style.opacity = '1'
-    moon.style.left = '1px'
-    nightModeBtn.style.backgroundColor = '#0cecfc';
-    moon.style.backgroundColor = '#ffd60a'
+let lastClickTime = 0;
 
+nightModeBtn.addEventListener("click", function () {
+  const currentTime = new Date().getTime();
 
-    nightMode = false;
-    console.log('Night Mode desactivated');
-
+  if (currentTime - lastClickTime < 1000) {
+    console.log("Wait for 1 second before clicking again");
+    return;
   }
+
+  lastClickTime = currentTime;
+  const logo = document.getElementById("logo");
+  if (nightMode === false) {
+    cloudBtn.style.transform = "translateX(10px)";
+    cloudBtn.style.opacity = "0";
+    moon.style.left = "22px";
+    moon.style.backgroundColor = "rgb(220, 215, 215)";
+    nightModeBtn.style.backgroundColor = "#001f54";
+    document.body.classList.add("dark-mode"); // Ajoutez une classe au body pour le mode sombre
+    menu.classList.add('flip')
+    /*     stbtn.classList.add('flipbtn')
+        cbtn.classList.add('flipbtn')
+        dbtn.classList.add('flipbtn')
+        skbtn.classList.add('flipbtn') */
+    setTimeout(() => {
+      stbtn.style.backgroundColor = ('#6b387e')
+      cbtn.style.backgroundColor = ('#6b387e')
+      dbtn.style.backgroundColor = ('#6b387e')
+      skbtn.style.backgroundColor = ('#6b387e')
+
+      logo.src = "media/logo_dark.png"; // Changez la source de l'image pour le mode sombre
+    }, 500);
+    setTimeout(() => {
+      menu.classList.remove('flip')
+      /*       stbtn.classList.remove('flipbtn')
+      cbtn.classList.remove('flipbtn')
+      dbtn.classList.remove('flipbtn')
+      skbtn.classList.remove('flipbtn') */
+    }, 1000);
+    console.log("Night Mode activated");
+    nightMode = true;
+
+  } else {
+    cloudBtn.style.transform = "translateX(0px)";
+    cloudBtn.style.opacity = "1";
+    moon.style.left = "1px";
+    nightModeBtn.style.backgroundColor = "#0cecfc";
+    moon.style.backgroundColor = "#ffd60a";
+    menu.classList.add('flip')
+    document.body.classList.remove("dark-mode"); // Retirez la classe pour le mode sombre
+
+    setTimeout(() => {
+
+      stbtn.style.backgroundColor = ('#4caf50')
+      cbtn.style.backgroundColor = ('#4caf50')
+      dbtn.style.backgroundColor = ('#4caf50')
+      skbtn.style.backgroundColor = ('#4caf50')
+      logo.src = "media/logo.ico"; // Changez la source de l'image pour le mode sombre
+    }, 500);
+    setTimeout(() => {
+      menu.classList.remove('flip')
+    }, 1000);
+    console.log("Night Mode desactivated");
+    nightMode = false;
+  }
+});
+
+
+const music = document.getElementById('music');
+
+function killedDog() {
+  failScreen.classList.add('failed')
+  const killSound = new Audio('media/music/ftnkill.mp3');
+
+  failScreen.style.zIndex = 999
+  killSound.play();
+  music.pause();
+}
+
+
+/////autoplaymusic/////
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function() {
+        if (music.paused && !failScreen.classList.contains('failed')) {
+            music.play();
+        }
+    });
 });

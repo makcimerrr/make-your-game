@@ -52,14 +52,34 @@ body {
     text-align: center;
     z-index: 999;
     border: 10px solid #f5f5dc;
-    /* Couleur beige */
     padding: 20px;
-    /* Espace à l'intérieur du carré */
     background-color: #e8d0d0;
-    /* Couleur de fond blanche à l'intérieur du carré */
     border-radius: 10px;
-    transition: opacity 0.5s steps(5);
+    transition: opacity 0.5s steps(5), background-color 0.5s step-end, border 0.5s step-end;
 }
+
+.flip {
+animation: flip 1s ease-in-out forwards;
+}
+
+@keyframes flip {
+    0% {
+        transform: translate(-50%, -50%) rotateY(0deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateY(90deg);
+    }
+    100%{
+        transform: translate(-50%, -50%) rotateY(0deg);
+
+    }
+}
+
+.dark-mode #menu {
+    border: 10px solid #222221;
+    background-color: #422828;
+    transition: opacity 0.5s steps(5), background-color 0.5s step-end, border 0.5s step-end;
+  }
 
 #logo {
     max-width: 100%;
@@ -86,9 +106,20 @@ body {
     font-family: 'Press Start 2P', system-ui;
 }
 
-.button:hover {
-    background-color: #45a049;
+.flipbtn {
+    transition: background-color 0.5s step-end;
 }
+
+
+/* .dark-mode .button {
+    background-color: #6b387e;
+  } */
+  .button:hover {
+    background-color: #45a049;
+  }
+  .dark-mode .button:hover {
+    background-color: #6b385e;
+  }
 
 #score-form {
     margin-top: 20px;
@@ -226,7 +257,14 @@ body {
     background-color: #887000;
     border-top: #45a049 dashed 1px;
     animation: miniDirtScroll 2s linear infinite;
+    transition: background-color 1s ease-in-out, border-top 1s ease-in-out;
+
 }
+
+.dark-mode .minidirt {
+    background-color: #3e1e88;
+    border-top: #4e0097 dashed 1px;
+  }
 
 @keyframes miniDirtScroll {
     0% {
@@ -269,7 +307,15 @@ body {
     display: flex;
     background-position-y: 100%;
     animation: background-defilment 30s infinite linear;
+    transition: background-image 1s ease-in-out;
+
 }
+
+.dark-mode .grass {
+    background-image: url("media/grass_night.png");
+    transition: background-image 1s ease-in-out;
+
+  }
 
 .grass.paused {
     animation-play-state: paused;
@@ -282,21 +328,36 @@ body {
     z-index: 0;
     background-color: #887000;
     bottom: 0;
+    transition: background-color 1s ease-in-out;
+
 }
 
-.trees {
+.dark-mode .dirt {
+    background-color: #102c51;
+    transition: background-color 1s ease-in-out;
+
+  }
+
+  .trees {
     position: fixed;
     top: 80vh;
     translate: 0px -490px;
     display: flex;
-}
-
-.tree {
+  }
+  .tree {
     height: 400px;
     width: 210px;
-    background-image: url('media/tree.png');
+    background-image: url("media/tree.png");
     background-repeat: no-repeat;
-}
+    background-size: 100%;
+    transition: background-image 1s ease-in-out;
+
+  }
+  .dark-mode .tree {
+    background-image: url("media/tree_night.png");
+    transition: background-image 1s ease-in-out;
+
+  }
 
 .tree:nth-child(1) {
     margin-left: 700px;
@@ -322,12 +383,19 @@ body {
 }
 
 .bush {
+    transition: background-image 1s ease-in-out;
     height: 123px;
     width: 100px;
     background-image: url('media/bush.png');
     background-repeat: no-repeat;
     margin-left: 300px;
+
 }
+
+.dark-mode .bush {
+    background-image: url("media/bush_night.png");
+    transition: background-image 1s ease-in-out;
+  }
 
 .bush:nth-child(1) {
     margin-right: 350px;
@@ -366,7 +434,15 @@ body {
     z-index: 0;
     background-repeat: no-repeat;
     background-size: cover;
+    transition: background-image 1s ease-in-out;
+
 }
+
+
+.dark-mode .mountain {
+    background-image: url("media/sky-transformed.jpg");
+    transition: background-image 1s ease-in-out;
+  }
 
 @keyframes background-defilment {
     0% {
@@ -389,7 +465,15 @@ body {
     width: 230px;
     background-image: url('media/cloud.png');
     background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+
 }
+
+.dark-mode .cloud {
+    background-image: url("media/cloud_night.png");
+    transition: background-image 1s ease-in-out;
+
+  }
 
 .cloud:nth-child(1) {
     margin-top: 5vh;
@@ -419,6 +503,11 @@ body {
     background-repeat: no-repeat;
     transform: scale(70%);
 }
+
+.dark-mode .cloud2 {
+    background-image: url("media/cloud_night.png");
+    transition: all 1s ease-in-out;
+  }
 
 .cloud2:nth-child(1) {
     margin-top: 12vh;
@@ -779,6 +868,41 @@ body {
     bottom: 20vh;
     translate: 0 -140px;
     transition: 1s translate linear;
+}
+
+.dead-dog {
+    animation: deadDog 1s ease-in-out forwards, blink 0.15s infinite step-end;
+}
+
+@keyframes deadDog {
+    0%{
+        translate: 0px -140px;
+    }
+    25% {
+        translate: 0px -140px;
+    }
+    50%{
+        translate: 0px -200px;
+    }
+    75%{
+        translate: 0px -200px;
+    }
+    100%{
+        translate: 0px -80px;
+
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .counter-dog {

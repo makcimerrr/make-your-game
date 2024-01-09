@@ -28,11 +28,3 @@ updateFPS();
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const music = document.getElementById('music');
-    document.addEventListener('click', function() {
-        if (music.paused) {
-            music.play();
-        }
-    });
-});
