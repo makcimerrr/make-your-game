@@ -10,12 +10,6 @@ body {
 
 /* /////menu///// */
 
-#music {
-    opacity: 0;
-    position: absolute;
-}
-
-
 #fps-display {
     position: fixed;
     top: 10px;
@@ -26,24 +20,29 @@ body {
     padding: 5px;
     border-radius: 5px;
     z-index: 1000;
+    border: solid black 1px;
 }
+
+#music {
+    opacity: 0;
+    position: absolute;
+}
+
 
 #fail-screen {
-background-color: rgba(22, 22, 22, 0.61);
-height: 100vh;
-width: 100vw;
-position: absolute;
-z-index: 999;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 100px;
-color: white;
+    background-color: rgba(22, 22, 22, 0.61);
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    color: white;
 
-z-index: -999;
+    z-index: -999;
 }
-
-
 
 #menu {
     position: fixed;
@@ -109,6 +108,149 @@ z-index: -999;
     text-align: center;
     color: #ede0d4;
     font-size: 50px;
+}
+
+/* /////////dark-mode-btn/////// */
+
+.night-mode-btn {
+/*     left: 50vw; */
+    right: 10px;
+    top: 45px;
+    height: 30px;
+    width: 50px;
+    background-color: #0cecfc;
+    z-index: 999;
+    position: absolute;
+    border: none;
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    transition: 0.5s all ease-in-out;
+    border: 1px solid rgba(0, 0, 0, 0.185);
+    overflow: hidden;
+}
+
+.stars-btn {
+    transform: translateY(-5px);
+}
+
+
+.star {
+    height: 3px;
+    width: 3px;
+    background-color: rgb(255, 253, 109);
+    margin-top: 5px;
+    margin-left: 3px;
+    rotate: 45deg;
+}
+
+.star:nth-child(1) {
+    translate: 4px 3px;
+    animation: star 4s 1s ease-in-out infinite alternate;
+}
+
+.star:nth-child(2) {
+    animation: star 5s ease-in-out infinite;
+    translate: -2px;
+}
+
+
+.star:nth-child(3) {
+    translate: 4px -2px;
+    animation: star 4.5s ease-in-out infinite reverse;
+}
+
+
+
+@keyframes star {
+    0% {
+        transform: scale(100%) translate(0px, 0px);
+    }
+
+    25% {
+        transform: scale(120%) translate(2px, 3px);
+
+    }
+
+    75% {
+        transform: scale(80%) translate(-3px, 1px);
+
+    }
+
+    100% {
+        transform: scale(100%) translate(0px, 0px);
+    }
+}
+
+.cloud-btn {
+    translate: 5px;
+    width: 36px;
+    height: 26px;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+.cloud-btn2 {
+    translate: 0px 5px;
+    background-size: 100%;
+    height: 100px;
+    width: 230px;
+    background-image: url('media/cloud.png');
+    background-repeat: no-repeat;
+    animation: minicloud 6s linear infinite;
+}
+
+.cloud-btn2:nth-child(2) {
+    translate: -3px 15px;
+    animation: minicloud 4s linear infinite;
+
+}
+
+@keyframes minicloud {
+    0% {
+        transform: translateX(38px);
+    }
+
+    100% {
+        transform: translateX(-18px);
+    }
+}
+
+.minidirt {
+    z-index: 10;
+    position: absolute;
+    height: 1px;
+    width: 60px;
+    bottom: 0px;
+    left: 0px;
+    background-color: #887000;
+    border-top: #45a049 dashed 1px;
+    animation: miniDirtScroll 2s linear infinite;
+}
+
+@keyframes miniDirtScroll {
+    0% {
+        translate: 0px;
+    }
+
+    100% {
+        translate: -10px;
+    }
+}
+
+.moon {
+    left: 1px;
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    background-color: #ffd60a;
+    z-index: 999;
+    position: absolute;
+    border: none;
+    pointer-events: none;
+    transition: 0.5s all ease-in-out;
 }
 
 /* /////////background///////// */
@@ -302,7 +444,7 @@ z-index: -999;
 
 .timediv {
     translate: -152px 0px;
-top: 100vh;
+    top: 100vh;
     position: fixed;
     transform: translateX(50vw);
     text-align: center;

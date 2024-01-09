@@ -1,60 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="icon" href="media/logo.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duck Hunt</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-
-
-
-<body>
-<!--     <div class="dog snif"></div>
-    <div class="dog find"></div>
-    <div class="dog laugh"></div>
-    <div class="dog one-duck"></div>
-    <div class="dog two-duck"></div> -->
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    #timer {
-      font-size: 24px;
-      margin-top: 20px;
-    }
-  </style>
-  <title>Timer Example</title>
+    <title>Slider Example</title>
+    <style>
+        /* Optional: Add some styling to the slider */
+        input[type="range"] {
+            width: 300px;
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<button onclick="startTimer()">Start Timer</button>
-<div id="timer"></div>
+    <label for="slider">Select a value:</label>
+    <!-- The input element with type="range" -->
+    <input type="range" id="slider" name="slider" min="0" max="100" step="100" value="0">
 
-<script>
-  let countdown;
-  
-  function startTimer() {
-    let seconds = 15;
-    clearInterval(countdown); // Reset the timer
+    <!-- Optional: Display the selected value -->
+    <p id="sliderValue">Selected value: 0</p>
 
-    countdown = setInterval(function() {
-      document.getElementById('timer').textContent = seconds + ' seconds remaining';
-      if (seconds <= 0) {
-        clearInterval(countdown);
-        document.getElementById('timer').textContent = 'Time is up!';
-      }
-      seconds--;
-    }, 1000);
-  }
-</script>
+    <script>
+        // JavaScript to update the displayed value when the slider changes
+        const slider = document.getElementById('slider');
+        const sliderValueDisplay = document.getElementById('sliderValue');
+
+        // Add an event listener to the slider
+        slider.addEventListener('input', function () {
+            // Update the displayed value
+            sliderValueDisplay.textContent = 'Selected value: ' + slider.value;
+        });
+    </script>
 
 </body>
 </html>
-
-</body>

@@ -33,7 +33,7 @@ function startGame() {
   } else {
     console.log('You are max speed')
   }
-  
+
 
   setTimeout(() => {
     failed();
@@ -69,6 +69,8 @@ function showCredits() {
 // skins ???
 
 const failScreen = document.getElementById('fail-screen')
+
+const nightModeBtn = document.querySelector('.night-mode-btn')
 
 const gameContainer = document.getElementById('game-container');
 let duckCount = 0;
@@ -417,3 +419,30 @@ function failed() {
 
 
 }
+
+let nightMode = false;
+const moon = document.querySelector('.moon')
+const cloudBtn = document.querySelector('.cloud-btn')
+
+nightModeBtn.addEventListener('click', function () {
+  if (nightMode === false) {
+    cloudBtn.style.transform = 'translateX(10px)'
+    cloudBtn.style.opacity = '0'
+    moon.style.left = '22px'
+    moon.style.backgroundColor = 'rgb(220, 215, 215)'
+    nightModeBtn.style.backgroundColor = '#001f54';
+    nightMode = true;
+    console.log('Night Mode activated');
+  } else {
+    cloudBtn.style.transform = 'translateX(0px)'
+    cloudBtn.style.opacity = '1'
+    moon.style.left = '1px'
+    nightModeBtn.style.backgroundColor = '#0cecfc';
+    moon.style.backgroundColor = '#ffd60a'
+
+
+    nightMode = false;
+    console.log('Night Mode desactivated');
+
+  }
+});

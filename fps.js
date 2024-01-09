@@ -13,8 +13,8 @@ function updateFPS() {
     const elapsedTime = currentTime - startTime;
 
     if (elapsedTime >= 1000) {
-        const fps = (frameCount / elapsedTime) * 1000;
-        fpsDisplay.textContent = `FPS: ${fps.toFixed(2)}`;
+        const fps = Math.round((frameCount / elapsedTime) * 1000);
+        fpsDisplay.textContent = `FPS: ${fps.toFixed(0)}`;
         frameCount = 0;
         startTime = currentTime;
     }
@@ -23,3 +23,16 @@ function updateFPS() {
 }
 
 updateFPS();
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const music = document.getElementById('music');
+    document.addEventListener('click', function() {
+        if (music.paused) {
+            music.play();
+        }
+    });
+});
