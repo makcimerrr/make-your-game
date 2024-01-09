@@ -113,14 +113,13 @@ body {
 /* /////////dark-mode-btn/////// */
 
 .night-mode-btn {
-/*     left: 50vw; */
-    right: 10px;
-    top: 45px;
+    top: 10px;
+    left: 10px;
     height: 30px;
     width: 50px;
     background-color: #0cecfc;
     z-index: 999;
-    position: absolute;
+    position: fixed;
     border: none;
     display: flex;
     align-items: center;
@@ -133,7 +132,6 @@ body {
 .stars-btn {
     transform: translateY(-5px);
 }
-
 
 .star {
     height: 3px;

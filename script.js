@@ -7,6 +7,7 @@ const dog = document.querySelector('.dog')
 //////////////menu//////////////////
 function startGame() {
   // Start moving ducks at regular intervals
+  nightModeBtn.style.opacity = 0
   const moveDucksInterval = setInterval(function () {
     moveDuck(ducks);
   }, speed);
@@ -33,7 +34,7 @@ function startGame() {
   } else {
     console.log('You are max speed')
   }
-
+  
 
   setTimeout(() => {
     failed();
@@ -416,6 +417,8 @@ function failed() {
     failScreen.style.zIndex = 999
     console.log('failed')
   }
+  nightModeBtn.style.opacity = 1
+
 
 
 }
