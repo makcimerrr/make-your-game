@@ -8,6 +8,37 @@ body {
   font-family: "Press Start 2P", system-ui;
 }
 
+/* Bouton Start */
+
+.menu-buttons {
+  margin-top: 20px; /* Ajoutez une marge au besoin */
+}
+
+.start-button {
+  cursor: pointer;
+  width: 200px;
+  height: 72px;
+  background-image: url("media/btn_start.png");
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.start-button:hover {
+  background-image: url("media/btn_start.png");
+  background-position: 0px -71px;
+}
+
+.start-button:active {
+  background-image: url("media/btn_start.png");
+  background-position: 0px -143px;
+}
+
+.start-button img {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
 /* /////menu///// */
 
 #menu {
@@ -25,6 +56,16 @@ body {
   /* Couleur de fond blanche à l'intérieur du carré */
   border-radius: 10px;
   transition: opacity 0.5s steps(5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode #menu {
+  border: 10px solid #222221;
+  background-color: #422828;
+  transition: all 1s ease-in-out;
 }
 
 #logo {
@@ -32,6 +73,7 @@ body {
   height: auto;
   margin-bottom: 20px;
   /* Espacement entre le logo et les boutons */
+  transition: all 1s ease-in-out;
 }
 
 .button {
@@ -52,8 +94,16 @@ body {
   font-family: "Press Start 2P", system-ui;
 }
 
+.dark-mode .button {
+  background-color: #6b387e;
+}
+
 .button:hover {
   background-color: #45a049;
+}
+
+.dark-mode .button:hover {
+  background-color: #6b385e;
 }
 
 #score-form {
@@ -65,6 +115,123 @@ body {
   width: auto;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+/* /////////dark-mode-btn/////// */
+.night-mode-btn {
+  top: 10px;
+  left: 10px;
+  height: 30px;
+  width: 50px;
+  background-color: #0cecfc;
+  z-index: 999;
+  position: fixed;
+  border: none;
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  transition: 0.5s all ease-in-out;
+  border: 1px solid rgba(0, 0, 0, 0.185);
+  overflow: hidden;
+}
+.stars-btn {
+  transform: translateY(-5px);
+}
+.star {
+  height: 3px;
+  width: 3px;
+  background-color: rgb(255, 253, 109);
+  margin-top: 5px;
+  margin-left: 3px;
+  rotate: 45deg;
+}
+.star:nth-child(1) {
+  translate: 4px 3px;
+  animation: star 4s 1s ease-in-out infinite alternate;
+}
+.star:nth-child(2) {
+  animation: star 5s ease-in-out infinite;
+  translate: -2px;
+}
+.star:nth-child(3) {
+  translate: 4px -2px;
+  animation: star 4.5s ease-in-out infinite reverse;
+}
+@keyframes star {
+  0% {
+    transform: scale(100%) translate(0px, 0px);
+  }
+  25% {
+    transform: scale(120%) translate(2px, 3px);
+  }
+  75% {
+    transform: scale(80%) translate(-3px, 1px);
+  }
+  100% {
+    transform: scale(100%) translate(0px, 0px);
+  }
+}
+.cloud-btn {
+  translate: 5px;
+  width: 36px;
+  height: 26px;
+  border-radius: 20px;
+  display: flex;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+.cloud-btn2 {
+  translate: 0px 5px;
+  background-size: 100%;
+  height: 100px;
+  width: 230px;
+  background-image: url("media/cloud.png");
+  background-repeat: no-repeat;
+  animation: minicloud 6s linear infinite;
+}
+
+.cloud-btn2:nth-child(2) {
+  translate: -3px 15px;
+  animation: minicloud 4s linear infinite;
+}
+@keyframes minicloud {
+  0% {
+    transform: translateX(38px);
+  }
+  100% {
+    transform: translateX(-18px);
+  }
+}
+.minidirt {
+  z-index: 10;
+  position: absolute;
+  height: 1px;
+  width: 60px;
+  bottom: 0px;
+  left: 0px;
+  background-color: #887000;
+  border-top: #45a049 dashed 1px;
+  animation: miniDirtScroll 2s linear infinite;
+}
+@keyframes miniDirtScroll {
+  0% {
+    translate: 0px;
+  }
+  100% {
+    translate: -10px;
+  }
+}
+.moon {
+  left: 1px;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  background-color: #ffd60a;
+  z-index: 999;
+  position: absolute;
+  border: none;
+  pointer-events: none;
+  transition: 0.5s all ease-in-out;
 }
 
 /* /////////background///////// */
@@ -85,6 +252,12 @@ body {
   display: flex;
   background-position-y: 100%;
   animation: background-defilment 30s infinite linear;
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode .grass {
+  background-image: url("media/grass_night.png");
+  transition: all 1s ease-in-out;
 }
 
 .grass.paused {
@@ -98,6 +271,12 @@ body {
   z-index: 0;
   background-color: #887000;
   bottom: 0;
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode .dirt {
+  background-color: #102c51;
+  transition: all 1s ease-in-out;
 }
 
 .trees {
@@ -112,6 +291,13 @@ body {
   width: 210px;
   background-image: url("media/tree.png");
   background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode .tree {
+  background-image: url("media/tree_night.png");
+  transition: all 1s ease-in-out;
 }
 
 .tree:nth-child(1) {
@@ -143,6 +329,12 @@ body {
   background-image: url("media/bush.png");
   background-repeat: no-repeat;
   margin-left: 300px;
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode .bush {
+  background-image: url("media/bush_night.png");
+  transition: all 1s ease-in-out;
 }
 
 .bush:nth-child(1) {
@@ -181,7 +373,13 @@ body {
   background-image: url("media/mountain.png");
   z-index: 0;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode .mountain {
+  background-image: url("media/sky-transformed.jpg");
+  transition: all 1s ease-in-out;
 }
 
 @keyframes background-defilment {
@@ -205,6 +403,12 @@ body {
   width: 230px;
   background-image: url("media/cloud.png");
   background-repeat: no-repeat;
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode .cloud {
+  background-image: url("media/cloud_night.png");
+  transition: all 1s ease-in-out;
 }
 
 .cloud:nth-child(1) {
@@ -234,6 +438,12 @@ body {
   background-image: url("media/cloud.png");
   background-repeat: no-repeat;
   transform: scale(70%);
+  transition: all 1s ease-in-out;
+}
+
+.dark-mode .cloud2 {
+  background-image: url("media/cloud_night.png");
+  transition: all 1s ease-in-out;
 }
 
 .cloud2:nth-child(1) {
@@ -662,44 +872,6 @@ body {
   100% {
     transform: translateY(50px);
   }
-}
-
-/* Bouton Start */
-
-#menu {
-  /* Ajoutez ces propriétés pour centrer le contenu */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.menu-buttons {
-  margin-top: 20px; /* Ajoutez une marge au besoin */
-}
-
-.start-button {
-  cursor: pointer;
-  width: 200px;
-  height: 72px;
-  background-image: url("media/btn_start.png");
-  background-repeat: no-repeat;
-  position: relative;
-}
-
-.start-button:hover {
-  background-image: url("media/btn_start.png");
-  background-position: 0px -71px;
-}
-
-.start-button:active {
-  background-image: url("media/btn_start.png");
-  background-position: 0px -143px;
-}
-
-.start-button img {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
 }
 
 /* Menu pause */

@@ -7,9 +7,11 @@ const dog = document.querySelector(".dog");
 ////////////recup divs//////////////
 
 function startGame() {
+  nightModeBtn.style.opacity = 0;
   setInterval(function () {
     moveDuck(ducks);
   }, speed);
+
   startTime = Date.now();
   menuDisapearInGame();
   dog.classList.replace("snif", "find");
@@ -342,3 +344,38 @@ function updateDifficultyLabel() {
       break;
   }
 }
+
+/* Night Mode */
+
+const nightModeBtn = document.querySelector(".night-mode-btn");
+
+let nightMode = false;
+const moon = document.querySelector(".moon");
+const cloudBtn = document.querySelector(".cloud-btn");
+nightModeBtn.addEventListener("click", function () {
+  const logo = document.getElementById("logo");
+
+  if (nightMode === false) {
+    cloudBtn.style.transform = "translateX(10px)";
+    cloudBtn.style.opacity = "0";
+    moon.style.left = "22px";
+    moon.style.backgroundColor = "rgb(220, 215, 215)";
+    nightModeBtn.style.backgroundColor = "#001f54";
+    nightMode = true;
+    document.body.classList.add("dark-mode"); // Ajoutez une classe au body pour le mode sombre
+    logo.src = "media/logo_dark.png"; // Changez la source de l'image pour le mode sombre
+    console.log("Night Mode activated");
+  } else {
+    cloudBtn.style.transform = "translateX(0px)";
+    cloudBtn.style.opacity = "1";
+    moon.style.left = "1px";
+    nightModeBtn.style.backgroundColor = "#0cecfc";
+    moon.style.backgroundColor = "#ffd60a";
+    nightMode = false;
+    document.body.classList.remove("dark-mode"); // Retirez la classe pour le mode sombre
+
+    logo.src = "media/logo.ico"; // Changez la source de l'image pour le mode sombre
+
+    console.log("Night Mode desactivated");
+  }
+});
