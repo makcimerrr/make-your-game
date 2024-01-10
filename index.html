@@ -38,10 +38,10 @@
     <div id="menu">
         <img id="logo" src="media/logo.ico" />
         <div class="menu-buttons">
-        <button class="button startBtn" onclick="startGame()">Start</button>
-        <button class="button creditBtn" onclick="showCredits()">Credits</button>
+        <button class="button" onclick="startGame()">Start</button>
+        <button class="button" onclick="showCredits()">Credits</button>
         <button class="button" onclick="showDifficulty()">Difficulty</button>
-        <button class="button skinBtn" onclick="setSkin()">Skin</button>
+        <button class="button" onclick="setSkin()">Skin</button>
     </div>
     <div class="difficulty">
         <h2>Choose Difficulty</h2>
@@ -70,7 +70,11 @@
       <button onclick="Restart()">Restart</button>
     </div>
 
-    <div id="fail-screen">FAILED</div>
+    <div id="fail-screen">
+        <h1>FAILED</h1>
+        <button onclick="Restart()">Back Home</button>
+    </div>
+
     <div class="mountain"></div>
 
     <div class="dirt">

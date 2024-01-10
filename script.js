@@ -405,6 +405,8 @@ function failed() {
   if (lastScore === deadDucks) {
     failScreen.style.zIndex = 999;
     console.log("failed");
+    grass.classList.toggle("paused");
+    dog.classList.toggle("paused");
     nightModeBtn.style.opacity = 1;
     envApi();
     isPaused;

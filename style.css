@@ -104,15 +104,12 @@ body {
   color: white;
   text-decoration: none;
   font-family: "Press Start 2P", system-ui;
+  transition: background-color 0.9s ease-in-out; /* Ajoutez une transition pour le changement de couleur de fond */
 }
 
-.flipbtn {
-  transition: background-color 0.5s step-end;
+.dark-mode .button {
+  background-color: #6b387e;
 }
-
-/* .dark-mode .button {
-    background-color: #6b387e;
-  } */
 .button:hover {
   background-color: #45a049;
 }
@@ -900,6 +897,9 @@ body {
   animation: snifDog 0.5s steps(5) infinite;
 }
 
+.snif.paused {
+  animation-play-state: paused;
+}
 @keyframes snifDog {
   0% {
     background-position: 0px 0px;
@@ -1044,4 +1044,40 @@ body {
 .difficulty {
   display: none;
   /* Autres styles... */
+}
+
+#fail-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #ffffff00; /* Couleur de fond rouge (vous pouvez ajuster) */
+  color: #fff; /* Couleur du texte en blanc (vous pouvez ajuster) */
+  font-size: 35px;
+  font-family: "Press Start 2P", system-ui;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -999; /* Pour masquer le contenu sous le fond */
+}
+
+#fail-screen button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50; /* Couleur de fond verte (vous pouvez ajuster) */
+  color: #fff; /* Couleur du texte en blanc (vous pouvez ajuster) */
+  font-family: "Press Start 2P", system-ui;
+  transition: background-color 0.3s ease-in-out; /* Transition de changement de couleur de fond */
+}
+
+#fail-screen button:hover {
+  background-color: #45a049; /* Couleur de fond verte au survol (vous pouvez ajuster) */
 }
