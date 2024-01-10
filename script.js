@@ -396,7 +396,8 @@ function dogAnimation() {
   }
 }
 
-lastDeadDucks = 0;
+let lastDeadDucks = 0;
+let isFailed = false;
 
 function failed() {
   lastDeadDucks = deadDucks;
@@ -405,6 +406,7 @@ function failed() {
   if (lastScore === deadDucks) {
     failScreen.style.zIndex = 999;
     console.log("failed");
+    isFailed = true;
     grass.classList.toggle("paused");
     dog.classList.toggle("paused");
     nightModeBtn.style.opacity = 1;

@@ -43,7 +43,11 @@ function timerShowUp() {
           console.log("operationel pour une deuxieme game");
           timer.textContent = `00:${seconde}`;
           if (isExpertDifficulty()) {
-            startGameExtreme();
+            if (!isFailed) {
+              startGameExtreme();
+            } else {
+              return;
+            }
           } else {
             return;
           }
