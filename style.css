@@ -1022,3 +1022,26 @@ animation: flip 1s ease-in-out forwards;
         transform: translateY(50px);
     }
 }
+
+#rankingContainer {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+
+#rankingContainer h2 {
+    font-size: 20px; /* Adjust the font size as needed */
+    margin-bottom: 10px;
+}
+
+#rankingContainer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#rankingContainer li {
+    font-size: 14px; /* Adjust the font size as needed */
+    margin-bottom: 5px;
+}

@@ -56,9 +56,8 @@ function menuDisapearInGame() {
 }
 
 function showCredits() {
-  console.log("Artworks : Enzo");
-  console.log("Front-End : Enzo");
-  console.log("Back-End : Enzo ft. Chat-Gpt");
+  console.log("les bgff ");
+
 }
 
 //////////////game//////////////////
@@ -425,18 +424,15 @@ lastDeadDucks = 0;
 
 function failed() {
   lastDeadDucks = deadDucks;
-  //console.log("Checking deadDucks after 5 seconds:", deadDucks);
-  //  console.log(lastDeadDucks, deadDucks);
+
   if (lastScore === deadDucks) {
     failScreen.style.zIndex = 999;
-    console.log("failed");
     nightModeBtn.style.opacity = 1;
     envApi();
   }
 
   function envApi() {
     const playerName = prompt("Entrez votre nom d'utilisateur:");
-    console.log(playerName);
     const playerData = {
       username: playerName,
       score: deadDucks,
@@ -460,6 +456,43 @@ function failed() {
       });
   }
 }
+
+function showRanking() {
+  fetch('http://127.0.0.1:8080/getscoreboard', {
+  method: 'GET', 
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    updateRankingHTML(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+function updateRankingHTML(rankingData) {
+  var rankingContainer = document.getElementById('rankingContainer');
+
+  // Clear previous content in the container
+  rankingContainer.innerHTML = '';
+
+  // Create and append elements to display ranking
+  var heading = document.createElement('h2');
+  heading.textContent = 'Ranking';
+
+  var list = document.createElement('ul');
+
+  for (var i = 0; i < Math.min(10, rankingData.length); i++) {
+    var listItem = document.createElement('li');
+    listItem.textContent = `${i + 1}. ${rankingData[i].username} - Score: ${rankingData[i].score}`;
+    list.appendChild(listItem);
+}
+
+  rankingContainer.appendChild(heading);
+  rankingContainer.appendChild(list);
+}
+
 
 /* Night Mode */
 let nightMode = false;
@@ -536,6 +569,7 @@ nightModeBtn.addEventListener("click", function () {
 });
 
 const music = document.getElementById("music");
+
 
 function killedDog() {
   failScreen.classList.add("failed");

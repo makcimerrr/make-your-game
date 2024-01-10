@@ -13,6 +13,8 @@
 
 
 <body>
+
+   
     <div id="fps-display"></div>
     <button class="night-mode-btn">
         <div class="moon"></div>
@@ -42,8 +44,15 @@
         <button class="button creditBtn" onclick="showCredits()">Credits</button>
         <button class="button difficultyBtn" onclick="setDifficulty()">Difficulty</button>
         <button class="button skinBtn" onclick="setSkin()">Skin</button>
+        <button class="button ranking" onclick="showRanking()">Ranking</button>
+
+    </div>
+    <div id="rankingContainer">
+        <!-- Ranking will be displayed here -->
     </div>
     </div>
+
+    
 
     <div id="fail-screen">FAILED</div>
     <div class="mountain"></div>
@@ -51,6 +60,7 @@
     <div class="dirt">
         <div class="score">0</div>
     </div>
+    
     <div class="sky">
         <div class="clouds">
             <div class="cloud"></div>
