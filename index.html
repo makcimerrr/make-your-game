@@ -40,9 +40,34 @@
         <div class="menu-buttons">
         <button class="button startBtn" onclick="startGame()">Start</button>
         <button class="button creditBtn" onclick="showCredits()">Credits</button>
-        <button class="button difficultyBtn" onclick="setDifficulty()">Difficulty</button>
+        <button class="button" onclick="showDifficulty()">Difficulty</button>
         <button class="button skinBtn" onclick="setSkin()">Skin</button>
     </div>
+    <div class="difficulty">
+        <h2>Choose Difficulty</h2>
+        <input
+          type="range"
+          id="difficulty-slider"
+          min="1"
+          max="4"
+          step="1"
+          value="1"
+        />
+        <p id="difficulty-label">Difficulty: Easy</p>
+        <p id="speed-label">Speed: 100</p>
+        <button onclick="applyDifficulty()">Apply</button>
+      </div>
+    </div>
+    </div>
+
+
+    
+
+    <div id="overlay" class="overlay"></div>
+    <div id="pauseMenu" class="menu">
+      <h2>Game Paused</h2>
+      <p>Press P to resume</p>
+      <button onclick="Restart()">Restart</button>
     </div>
 
     <div id="fail-screen">FAILED</div>
@@ -92,6 +117,7 @@
 </body>
 <script src="script.js"></script>
 <script src="fps.js"></script>
+<script src="timer.js"></script>
 
 
 </html>

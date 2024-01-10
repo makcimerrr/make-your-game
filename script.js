@@ -40,7 +40,9 @@ function startGame() {
   }
 
   setTimeout(() => {
-    failed();
+    if (!isGamePaused) {
+      failed();
+    }
   }, 11000);
 }
 
@@ -257,147 +259,89 @@ function startCreatingDucks() {
 }
 
 function moveDuck(ducks) {
-  console.log("moved");
-  ducks.forEach((duck, index) => {
-    /*     const maxX = gameContainer.offsetWidth - duckWidth;
+  if (!isPaused) {
+    console.log("moved");
+    ducks.forEach((duck, index) => {
+      /*     const maxX = gameContainer.offsetWidth - duckWidth;
     const maxY = gameContainer.offsetHeight - duckHeight; */
 
-    let newX = parseInt(duck.style.left);
-    let newY = parseInt(duck.style.top);
+      let newX = parseInt(duck.style.left);
+      let newY = parseInt(duck.style.top);
 
-    if (gameContainer.classList.contains("invincible")) {
-      //a 0 seconde on peu plus cliquer sur les canards
-      duck.style.pointerEvents = "none";
-      setTimeout(() => {
-        // les rend clicable a nouveau
-        duck.style.pointerEvents = "auto";
-      }, 4000);
-    }
-
-    let { leftOrRightValue, upOrDownValue } = randomValues[index];
-    if (duck.classList.contains("dead")) {
-      newX += 0;
-      newY += 0;
-    } else if (gameContainer.classList.contains("end")) {
-      upOrDownValue = 2;
-      if (leftOrRightValue === 0) {
-        newX = Math.max(newX - distance /* 0 */);
-      } else if (leftOrRightValue === 2) {
-        newX = Math.min(newX + distance /* maxX */);
+      if (gameContainer.classList.contains("invincible")) {
+        //a 0 seconde on peu plus cliquer sur les canards
+        duck.style.pointerEvents = "none";
+        setTimeout(() => {
+          // les rend clicable a nouveau
+          duck.style.pointerEvents = "auto";
+        }, 4000);
       }
-      if (upOrDownValue === 0) {
-        newY = Math.min(newY + distance /*  maxY  */);
-      } else if (upOrDownValue === 2) {
-        newY = Math.max(newY - distance /* 0 */);
-      }
-      if (leftOrRightValue === 1 && upOrDownValue === 1) {
-        newY -= 5;
-        newX += 10;
-      }
-    } else {
-      if (leftOrRightValue === 0) {
-        newX = Math.max(newX - distance /* 0 */);
-      } else if (leftOrRightValue === 2) {
-        newX = Math.min(newX + distance /* maxX */);
-      }
-      if (upOrDownValue === 0) {
-        newY = Math.min(newY + distance /*  maxY  */);
-      } else if (upOrDownValue === 2) {
-        newY = Math.max(newY - distance /* 0 */);
-      }
-      if (leftOrRightValue === 1 && upOrDownValue === 1) {
-        newY -= 5;
-        newX += 10;
-      }
-    }
 
-    const transformations = {
-      "1-2": ["flying-top", `scaleY(1) rotate(0deg)`], //top
-      "1-0": ["flying-top", `scaleY(-1) rotate(0deg)`], //bottom
-      "2-1": ["flying-right", `scaleY(1) rotate(0deg)`], //right
-      "0-1": ["flying-right", `scaleX(-1) rotate(0deg)`], //left
-      "2-2": ["flying-top-right", `scaleY(1) rotate(0deg)`], //top-right
-      "0-2": ["flying-top-right", `scaleX(-1) rotate(0deg)`], //top-left
-      "2-0": ["flying-top-right", `scale(1) rotate(90deg)`], //bottom-right
-      "0-0": ["flying-top-right", `scaleX(-1) rotate(90deg)`], //bottom-left
-      "1-1": ["flying-right", `scaleY(1) rotate(0deg)`],
-    };
-
-    const key = `${leftOrRightValue}-${upOrDownValue}`;
-    if (transformations[key]) {
-      const [className, transformValue] = transformations[key];
-      duck.classList.remove("flying-top", "flying-top-right", "flying-right");
-      if (!duck.classList.contains("dead")) {
-        duck.classList.add(className);
-        duck.style.transform = transformValue;
-      } else {
-        duck.style.transform = `scaleY(1) rotate(0deg)`;
-      }
-    }
-
-    duck.style.left = newX + "px";
-    duck.style.top = newY + "px";
-  });
-}
-
-function timerShowUp() {
-  let time = seconde;
-
-  // Clear any existing interval
-  clearInterval(countdown);
-
-  // Show the timer
-  timediv.style.translate = "-152px -150px";
-
-  // Format the timer as 00:00
-  countdown = setInterval(function () {
-    let minutes = Math.floor(time / 60);
-    let remainingtime = time % 60;
-    let formattedTime =
-      (minutes < 10 ? "0" : "") +
-      minutes +
-      ":" +
-      (remainingtime < 10 ? "0" : "") +
-      remainingtime;
-    timer.textContent = formattedTime;
-
-    if (time <= 2) {
-      gameContainer.classList.add("end");
-      setTimeout(() => {
-        gameContainer.classList.remove("end");
-        while (gameContainer.firstChild) {
-          gameContainer.removeChild(gameContainer.firstChild);
+      let { leftOrRightValue, upOrDownValue } = randomValues[index];
+      if (duck.classList.contains("dead")) {
+        newX += 0;
+        newY += 0;
+      } else if (gameContainer.classList.contains("end")) {
+        upOrDownValue = 2;
+        if (leftOrRightValue === 0) {
+          newX = Math.max(newX - distance /* 0 */);
+        } else if (leftOrRightValue === 2) {
+          newX = Math.min(newX + distance /* maxX */);
         }
-      }, 8000);
-    }
+        if (upOrDownValue === 0) {
+          newY = Math.min(newY + distance /*  maxY  */);
+        } else if (upOrDownValue === 2) {
+          newY = Math.max(newY - distance /* 0 */);
+        }
+        if (leftOrRightValue === 1 && upOrDownValue === 1) {
+          newY -= 5;
+          newX += 10;
+        }
+      } else {
+        if (leftOrRightValue === 0) {
+          newX = Math.max(newX - distance /* 0 */);
+        } else if (leftOrRightValue === 2) {
+          newX = Math.min(newX + distance /* maxX */);
+        }
+        if (upOrDownValue === 0) {
+          newY = Math.min(newY + distance /*  maxY  */);
+        } else if (upOrDownValue === 2) {
+          newY = Math.max(newY - distance /* 0 */);
+        }
+        if (leftOrRightValue === 1 && upOrDownValue === 1) {
+          newY -= 5;
+          newX += 10;
+        }
+      }
 
-    if (time <= 0) {
-      gameContainer.classList.add("invincible");
-      gameContainer.classList.add("oneduck?");
+      const transformations = {
+        "1-2": ["flying-top", `scaleY(1) rotate(0deg)`], //top
+        "1-0": ["flying-top", `scaleY(-1) rotate(0deg)`], //bottom
+        "2-1": ["flying-right", `scaleY(1) rotate(0deg)`], //right
+        "0-1": ["flying-right", `scaleX(-1) rotate(0deg)`], //left
+        "2-2": ["flying-top-right", `scaleY(1) rotate(0deg)`], //top-right
+        "0-2": ["flying-top-right", `scaleX(-1) rotate(0deg)`], //top-left
+        "2-0": ["flying-top-right", `scale(1) rotate(90deg)`], //bottom-right
+        "0-0": ["flying-top-right", `scaleX(-1) rotate(90deg)`], //bottom-left
+        "1-1": ["flying-right", `scaleY(1) rotate(0deg)`],
+      };
 
-      dog.style.translate = "0px -140px";
-      dog.style.opacity = "1";
-      setTimeout(() => {
-        gameContainer.classList.remove("invincible");
-        console.log("operationel pour une deuxieme game");
-        timer.textContent = `00:${seconde}`;
-        startGame();
-      }, 8000);
+      const key = `${leftOrRightValue}-${upOrDownValue}`;
+      if (transformations[key]) {
+        const [className, transformValue] = transformations[key];
+        duck.classList.remove("flying-top", "flying-top-right", "flying-right");
+        if (!duck.classList.contains("dead")) {
+          duck.classList.add(className);
+          duck.style.transform = transformValue;
+        } else {
+          duck.style.transform = `scaleY(1) rotate(0deg)`;
+        }
+      }
 
-      clearInterval(countdown);
-
-      setTimeout(() => {
-        // Restart the background
-        grass.classList.toggle("paused");
-        gameContainer.classList.remove("oneduck?");
-      }, 1000);
-
-      // Hide the timer
-      timediv.style.translate = "-152px 0px";
-    }
-
-    time--;
-  }, 1000);
+      duck.style.left = newX + "px";
+      duck.style.top = newY + "px";
+    });
+  }
 }
 
 function menuDisapearInGame() {
@@ -432,6 +376,7 @@ function failed() {
     console.log("failed");
     nightModeBtn.style.opacity = 1;
     envApi();
+    isPaused;
   }
 
   function envApi() {
@@ -554,3 +499,81 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+/* Menu Pause */
+let lastTimestamp = performance.now();
+
+let isPaused = false;
+
+function toggleCloudsAnimation(isPaused) {
+  const clouds = document.querySelector(".clouds");
+  const clouds2 = document.querySelector(".clouds2");
+  if (isPaused) {
+    clouds.classList.add("paused");
+    clouds2.classList.add("paused");
+  } else {
+    clouds.classList.remove("paused");
+    clouds2.classList.remove("paused");
+  }
+}
+
+function toggleAnimationPause() {
+  ducks.forEach((duck) => {
+    duck.style.animationPlayState = isPaused ? "paused" : "running";
+  });
+}
+
+function Restart() {
+  window.location.reload();
+}
+
+/* Menu Difficulty */
+// Ajoutez cet événement à votre script
+document
+  .getElementById("difficulty-slider")
+  .addEventListener("input", updateDifficultyLabel);
+
+function showDifficulty() {
+  const difficultyDiv = document.querySelector(".difficulty");
+  difficultyDiv.style.display = "block";
+}
+
+function applyDifficulty() {
+  // Cacher la div "difficulty" après l'application de la difficulté (à ajuster selon vos besoins)
+  const difficultyDiv = document.querySelector(".difficulty");
+  difficultyDiv.style.display = "none";
+}
+
+// Définissez la fonction updateDifficultyLabel
+function updateDifficultyLabel() {
+  const difficultySlider = document.getElementById("difficulty-slider");
+  const difficultyLabel = document.getElementById("difficulty-label");
+  const speedLabel = document.getElementById("speed-label");
+  const difficultyValue = parseInt(difficultySlider.value);
+  switch (difficultyValue) {
+    case 1:
+      difficultyLabel.textContent = "Difficulty: Easy";
+      speedLabel.textContent = "Speed: 100";
+      speed = 100;
+      break;
+    case 2:
+      difficultyLabel.textContent = "Difficulty: Medium";
+      speedLabel.textContent = "Speed: 75";
+      speed = 75;
+      break;
+    case 3:
+      difficultyLabel.textContent = "Difficulty: Hard";
+      speedLabel.textContent = "Speed: 50";
+      speed = 50;
+      break;
+    case 4:
+      difficultyLabel.textContent = "Difficulty: Extreme";
+      speedLabel.textContent = "";
+      break;
+    default:
+      difficultyLabel.textContent = "Difficulty: Easy";
+      speedLabel.textContent = "Speed: 100";
+      speed = 100;
+      break;
+  }
+}
