@@ -8,8 +8,41 @@ const quackSound = new Audio("media/music/quack.mp3");
 
 ////////////recup divs//////////////
 
-//////////////menu//////////////////
+//////////////menu/////////////////
+function isExpertDifficulty() {
+  // Vous devrez ajuster cette fonction en fonction de la façon dont vous déterminez la difficulté
+  const difficultySlider = document.getElementById("difficulty-slider");
+  return difficultySlider.value == 4; // Supposons que la valeur 4 représente le niveau "Expert"
+}
+
 function startGame() {
+  if (isExpertDifficulty()) {
+    startGameExtreme();
+  } else {
+    startGameNormal();
+  }
+}
+
+function startGameNormal() {
+  nightModeBtn.style.opacity = 0;
+  setInterval(function () {
+    moveDuck(ducks);
+  }, speed);
+  startTime = Date.now();
+  menuDisapearInGame();
+  timerShowUp();
+  dogAnimation();
+  setTimeout(() => {
+    startCreatingDucks();
+    setInterval(getRandomValue, 1000);
+  }, 1000);
+  console.log(speed);
+  setTimeout(() => {
+    failed();
+  }, 11000);
+}
+
+function startGameExtreme() {
   // Start moving ducks at regular intervals
   nightModeBtn.style.opacity = 0;
   const moveDucksInterval = setInterval(function () {
@@ -40,9 +73,7 @@ function startGame() {
   }
 
   setTimeout(() => {
-    if (!isGamePaused) {
-      failed();
-    }
+    failed();
   }, 11000);
 }
 

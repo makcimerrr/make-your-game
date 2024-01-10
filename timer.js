@@ -42,7 +42,11 @@ function timerShowUp() {
           gameContainer.classList.remove("invincible");
           console.log("operationel pour une deuxieme game");
           timer.textContent = `00:${seconde}`;
-          startGame();
+          if (isExpertDifficulty()) {
+            startGameExtreme();
+          } else {
+            return;
+          }
         }, 8000);
 
         clearInterval(countdown);
