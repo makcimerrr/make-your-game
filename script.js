@@ -1,18 +1,17 @@
 ////////////recup divs//////////////
-const menu = document.getElementById('menu')
-const grass = document.querySelector('.grass');
-const dog = document.querySelector('.dog')
-const silencedSound = new Audio('media/music/silenced.mp3');
-const hitmarkerSound = new Audio('media/music/hitmarker.wav');
-const quackSound = new Audio('media/music/quack.mp3');
-
+const menu = document.getElementById("menu");
+const grass = document.querySelector(".grass");
+const dog = document.querySelector(".dog");
+const silencedSound = new Audio("media/music/silenced.mp3");
+const hitmarkerSound = new Audio("media/music/hitmarker.wav");
+const quackSound = new Audio("media/music/quack.mp3");
 
 ////////////recup divs//////////////
 
 //////////////menu//////////////////
 function startGame() {
   // Start moving ducks at regular intervals
-  nightModeBtn.style.opacity = 0
+  nightModeBtn.style.opacity = 0;
   const moveDucksInterval = setInterval(function () {
     moveDuck(ducks);
   }, speed);
@@ -29,30 +28,27 @@ function startGame() {
     setInterval(getRandomValue, 1000);
   }, 1000);
   if (speed > 30) {
-    speed -= 10
-    duckStartHeight -= 200
-    console.log('next speed: ' + speed)
+    speed -= 10;
+    duckStartHeight -= 200;
+    console.log("next speed: " + speed);
   } else if (speed > 10 && speed <= 30) {
-    speed -= 5
-    duckStartHeight -= 200
-    console.log('next speed: ' + speed)
+    speed -= 5;
+    duckStartHeight -= 200;
+    console.log("next speed: " + speed);
   } else {
-    console.log('You are max speed')
+    console.log("You are max speed");
   }
-
 
   setTimeout(() => {
     failed();
   }, 11000);
-
-
-
 }
 
-function menuDisapearInGame() { //fait disparaitre le menu quand on clique sur start
-  console.log('menu disapear')
-  menu.style.opacity = 0
-  grass.classList.toggle('paused');
+function menuDisapearInGame() {
+  //fait disparaitre le menu quand on clique sur start
+  console.log("menu disapear");
+  menu.style.opacity = 0;
+  grass.classList.toggle("paused");
 
   setTimeout(() => {
     menu.style.zIndex = -999;
@@ -60,11 +56,10 @@ function menuDisapearInGame() { //fait disparaitre le menu quand on clique sur s
 }
 
 function showCredits() {
-  console.log('Artworks : Enzo')
-  console.log('Front-End : Enzo')
-  console.log('Back-End : Enzo ft. Chat-Gpt')
+  console.log("Artworks : Enzo");
+  console.log("Front-End : Enzo");
+  console.log("Back-End : Enzo ft. Chat-Gpt");
 }
-
 
 //////////////game//////////////////
 
@@ -74,17 +69,17 @@ function showCredits() {
 // ecran fail
 // skins ???
 
-const failScreen = document.getElementById('fail-screen')
+const failScreen = document.getElementById("fail-screen");
 
-const nightModeBtn = document.querySelector('.night-mode-btn')
+const nightModeBtn = document.querySelector(".night-mode-btn");
 
-const gameContainer = document.getElementById('game-container');
+const gameContainer = document.getElementById("game-container");
 let duckCount = 0;
 const ducks = [];
 
 let i = 0;
 var maxDuck = 15;
-var duckStartHeight = 3000
+var duckStartHeight = 3000;
 
 var distance = 16;
 var speed = 100;
@@ -104,148 +99,133 @@ let redCount = 2;
 
 let countdown;
 let seconde = 10;
-const timer = document.querySelector('.timer')
-const timediv = document.querySelector('.timediv')
+const timer = document.querySelector(".timer");
+const timediv = document.querySelector(".timediv");
 
+const score = document.querySelector(".score");
 
-const score = document.querySelector('.score')
+const divBg = document.querySelector(".divbackground");
 
-const divBg = document.querySelector('.divbackground')
+let lastScore = 0;
 
-let lastScore = 0
-
-
-
-window.addEventListener('resize', () => {
+window.addEventListener("resize", () => {
   screenWidth = window.innerWidth;
   screenHeight = window.innerHeight;
 });
-
 
 function getRandomValue() {
   randomValues = [];
   const currentTime = Date.now() - startTime;
   ducks.forEach(() => {
     const leftOrRightValue = Math.floor(Math.random() * 3);
-    const upOrDownValue = currentTime < (duckStartHeight + 1000) ? 2 : Math.floor(Math.random() * 3);
+    const upOrDownValue =
+      currentTime < duckStartHeight + 1000 ? 2 : Math.floor(Math.random() * 3);
     randomValues.push({ leftOrRightValue, upOrDownValue });
   });
 }
 
-
 function isBlackBlueOrRed() {
   if (blueCount > 0 && Math.random() < 0.05) {
     blueCount--;
-    return 'blue';
+    return "blue";
   } else if (redCount > 0 && Math.random() < 0.1) {
     redCount--;
-    return 'red';
+    return "red";
   } else {
-    return 'black';
+    return "black";
   }
 }
 
-
-
 function createDuck(id, initialX, initialY) {
-  const duck = document.createElement('div');
+  const duck = document.createElement("div");
   duck.id = `duck${id}`;
-  duck.classList.add('bird');
+  duck.classList.add("bird");
   duck.style.left = `${initialX}px`;
   duck.style.top = `${initialY}px`;
-  
+
   const color = isBlackBlueOrRed();
-  
-  if (color === 'red') {
-    duck.classList.add('red');
-  } else if (color === 'blue') {
-    duck.classList.add('blue');
+
+  if (color === "red") {
+    duck.classList.add("red");
+  } else if (color === "blue") {
+    duck.classList.add("blue");
   }
-  
-  let alreadyDead = false
-  
-  
-  document.addEventListener('click', function() {
+
+  let alreadyDead = false;
+
+  document.addEventListener("click", function () {
     silencedSound.currentTime = 0;
-        silencedSound.play();
+    silencedSound.play();
   });
-  
-  duck.addEventListener('click', function () {
+
+  duck.addEventListener("click", function () {
     setTimeout(() => {
-    silencedSound.volume = 1
+      silencedSound.volume = 1;
     }, 50);
-    silencedSound.volume = 0.5
-    
-    
-    console.log(deadDucks, lastScore)
+    silencedSound.volume = 0.5;
+
+    console.log(deadDucks, lastScore);
     if (!alreadyDead) {
       alreadyDead = true;
       hitmarkerSound.play();
       quackSound.currentTime = 0;
       quackSound.play();
-      duck.classList.add('dead')
-      if (duck.classList.contains('red')) {
-        deadDucks += 2
+      duck.classList.add("dead");
+      if (duck.classList.contains("red")) {
+        deadDucks += 2;
       }
-      if (duck.classList.contains('blue')) {
-        deadDucks += 5
+      if (duck.classList.contains("blue")) {
+        deadDucks += 5;
       } else {
-        deadDucks += 1
+        deadDucks += 1;
       }
-      
-      score.textContent = `${deadDucks}`
 
+      score.textContent = `${deadDucks}`;
 
       if (deadDucks % 2 === 0) {
-        const counterDog = document.createElement('div');
-        counterDog.classList.add('counter-dog');
-        counterDog.classList.add('double-duck');
-        counterDog.style.pointerEvents = 'auto'
+        const counterDog = document.createElement("div");
+        counterDog.classList.add("counter-dog");
+        counterDog.classList.add("double-duck");
+        counterDog.style.pointerEvents = "auto";
         counterDog.style.left = `${initialX}px`;
         divBg.appendChild(counterDog);
         setTimeout(() => {
           divBg.removeChild(counterDog);
         }, 4000);
-        counterDog.addEventListener('click', function () {
-          counterDog.classList.remove('double-duck')
-          counterDog.classList.add('dead-dog')
-          console.log('feur')
-          killedDog()
+        counterDog.addEventListener("click", function () {
+          counterDog.classList.remove("double-duck");
+          counterDog.classList.add("dead-dog");
+          console.log("feur");
+          killedDog();
         });
       }
 
-      if (deadDucks % 2 !== 0 && gameContainer.classList.contains('end')) {
-        const counterDog = document.createElement('div');
-        counterDog.classList.add('counter-dog');
-        counterDog.classList.add('one-duck');
-        counterDog.style.pointerEvents = 'auto'
+      if (deadDucks % 2 !== 0 && gameContainer.classList.contains("end")) {
+        const counterDog = document.createElement("div");
+        counterDog.classList.add("counter-dog");
+        counterDog.classList.add("one-duck");
+        counterDog.style.pointerEvents = "auto";
         counterDog.style.left = `${initialX}px`;
         divBg.appendChild(counterDog);
         setTimeout(() => {
           divBg.removeChild(counterDog);
         }, 4000);
 
-
-
-
-        counterDog.addEventListener('click', function () {
-
-          killedDog()
+        counterDog.addEventListener("click", function () {
+          killedDog();
         });
       }
 
       setTimeout(() => {
-        console.log('removed')
+        console.log("removed");
         removeDuck(duck);
-      }, 2000)
-
+      }, 2000);
     }
-
   });
 
   gameContainer.appendChild(duck);
   ducks.push(duck);
-  lastScore = deadDucks
+  lastScore = deadDucks;
 }
 
 function removeDuck(duck) {
@@ -257,24 +237,27 @@ function removeDuck(duck) {
 }
 
 function startCreatingDucks() {
-  createDuck(i, Math.floor(Math.random() * gameContainer.offsetWidth), gameContainer.offsetHeight);
+  createDuck(
+    i,
+    Math.floor(Math.random() * gameContainer.offsetWidth),
+    gameContainer.offsetHeight
+  );
   setInterval(getRandomValue());
   i++;
   if (i < maxDuck) {
-    console.log('created duck')
+    console.log("created duck");
     setTimeout(startCreatingDucks, 100);
-    console.log(i)
+    console.log(i);
   }
   if (i === maxDuck - 1) {
     setTimeout(() => {
-      i = 0
+      i = 0;
     }, 10000);
   }
 }
 
-
 function moveDuck(ducks) {
-  console.log('moved')
+  console.log("moved");
   ducks.forEach((duck, index) => {
     /*     const maxX = gameContainer.offsetWidth - duckWidth;
     const maxY = gameContainer.offsetHeight - duckHeight; */
@@ -282,46 +265,45 @@ function moveDuck(ducks) {
     let newX = parseInt(duck.style.left);
     let newY = parseInt(duck.style.top);
 
-    if (gameContainer.classList.contains('invincible')) {
+    if (gameContainer.classList.contains("invincible")) {
       //a 0 seconde on peu plus cliquer sur les canards
-      duck.style.pointerEvents = 'none'
+      duck.style.pointerEvents = "none";
       setTimeout(() => {
         // les rend clicable a nouveau
-        duck.style.pointerEvents = 'auto'
+        duck.style.pointerEvents = "auto";
       }, 4000);
     }
 
     let { leftOrRightValue, upOrDownValue } = randomValues[index];
-    if (duck.classList.contains('dead')) {
-      newX += 0
-      newY += 0
-    } else if (gameContainer.classList.contains('end')) {
+    if (duck.classList.contains("dead")) {
+      newX += 0;
+      newY += 0;
+    } else if (gameContainer.classList.contains("end")) {
       upOrDownValue = 2;
       if (leftOrRightValue === 0) {
-        newX = Math.max(newX - distance, /* 0 */);
+        newX = Math.max(newX - distance /* 0 */);
       } else if (leftOrRightValue === 2) {
-        newX = Math.min(newX + distance, /* maxX */);
+        newX = Math.min(newX + distance /* maxX */);
       }
       if (upOrDownValue === 0) {
-        newY = Math.min(newY + distance,/*  maxY  */);
+        newY = Math.min(newY + distance /*  maxY  */);
       } else if (upOrDownValue === 2) {
-        newY = Math.max(newY - distance, /* 0 */);
+        newY = Math.max(newY - distance /* 0 */);
       }
       if (leftOrRightValue === 1 && upOrDownValue === 1) {
         newY -= 5;
         newX += 10;
       }
-    }
-    else {
+    } else {
       if (leftOrRightValue === 0) {
-        newX = Math.max(newX - distance, /* 0 */);
+        newX = Math.max(newX - distance /* 0 */);
       } else if (leftOrRightValue === 2) {
-        newX = Math.min(newX + distance, /* maxX */);
+        newX = Math.min(newX + distance /* maxX */);
       }
       if (upOrDownValue === 0) {
-        newY = Math.min(newY + distance,/*  maxY  */);
+        newY = Math.min(newY + distance /*  maxY  */);
       } else if (upOrDownValue === 2) {
-        newY = Math.max(newY - distance, /* 0 */);
+        newY = Math.max(newY - distance /* 0 */);
       }
       if (leftOrRightValue === 1 && upOrDownValue === 1) {
         newY -= 5;
@@ -330,37 +312,33 @@ function moveDuck(ducks) {
     }
 
     const transformations = {
-      '1-2': ['flying-top', `scaleY(1) rotate(0deg)`],//top
-      '1-0': ['flying-top', `scaleY(-1) rotate(0deg)`],//bottom
-      '2-1': ['flying-right', `scaleY(1) rotate(0deg)`],//right
-      '0-1': ['flying-right', `scaleX(-1) rotate(0deg)`],//left
-      '2-2': ['flying-top-right', `scaleY(1) rotate(0deg)`],//top-right
-      '0-2': ['flying-top-right', `scaleX(-1) rotate(0deg)`],//top-left
-      '2-0': ['flying-top-right', `scale(1) rotate(90deg)`],//bottom-right
-      '0-0': ['flying-top-right', `scaleX(-1) rotate(90deg)`],//bottom-left
-      '1-1': ['flying-right', `scaleY(1) rotate(0deg)`]
+      "1-2": ["flying-top", `scaleY(1) rotate(0deg)`], //top
+      "1-0": ["flying-top", `scaleY(-1) rotate(0deg)`], //bottom
+      "2-1": ["flying-right", `scaleY(1) rotate(0deg)`], //right
+      "0-1": ["flying-right", `scaleX(-1) rotate(0deg)`], //left
+      "2-2": ["flying-top-right", `scaleY(1) rotate(0deg)`], //top-right
+      "0-2": ["flying-top-right", `scaleX(-1) rotate(0deg)`], //top-left
+      "2-0": ["flying-top-right", `scale(1) rotate(90deg)`], //bottom-right
+      "0-0": ["flying-top-right", `scaleX(-1) rotate(90deg)`], //bottom-left
+      "1-1": ["flying-right", `scaleY(1) rotate(0deg)`],
     };
 
     const key = `${leftOrRightValue}-${upOrDownValue}`;
     if (transformations[key]) {
       const [className, transformValue] = transformations[key];
-      duck.classList.remove('flying-top', 'flying-top-right', 'flying-right');
-      if (!duck.classList.contains('dead')) {
+      duck.classList.remove("flying-top", "flying-top-right", "flying-right");
+      if (!duck.classList.contains("dead")) {
         duck.classList.add(className);
         duck.style.transform = transformValue;
       } else {
-        duck.style.transform = `scaleY(1) rotate(0deg)`
+        duck.style.transform = `scaleY(1) rotate(0deg)`;
       }
     }
 
-    duck.style.left = newX + 'px';
-    duck.style.top = newY + 'px';
+    duck.style.left = newX + "px";
+    duck.style.top = newY + "px";
   });
-
 }
-
-
-
 
 function timerShowUp() {
   let time = seconde;
@@ -369,21 +347,24 @@ function timerShowUp() {
   clearInterval(countdown);
 
   // Show the timer
-  timediv.style.translate = '-152px -150px';
+  timediv.style.translate = "-152px -150px";
 
   // Format the timer as 00:00
   countdown = setInterval(function () {
     let minutes = Math.floor(time / 60);
     let remainingtime = time % 60;
     let formattedTime =
-      (minutes < 10 ? '0' : '') + minutes + ':' +
-      (remainingtime < 10 ? '0' : '') + remainingtime;
+      (minutes < 10 ? "0" : "") +
+      minutes +
+      ":" +
+      (remainingtime < 10 ? "0" : "") +
+      remainingtime;
     timer.textContent = formattedTime;
 
     if (time <= 2) {
-      gameContainer.classList.add('end');
+      gameContainer.classList.add("end");
       setTimeout(() => {
-        gameContainer.classList.remove('end');
+        gameContainer.classList.remove("end");
         while (gameContainer.firstChild) {
           gameContainer.removeChild(gameContainer.firstChild);
         }
@@ -391,14 +372,14 @@ function timerShowUp() {
     }
 
     if (time <= 0) {
-      gameContainer.classList.add('invincible');
-      gameContainer.classList.add('oneduck?');
+      gameContainer.classList.add("invincible");
+      gameContainer.classList.add("oneduck?");
 
-      dog.style.translate = '0px -140px';
-      dog.style.opacity = '1';
+      dog.style.translate = "0px -140px";
+      dog.style.opacity = "1";
       setTimeout(() => {
-        gameContainer.classList.remove('invincible');
-        console.log('operationel pour une deuxieme game');
+        gameContainer.classList.remove("invincible");
+        console.log("operationel pour une deuxieme game");
         timer.textContent = `00:${seconde}`;
         startGame();
       }, 8000);
@@ -407,12 +388,12 @@ function timerShowUp() {
 
       setTimeout(() => {
         // Restart the background
-        grass.classList.toggle('paused');
-        gameContainer.classList.remove('oneduck?');
+        grass.classList.toggle("paused");
+        gameContainer.classList.remove("oneduck?");
       }, 1000);
 
       // Hide the timer
-      timediv.style.translate = '-152px 0px';
+      timediv.style.translate = "-152px 0px";
     }
 
     time--;
@@ -420,60 +401,74 @@ function timerShowUp() {
 }
 
 function menuDisapearInGame() {
-  console.log('menu disapear');
+  console.log("menu disapear");
   menu.style.opacity = 0;
-  grass.classList.toggle('paused');
+  grass.classList.toggle("paused");
 
   setTimeout(() => {
     menu.style.zIndex = -999;
   }, 500);
 }
 
-
 function dogAnimation() {
-  dog.classList.replace('snif', 'find')
+  dog.classList.replace("snif", "find");
   setTimeout(() => {
-    dog.classList.replace('find', 'snif')
-    dog.style.opacity = '0'
-    dog.style.translate = '-100px -140px'
+    dog.classList.replace("find", "snif");
+    dog.style.opacity = "0";
+    dog.style.translate = "-100px -140px";
   }, 1000);
-  if (gameContainer.classList.contains('end')) {
+  if (gameContainer.classList.contains("end")) {
   }
-
 }
 
-
-
-
-
-
-lastDeadDucks = 0
-
-
-
+lastDeadDucks = 0;
 
 function failed() {
-  lastDeadDucks = deadDucks
-  console.log('Checking deadDucks after 5 seconds:', deadDucks);
-  console.log(lastDeadDucks, deadDucks)
+  lastDeadDucks = deadDucks;
+  //console.log("Checking deadDucks after 5 seconds:", deadDucks);
+  //  console.log(lastDeadDucks, deadDucks);
   if (lastScore === deadDucks) {
-    failScreen.style.zIndex = 999
-    console.log('failed')
-    nightModeBtn.style.opacity = 1
+    failScreen.style.zIndex = 999;
+    console.log("failed");
+    nightModeBtn.style.opacity = 1;
+    envApi();
+  }
+
+  function envApi() {
+    const playerName = prompt("Entrez votre nom d'utilisateur:");
+    console.log(playerName);
+    const playerData = {
+      username: playerName,
+      score: deadDucks,
+    };
+
+    console.log(playerData);
+
+    fetch("http://127.0.0.1:8080/addscore", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(playerData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Réponse du serveur:", data);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'envoi des données:", error);
+      });
   }
 }
-
-
-
 
 /* Night Mode */
 let nightMode = false;
 const moon = document.querySelector(".moon");
 const cloudBtn = document.querySelector(".cloud-btn");
-const stbtn = document.querySelector('.startBtn')
-const cbtn = document.querySelector('.creditBtn')
-const dbtn = document.querySelector('.difficultyBtn')
-const skbtn = document.querySelector('.skinBtn')
+const stbtn = document.querySelector(".startBtn");
+const cbtn = document.querySelector(".creditBtn");
+const dbtn = document.querySelector(".difficultyBtn");
+const skbtn = document.querySelector(".skinBtn");
 
 let lastClickTime = 0;
 
@@ -494,21 +489,21 @@ nightModeBtn.addEventListener("click", function () {
     moon.style.backgroundColor = "rgb(220, 215, 215)";
     nightModeBtn.style.backgroundColor = "#001f54";
     document.body.classList.add("dark-mode"); // Ajoutez une classe au body pour le mode sombre
-    menu.classList.add('flip')
+    menu.classList.add("flip");
     /*     stbtn.classList.add('flipbtn')
         cbtn.classList.add('flipbtn')
         dbtn.classList.add('flipbtn')
         skbtn.classList.add('flipbtn') */
     setTimeout(() => {
-      stbtn.style.backgroundColor = ('#6b387e')
-      cbtn.style.backgroundColor = ('#6b387e')
-      dbtn.style.backgroundColor = ('#6b387e')
-      skbtn.style.backgroundColor = ('#6b387e')
+      stbtn.style.backgroundColor = "#6b387e";
+      cbtn.style.backgroundColor = "#6b387e";
+      dbtn.style.backgroundColor = "#6b387e";
+      skbtn.style.backgroundColor = "#6b387e";
 
       logo.src = "media/logo_dark.png"; // Changez la source de l'image pour le mode sombre
     }, 500);
     setTimeout(() => {
-      menu.classList.remove('flip')
+      menu.classList.remove("flip");
       /*       stbtn.classList.remove('flipbtn')
       cbtn.classList.remove('flipbtn')
       dbtn.classList.remove('flipbtn')
@@ -516,50 +511,46 @@ nightModeBtn.addEventListener("click", function () {
     }, 1000);
     console.log("Night Mode activated");
     nightMode = true;
-
   } else {
     cloudBtn.style.transform = "translateX(0px)";
     cloudBtn.style.opacity = "1";
     moon.style.left = "1px";
     nightModeBtn.style.backgroundColor = "#0cecfc";
     moon.style.backgroundColor = "#ffd60a";
-    menu.classList.add('flip')
+    menu.classList.add("flip");
     document.body.classList.remove("dark-mode"); // Retirez la classe pour le mode sombre
 
     setTimeout(() => {
-
-      stbtn.style.backgroundColor = ('#4caf50')
-      cbtn.style.backgroundColor = ('#4caf50')
-      dbtn.style.backgroundColor = ('#4caf50')
-      skbtn.style.backgroundColor = ('#4caf50')
+      stbtn.style.backgroundColor = "#4caf50";
+      cbtn.style.backgroundColor = "#4caf50";
+      dbtn.style.backgroundColor = "#4caf50";
+      skbtn.style.backgroundColor = "#4caf50";
       logo.src = "media/logo.ico"; // Changez la source de l'image pour le mode sombre
     }, 500);
     setTimeout(() => {
-      menu.classList.remove('flip')
+      menu.classList.remove("flip");
     }, 1000);
     console.log("Night Mode desactivated");
     nightMode = false;
   }
 });
 
-
-const music = document.getElementById('music');
+const music = document.getElementById("music");
 
 function killedDog() {
-  failScreen.classList.add('failed')
-  const killSound = new Audio('media/music/ftnkill.mp3');
+  failScreen.classList.add("failed");
+  const killSound = new Audio("media/music/ftnkill.mp3");
 
-  failScreen.style.zIndex = 999
+  failScreen.style.zIndex = 999;
   killSound.play();
   music.pause();
 }
 
-
 /////autoplaymusic/////
-document.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener('click', function() {
-        if (music.paused && !failScreen.classList.contains('failed')) {
-            music.play();
-        }
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("click", function () {
+    if (music.paused && !failScreen.classList.contains("failed")) {
+      music.play();
+    }
+  });
 });
