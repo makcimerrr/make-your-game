@@ -1,49 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <link rel="icon" href="media/logo.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="icon" href="media/logo.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Duck Hunt</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-
-
-
-<body>
+  <body>
     <div id="fps-display"></div>
     <button class="night-mode-btn">
-        <div class="moon"></div>
-        <div class="minidirt"></div>
-        <div class="stars-btn">
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-        </div>
-        <div class="cloud-btn">
-            <div class="cloud-btn2"></div>
-            <div class="cloud-btn2"></div>
-        </div>
-
-
-
+      <div class="moon"></div>
+      <div class="minidirt"></div>
+      <div class="stars-btn">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+      </div>
+      <div class="cloud-btn">
+        <div class="cloud-btn2"></div>
+        <div class="cloud-btn2"></div>
+      </div>
     </button>
 
     <audio id="music" controls loop play>
-        <source src="media/music/banger.mp3" type="audio/mp3">
+      <source src="media/music/banger.mp3" type="audio/mp3" />
     </audio>
 
     <div id="menu">
-        <img id="logo" src="media/logo.ico" />
-        <div class="menu-buttons">
+      <img id="logo" src="media/logo.ico" />
+      <div class="menu-buttons">
         <button class="button" onclick="startGame()">Start</button>
         <button class="button" onclick="showCredits()">Credits</button>
         <button class="button" onclick="showDifficulty()">Difficulty</button>
         <button class="button" onclick="setSkin()">Skin</button>
-    </div>
-    <div class="difficulty">
+        <button class="button" onclick="toggleRanking()">Ranking</button>
+      </div>
+      <div class="difficulty">
         <h2>Choose Difficulty</h2>
         <input
           type="range"
@@ -57,11 +51,10 @@
         <p id="speed-label">Speed: 100</p>
         <button onclick="applyDifficulty()">Apply</button>
       </div>
+      <div id="rankingContainer" class="hidden">
+        <!-- Ranking will be displayed here -->
+      </div>
     </div>
-    </div>
-
-
-    
 
     <div id="overlay" class="overlay"></div>
     <div id="pauseMenu" class="menu">
@@ -71,57 +64,59 @@
     </div>
 
     <div id="fail-screen">
-        <h1>FAILED</h1>
-        <button onclick="Restart()">Back Home</button>
+      <h1>FAILED</h1>
+      <button onclick="Restart()">Back Home</button>
+    </div>
+
+    <div id="score-screen">
+      <h1 id="score-value"></h1>
+      <button onclick="Restart()">Back Home</button>
     </div>
 
     <div class="mountain"></div>
 
     <div class="dirt">
-        <div class="score">0</div>
+      <div class="score">0</div>
     </div>
     <div class="sky">
-        <div class="clouds">
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-        </div>
-        <div class="clouds2">
-            <div class="cloud2"></div>
-            <div class="cloud2"></div>
-        </div>
+      <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+      </div>
+      <div class="clouds2">
+        <div class="cloud2"></div>
+        <div class="cloud2"></div>
+      </div>
     </div>
 
     <section class="divbackground">
-        <div class="dog snif"></div>
-        <!--         <div class="counter-dog"></div> -->
-        <div class="timediv">
-            <div class="timer">00:10</div>
-            <div class="timer-foot"></div>
-        </div>
+      <div class="dog snif"></div>
+      <!--         <div class="counter-dog"></div> -->
+      <div class="timediv">
+        <div class="timer">00:10</div>
+        <div class="timer-foot"></div>
+      </div>
 
-        <div class="grass">
-            <div class="trees">
-                <div class="tree"></div>
-                <div class="tree"></div>
-                <div class="tree"></div>
-                <div class="tree"></div>
-            </div>
-            <div class="bushes">
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-                <div class="bush"></div>
-            </div>
+      <div class="grass">
+        <div class="trees">
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
         </div>
+        <div class="bushes">
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+          <div class="bush"></div>
+        </div>
+      </div>
     </section>
     <div id="game-container"></div>
-
-</body>
-<script src="script.js"></script>
-<script src="fps.js"></script>
-<script src="timer.js"></script>
-
-
+  </body>
+  <script src="script.js"></script>
+  <script src="fps.js"></script>
+  <script src="timer.js"></script>
 </html>

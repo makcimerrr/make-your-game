@@ -66,6 +66,22 @@ function timerShowUp() {
       }
 
       time--;
+
+      lastDeadDucks = deadDucks;
+
+      if (time < 0) {
+        if (!isExpertDifficulty) {
+          // Temps écoulé, déclencher la fonction failed
+          failed();
+          clearInterval(countdown); // Arrêter le setInterval
+        } else {
+          if (lastScore === deadDucks) {
+            // Temps écoulé, déclencher la fonction failed
+            failed();
+            clearInterval(countdown); // Arrêter le setInterval
+          }
+        }
+      }
     }
   }, 1000);
 }

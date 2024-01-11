@@ -23,6 +23,8 @@ function startGame() {
   }
 }
 
+let countdownTime = 11000; // Temps en millisecondes
+
 function startGameNormal() {
   nightModeBtn.style.opacity = 0;
   setInterval(function () {
@@ -37,9 +39,9 @@ function startGameNormal() {
     setInterval(getRandomValue, 1000);
   }, 1000);
   console.log(speed);
-  setTimeout(() => {
-    failed();
-  }, 11000);
+
+  countdownTime = 11000; // Réinitialiser le temps du compte à rebours
+  timerShowUp();
 }
 
 function startGameExtreme() {
@@ -72,9 +74,8 @@ function startGameExtreme() {
     console.log("You are max speed");
   }
 
-  setTimeout(() => {
-    failed();
-  }, 11000);
+  countdownTime = 11000; // Réinitialiser le temps du compte à rebours
+  timerShowUp();
 }
 
 function menuDisapearInGame() {
@@ -398,20 +399,37 @@ function dogAnimation() {
 
 let lastDeadDucks = 0;
 let isFailed = false;
+let showScore = document.getElementById("score-screen");
+const scoreValueElement = document.getElementById("score-value");
 
 function failed() {
+  envApi();
   lastDeadDucks = deadDucks;
   //console.log("Checking deadDucks after 5 seconds:", deadDucks);
   //  console.log(lastDeadDucks, deadDucks);
   if (lastScore === deadDucks) {
-    failScreen.style.zIndex = 999;
-    console.log("failed");
-    isFailed = true;
+    if (deadDucks === 0) {
+      failScreen.style.zIndex = 999;
+      console.log("failed");
+      isFailed = true;
+      grass.classList.toggle("paused");
+      dog.classList.toggle("paused");
+      nightModeBtn.style.opacity = 1;
+      isPaused;
+    } else {
+      showScore.style.zIndex = 999;
+      scoreValueElement.textContent = "Score: " + deadDucks;
+      grass.classList.toggle("paused");
+      dog.classList.toggle("paused");
+      nightModeBtn.style.opacity = 1;
+      isPaused;
+    }
+  } else {
+    showScore.style.zIndex = 999;
     grass.classList.toggle("paused");
     dog.classList.toggle("paused");
-    nightModeBtn.style.opacity = 1;
-    envApi();
-    isPaused;
+
+    scoreValueElement.textContent = "Score: " + deadDucks;
   }
 
   function envApi() {
@@ -611,4 +629,69 @@ function updateDifficultyLabel() {
       speed = 100;
       break;
   }
+}
+
+/* Rank */
+
+var rankingContainer = document.getElementById("rankingContainer");
+var rankingVisible = false;
+
+function toggleRanking() {
+  if (rankingVisible) {
+    rankingContainer.style.display = "none";
+  } else {
+    rankingContainer.style.display = "block";
+  }
+  rankingVisible = !rankingVisible;
+}
+
+var isRankingVisible = false;
+
+function toggleRanking() {
+  var rankingContainer = document.getElementById("rankingContainer");
+
+  // Inverse l'état d'affichage à chaque clic
+  isRankingVisible = !isRankingVisible;
+
+  if (isRankingVisible) {
+    showRanking();
+    rankingContainer.style.display = "block";
+  } else {
+    rankingContainer.style.display = "none";
+  }
+}
+
+function showRanking() {
+  fetch("http://127.0.0.1:8080/getscoreboard", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      updateRankingHTML(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+function updateRankingHTML(rankingData) {
+  var rankingContainer = document.getElementById("rankingContainer");
+
+  rankingContainer.style.display = "block";
+  // Clear previous content in the container
+  rankingContainer.innerHTML = "";
+  // Create and append elements to display ranking
+
+  var heading = document.createElement("h2");
+  heading.textContent = "Ranking";
+  var list = document.createElement("ul");
+  for (var i = 0; i < Math.min(10, rankingData.length); i++) {
+    var listItem = document.createElement("li");
+    listItem.textContent = `${i + 1}. ${rankingData[i].username} - Score: ${
+      rankingData[i].score
+    }`;
+    list.appendChild(listItem);
+  }
+  rankingContainer.appendChild(heading);
+  rankingContainer.appendChild(list);
 }
