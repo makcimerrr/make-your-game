@@ -55,18 +55,33 @@ function menuDisapearInGame() {
   }, 500);
 }
 
-function showCredits() {
-  console.log("les bgff ");
+document.addEventListener('DOMContentLoaded', function() {
+  const music = document.getElementById('music');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const sfxSlider = document.getElementById('sfxSlider');
 
-}
+
+  volumeSlider.addEventListener('input', function() {
+    const volume = this.value / 100;
+    music.volume = volume;
+  });
+
+  sfxSlider.addEventListener('input', function() {
+    const volume = this.value / 100;
+    silencedSound.volume = volume;
+    hitmarkerSound.volume = volume;
+    quackSound.volume = volume;
+  });
+});
+
+function showSettings() {
+  const openSettingsDiv = document.querySelector('.openSettings');
+  openSettingsDiv.classList.toggle('active');
+};
+
+
 
 //////////////game//////////////////
-
-// a faire :
-///if je touche au moins un canard la vitesse augmente
-// relancer la partie automatiquement
-// ecran fail
-// skins ???
 
 const failScreen = document.getElementById("fail-screen");
 
@@ -158,11 +173,11 @@ function createDuck(id, initialX, initialY) {
   });
 
   duck.addEventListener("click", function () {
-    setTimeout(() => {
+/*     setTimeout(() => {
       silencedSound.volume = 1;
     }, 50);
     silencedSound.volume = 0.5;
-
+ */
     console.log(deadDucks, lastScore);
     if (!alreadyDead) {
       alreadyDead = true;
@@ -499,9 +514,9 @@ let nightMode = false;
 const moon = document.querySelector(".moon");
 const cloudBtn = document.querySelector(".cloud-btn");
 const stbtn = document.querySelector(".startBtn");
-const cbtn = document.querySelector(".creditBtn");
+const sbtn = document.querySelector(".settingsBtn");
 const dbtn = document.querySelector(".difficultyBtn");
-const skbtn = document.querySelector(".skinBtn");
+const rbtn = document.querySelector(".rankingBtn");
 
 let lastClickTime = 0;
 
@@ -524,23 +539,23 @@ nightModeBtn.addEventListener("click", function () {
     document.body.classList.add("dark-mode"); // Ajoutez une classe au body pour le mode sombre
     menu.classList.add("flip");
     /*     stbtn.classList.add('flipbtn')
-        cbtn.classList.add('flipbtn')
+        sbtn.classList.add('flipbtn')
         dbtn.classList.add('flipbtn')
-        skbtn.classList.add('flipbtn') */
+        rbtn.classList.add('flipbtn') */
     setTimeout(() => {
       stbtn.style.backgroundColor = "#6b387e";
-      cbtn.style.backgroundColor = "#6b387e";
+      sbtn.style.backgroundColor = "#6b387e";
       dbtn.style.backgroundColor = "#6b387e";
-      skbtn.style.backgroundColor = "#6b387e";
+      rbtn.style.backgroundColor = "#6b387e";
 
       logo.src = "media/logo_dark.png"; // Changez la source de l'image pour le mode sombre
     }, 500);
     setTimeout(() => {
       menu.classList.remove("flip");
       /*       stbtn.classList.remove('flipbtn')
-      cbtn.classList.remove('flipbtn')
+      sbtn.classList.remove('flipbtn')
       dbtn.classList.remove('flipbtn')
-      skbtn.classList.remove('flipbtn') */
+      rbtn.classList.remove('flipbtn') */
     }, 1000);
     console.log("Night Mode activated");
     nightMode = true;
@@ -555,9 +570,9 @@ nightModeBtn.addEventListener("click", function () {
 
     setTimeout(() => {
       stbtn.style.backgroundColor = "#4caf50";
-      cbtn.style.backgroundColor = "#4caf50";
+      sbtn.style.backgroundColor = "#4caf50";
       dbtn.style.backgroundColor = "#4caf50";
-      skbtn.style.backgroundColor = "#4caf50";
+      rbtn.style.backgroundColor = "#4caf50";
       logo.src = "media/logo.ico"; // Changez la source de l'image pour le mode sombre
     }, 500);
     setTimeout(() => {
@@ -574,7 +589,6 @@ const music = document.getElementById("music");
 function killedDog() {
   failScreen.classList.add("failed");
   const killSound = new Audio("media/music/ftnkill.mp3");
-
   failScreen.style.zIndex = 999;
   killSound.play();
   music.pause();
@@ -588,3 +602,64 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+
+
+
+
+/* Menu Difficulty */
+// Ajoutez cet événement à votre script
+document
+  .getElementById("difficulty-slider")
+  .addEventListener("input", updateDifficultyLabel);
+  const difficultyDiv = document.querySelector(".difficulty");
+  
+/* function showDifficulty() {
+  difficultyDiv.style.display = "block";
+}
+
+function applyDifficulty() {
+  // Cacher la div "difficulty" après l'application de la difficulté (à ajuster selon vos besoins)
+  const difficultyDiv = document.querySelector(".difficulty");
+}
+ */
+const openDifficulty = document.querySelector('.openDifficulty')
+
+function setDifficulty() {
+  openDifficulty.classList.toggle('active');
+/*   applyDifficulty() */
+}
+
+// Définissez la fonction updateDifficultyLabel
+function updateDifficultyLabel() {
+  const difficultySlider = document.getElementById("difficulty-slider");
+  const difficultyLabel = document.getElementById("difficulty-label");
+  const speedLabel = document.getElementById("speed-label");
+  const difficultyValue = parseInt(difficultySlider.value);
+  switch (difficultyValue) {
+    case 1:
+      difficultyLabel.textContent = "Easy";
+      speedLabel.textContent = "Speed: slow";
+      speed = 100;
+      break;
+    case 2:
+      difficultyLabel.textContent = "Medium";
+      speedLabel.textContent = "Speed: medium";
+      speed = 75;
+      break;
+    case 3:
+      difficultyLabel.textContent = "Hard";
+      speedLabel.textContent = "Speed: fast";
+      speed = 50;
+      break;
+    case 4:
+      difficultyLabel.textContent = "Extreme";
+      speedLabel.textContent = "Gonna be Hard";
+      break;
+    default:
+      difficultyLabel.textContent = "Easy";
+      speedLabel.textContent = "Speed: 100";
+      speed = 100;
+      break;
+  }
+}

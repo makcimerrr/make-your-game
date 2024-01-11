@@ -13,8 +13,10 @@
 
 
 <body>
+    <audio id="music" controls loop play>
+        <source src="media/music/banger.mp3" type="audio/mp3">
+    </audio>
 
-   
     <div id="fps-display"></div>
     <button class="night-mode-btn">
         <div class="moon"></div>
@@ -28,31 +30,43 @@
             <div class="cloud-btn2"></div>
             <div class="cloud-btn2"></div>
         </div>
-
-
-
     </button>
 
-    <audio id="music" controls loop play>
-        <source src="media/music/banger.mp3" type="audio/mp3">
-    </audio>
 
     <div id="menu">
         <img id="logo" src="media/logo.ico" />
         <div class="menu-buttons">
-        <button class="button startBtn" onclick="startGame()">Start</button>
-        <button class="button creditBtn" onclick="showCredits()">Credits</button>
-        <button class="button difficultyBtn" onclick="setDifficulty()">Difficulty</button>
-        <button class="button skinBtn" onclick="setSkin()">Skin</button>
-        <button class="button ranking" onclick="showRanking()">Ranking</button>
+            <button class="button startBtn" onclick="startGame()">Start</button>
+            <button class="button settingsBtn" onclick="showSettings()">Settings
+                <div class="openSettings">
+                    <div class="line"></div>
+                    <div class="volume-fader">
+                        <label for="volumeSlider">Volume</label>
+                        <input type="range" id="volumeSlider" min="0" max="100" step="1" value="100">
+                    </div>
+                    <div class="sfx-fader">
+                        <label for="sfxSlider">SFX</label>
+                        <input type="range" id="sfxSlider" min="0" max="100" step="1" value="100">
+                    </div>
+                </div>
+            </button>
+            <button class="button difficultyBtn" onclick="setDifficulty()">Difficulty
+                <div class="openDifficulty">
+                    <div class="line"></div>
+                    <p id="difficulty-label">Easy</p>
+                    <input type="range" id="difficulty-slider" min="1" max="4" step="1" value="1" />
+                    <p id="speed-label">Speed: slow</p>
+                                        <!-- <button onclick="applyDifficulty()">Apply</button> -->
+                </div>
+            </button>
+            <button class="button rankingBtn" onclick="showRanking()">Ranking</button>
+        </div>
+        <div id="rankingContainer">
+            <!-- Ranking will be displayed here -->
+        </div>
+    </div>
 
-    </div>
-    <div id="rankingContainer">
-        <!-- Ranking will be displayed here -->
-    </div>
-    </div>
 
-    
 
     <div id="fail-screen">FAILED</div>
     <div class="mountain"></div>
@@ -60,7 +74,7 @@
     <div class="dirt">
         <div class="score">0</div>
     </div>
-    
+
     <div class="sky">
         <div class="clouds">
             <div class="cloud"></div>

@@ -59,17 +59,19 @@ body {
 }
 
 .flip {
-animation: flip 1s ease-in-out forwards;
+    animation: flip 1s ease-in-out forwards;
 }
 
 @keyframes flip {
     0% {
         transform: translate(-50%, -50%) rotateY(0deg);
     }
+
     50% {
         transform: translate(-50%, -50%) rotateY(90deg);
     }
-    100%{
+
+    100% {
         transform: translate(-50%, -50%) rotateY(0deg);
 
     }
@@ -79,7 +81,7 @@ animation: flip 1s ease-in-out forwards;
     border: 10px solid #222221;
     background-color: #422828;
     transition: opacity 0.5s steps(5), background-color 0.5s step-end, border 0.5s step-end;
-  }
+}
 
 #logo {
     max-width: 100%;
@@ -114,12 +116,13 @@ animation: flip 1s ease-in-out forwards;
 /* .dark-mode .button {
     background-color: #6b387e;
   } */
-  .button:hover {
+.button:hover {
     background-color: #45a049;
-  }
-  .dark-mode .button:hover {
+}
+
+.dark-mode .button:hover {
     background-color: #6b385e;
-  }
+}
 
 #score-form {
     margin-top: 20px;
@@ -264,7 +267,7 @@ animation: flip 1s ease-in-out forwards;
 .dark-mode .minidirt {
     background-color: #3e1e88;
     border-top: #4e0097 dashed 1px;
-  }
+}
 
 @keyframes miniDirtScroll {
     0% {
@@ -315,7 +318,7 @@ animation: flip 1s ease-in-out forwards;
     background-image: url("media/grass_night.png");
     transition: background-image 1s ease-in-out;
 
-  }
+}
 
 .grass.paused {
     animation-play-state: paused;
@@ -336,15 +339,16 @@ animation: flip 1s ease-in-out forwards;
     background-color: #102c51;
     transition: background-color 1s ease-in-out;
 
-  }
+}
 
-  .trees {
+.trees {
     position: fixed;
     top: 80vh;
     translate: 0px -490px;
     display: flex;
-  }
-  .tree {
+}
+
+.tree {
     height: 400px;
     width: 210px;
     background-image: url("media/tree.png");
@@ -352,12 +356,13 @@ animation: flip 1s ease-in-out forwards;
     background-size: 100%;
     transition: background-image 1s ease-in-out;
 
-  }
-  .dark-mode .tree {
+}
+
+.dark-mode .tree {
     background-image: url("media/tree_night.png");
     transition: background-image 1s ease-in-out;
 
-  }
+}
 
 .tree:nth-child(1) {
     margin-left: 700px;
@@ -395,7 +400,7 @@ animation: flip 1s ease-in-out forwards;
 .dark-mode .bush {
     background-image: url("media/bush_night.png");
     transition: background-image 1s ease-in-out;
-  }
+}
 
 .bush:nth-child(1) {
     margin-right: 350px;
@@ -442,7 +447,7 @@ animation: flip 1s ease-in-out forwards;
 .dark-mode .mountain {
     background-image: url("media/sky-transformed.jpg");
     transition: background-image 1s ease-in-out;
-  }
+}
 
 @keyframes background-defilment {
     0% {
@@ -473,7 +478,7 @@ animation: flip 1s ease-in-out forwards;
     background-image: url("media/cloud_night.png");
     transition: background-image 1s ease-in-out;
 
-  }
+}
 
 .cloud:nth-child(1) {
     margin-top: 5vh;
@@ -507,7 +512,7 @@ animation: flip 1s ease-in-out forwards;
 .dark-mode .cloud2 {
     background-image: url("media/cloud_night.png");
     transition: all 1s ease-in-out;
-  }
+}
 
 .cloud2:nth-child(1) {
     margin-top: 12vh;
@@ -875,19 +880,23 @@ animation: flip 1s ease-in-out forwards;
 }
 
 @keyframes deadDog {
-    0%{
+    0% {
         translate: 0px -140px;
     }
+
     25% {
         translate: 0px -140px;
     }
-    50%{
+
+    50% {
         translate: 0px -200px;
     }
-    75%{
+
+    75% {
         translate: 0px -200px;
     }
-    100%{
+
+    100% {
         translate: 0px -80px;
 
     }
@@ -897,9 +906,11 @@ animation: flip 1s ease-in-out forwards;
     0% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -1031,7 +1042,8 @@ animation: flip 1s ease-in-out forwards;
 }
 
 #rankingContainer h2 {
-    font-size: 20px; /* Adjust the font size as needed */
+    font-size: 20px;
+    /* Adjust the font size as needed */
     margin-bottom: 10px;
 }
 
@@ -1042,6 +1054,69 @@ animation: flip 1s ease-in-out forwards;
 }
 
 #rankingContainer li {
-    font-size: 14px; /* Adjust the font size as needed */
+    font-size: 14px;
+    /* Adjust the font size as needed */
     margin-bottom: 5px;
+}
+
+.openSettings {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.openSettings.active {
+    max-height: 200px;
+}
+
+.line {
+    height: 3px;
+    width: 160px;
+    background-color: white;
+    margin: 10px;
+}
+
+.volume-fader {
+    text-align: center;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    /*     width: 200px; */
+    height: 10px;
+    background-color: rgb(49, 129, 53);
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 10px;
+    background: white;
+    border-radius: 20%;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    color: white;
+}
+
+#speed-label {
+    font-size: 10px;
+}
+
+.openDifficulty {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.openDifficulty.active {
+    max-height: 200px;
 }
