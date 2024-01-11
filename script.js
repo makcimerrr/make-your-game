@@ -296,7 +296,6 @@ function moveDuck(ducks) {
     ducks.forEach((duck, index) => {
       /*     const maxX = gameContainer.offsetWidth - duckWidth;
     const maxY = gameContainer.offsetHeight - duckHeight; */
-
       let newX = parseInt(duck.style.left);
       let newY = parseInt(duck.style.top);
 
@@ -373,6 +372,7 @@ function moveDuck(ducks) {
       duck.style.left = newX + "px";
       duck.style.top = newY + "px";
     });
+    requestAnimationFrame(moveDuck); // Call moveDuck again on the next frame
   }
 }
 
@@ -606,7 +606,7 @@ function updateDifficultyLabel() {
   switch (difficultyValue) {
     case 1:
       difficultyLabel.textContent = "Difficulty: Easy";
-      speedLabel.textContent = "Speed: 100";
+      speedLabel.textContent = "Speed: 1";
       speed = 100;
       break;
     case 2:
