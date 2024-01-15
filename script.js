@@ -171,7 +171,7 @@ function isBlackBlueOrRed() {
 }
 
 function createDuck(id, initialX, initialY) {
-  const duck = document.createElement("div");
+  const duck = document.createElement("duck");
   duck.id = `duck${id}`;
   duck.classList.add("bird");
   duck.style.left = `${initialX}px`;
@@ -399,16 +399,18 @@ function dogAnimation() {
 
 let lastDeadDucks = 0;
 let isFailed = false;
+
 let showScore = document.getElementById("score-screen");
 const scoreValueElement = document.getElementById("score-value");
 
 function failed() {
-  envApi();
   lastDeadDucks = deadDucks;
   //console.log("Checking deadDucks after 5 seconds:", deadDucks);
   //  console.log(lastDeadDucks, deadDucks);
+
   if (lastScore === deadDucks) {
     if (deadDucks === 0) {
+      envApi();
       failScreen.style.zIndex = 999;
       console.log("failed");
       isFailed = true;
@@ -417,6 +419,7 @@ function failed() {
       nightModeBtn.style.opacity = 1;
       isPaused;
     } else {
+      envApi();
       showScore.style.zIndex = 999;
       scoreValueElement.textContent = "Score: " + deadDucks;
       grass.classList.toggle("paused");
@@ -425,11 +428,13 @@ function failed() {
       isPaused;
     }
   } else {
+    envApi();
     showScore.style.zIndex = 999;
+    scoreValueElement.textContent = "Score: " + deadDucks;
     grass.classList.toggle("paused");
     dog.classList.toggle("paused");
-
-    scoreValueElement.textContent = "Score: " + deadDucks;
+    nightModeBtn.style.opacity = 1;
+    isPaused;
   }
 
   function envApi() {

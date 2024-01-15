@@ -75,11 +75,9 @@ function timerShowUp() {
           failed();
           clearInterval(countdown); // Arrêter le setInterval
         } else {
-          if (lastScore === deadDucks) {
-            // Temps écoulé, déclencher la fonction failed
-            failed();
-            clearInterval(countdown); // Arrêter le setInterval
-          }
+          // Temps écoulé, déclencher la fonction failed
+          failed();
+          clearInterval(countdown); // Arrêter le setInterval
         }
       }
     }
