@@ -1138,3 +1138,20 @@ body {
 #score-screen button:hover {
   background-color: #45a049; /* Couleur de fond verte au survol (vous pouvez ajuster) */
 }
+
+#pauseMenu button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #acacac; /* Couleur de fond verte (vous pouvez ajuster) */
+  color: #fff; /* Couleur du texte en blanc (vous pouvez ajuster) */
+  font-family: "Press Start 2P", system-ui;
+  transition: background-color 0.3s ease-in-out; /* Transition de changement de couleur de fond */
+}
+
+#pauseMenu button:hover {
+  background-color: #7a7c7a; /* Couleur de fond verte au survol (vous pouvez ajuster) */
+}

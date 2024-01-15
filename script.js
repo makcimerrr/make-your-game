@@ -170,6 +170,8 @@ function isBlackBlueOrRed() {
   }
 }
 
+let isDeadDog = false;
+
 function createDuck(id, initialX, initialY) {
   const duck = document.createElement("duck");
   duck.id = `duck${id}`;
@@ -231,6 +233,7 @@ function createDuck(id, initialX, initialY) {
           counterDog.classList.add("dead-dog");
           console.log("feur");
           killedDog();
+          isDeadDog = true;
         });
       }
 
@@ -247,6 +250,7 @@ function createDuck(id, initialX, initialY) {
 
         counterDog.addEventListener("click", function () {
           killedDog();
+          isDeadDog = true;
         });
       }
 
@@ -408,16 +412,26 @@ function failed() {
   //console.log("Checking deadDucks after 5 seconds:", deadDucks);
   //  console.log(lastDeadDucks, deadDucks);
 
-  if (lastScore === deadDucks) {
-    if (deadDucks === 0) {
-      envApi();
-      failScreen.style.zIndex = 999;
-      console.log("failed");
-      isFailed = true;
-      grass.classList.toggle("paused");
-      dog.classList.toggle("paused");
-      nightModeBtn.style.opacity = 1;
-      isPaused;
+  if (!isDeadDog) {
+    if (lastScore === deadDucks) {
+      if (deadDucks === 0) {
+        envApi();
+        failScreen.style.zIndex = 999;
+        console.log("failed");
+        isFailed = true;
+        grass.classList.toggle("paused");
+        dog.classList.toggle("paused");
+        nightModeBtn.style.opacity = 1;
+        isPaused;
+      } else {
+        envApi();
+        showScore.style.zIndex = 999;
+        scoreValueElement.textContent = "Score: " + deadDucks;
+        grass.classList.toggle("paused");
+        dog.classList.toggle("paused");
+        nightModeBtn.style.opacity = 1;
+        isPaused;
+      }
     } else {
       envApi();
       showScore.style.zIndex = 999;
@@ -428,9 +442,9 @@ function failed() {
       isPaused;
     }
   } else {
-    envApi();
-    showScore.style.zIndex = 999;
-    scoreValueElement.textContent = "Score: " + deadDucks;
+    failScreen.style.zIndex = 999;
+    console.log("failed");
+    isFailed = true;
     grass.classList.toggle("paused");
     dog.classList.toggle("paused");
     nightModeBtn.style.opacity = 1;
