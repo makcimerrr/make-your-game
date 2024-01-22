@@ -652,19 +652,10 @@ function updateDifficultyLabel() {
 
 /* Rank */
 
-var rankingContainer = document.getElementById("rankingContainer");
-var rankingVisible = false;
-
-function toggleRanking() {
-  if (rankingVisible) {
-    rankingContainer.style.display = "none";
-  } else {
-    rankingContainer.style.display = "block";
-  }
-  rankingVisible = !rankingVisible;
-}
-
 var isRankingVisible = false;
+var currentPage = 1;
+var itemsPerPage = 1;
+var rankingData = []; // Stocker toutes les données côté client
 
 function toggleRanking() {
   var rankingContainer = document.getElementById("rankingContainer");
@@ -673,44 +664,86 @@ function toggleRanking() {
   isRankingVisible = !isRankingVisible;
 
   if (isRankingVisible) {
-    showRanking();
+    if (rankingData.length === 0) {
+      // Si les données n'ont pas encore été chargées, chargez-les
+      loadRankingData();
+    } else {
+      // Sinon, affichez la page actuelle
+      showCurrentPage();
+    }
     rankingContainer.style.display = "block";
   } else {
     rankingContainer.style.display = "none";
   }
 }
 
-function showRanking() {
+function loadRankingData() {
   fetch("http://127.0.0.1:8080/getscoreboard", {
     method: "GET",
   })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      updateRankingHTML(data);
+      rankingData = data;
+      showCurrentPage();
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 }
-function updateRankingHTML(rankingData) {
+
+function showCurrentPage() {
   var rankingContainer = document.getElementById("rankingContainer");
 
   rankingContainer.style.display = "block";
   // Clear previous content in the container
   rankingContainer.innerHTML = "";
-  // Create and append elements to display ranking
 
+  // Create and append elements to display ranking
   var heading = document.createElement("h2");
   heading.textContent = "Ranking";
+
+  var startIndex = (currentPage - 1) * itemsPerPage;
+  var endIndex = startIndex + itemsPerPage;
+  var currentPageData = rankingData.slice(startIndex, endIndex);
+
   var list = document.createElement("ul");
-  for (var i = 0; i < Math.min(10, rankingData.length); i++) {
+  for (var i = 0; i < currentPageData.length; i++) {
     var listItem = document.createElement("li");
-    listItem.textContent = `${i + 1}. ${rankingData[i].username} - Score: ${
-      rankingData[i].score
-    }`;
+    listItem.textContent = `${startIndex + i + 1}. ${
+      currentPageData[i].username
+    } - Score: ${currentPageData[i].score}`;
     list.appendChild(listItem);
   }
+
   rankingContainer.appendChild(heading);
   rankingContainer.appendChild(list);
+
+  // Add pagination buttons
+  var paginationContainer = document.createElement("div");
+  paginationContainer.classList.add("pagination");
+
+  var prevButton = document.createElement("button");
+  prevButton.textContent = "Précédent";
+  prevButton.addEventListener("click", function () {
+    if (currentPage > 1) {
+      currentPage--;
+      showCurrentPage();
+    }
+  });
+
+  var nextButton = document.createElement("button");
+  nextButton.textContent = "Suivant";
+  nextButton.addEventListener("click", function () {
+    var totalPages = Math.ceil(rankingData.length / itemsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      showCurrentPage();
+    }
+  });
+
+  paginationContainer.appendChild(prevButton);
+  paginationContainer.appendChild(nextButton);
+
+  rankingContainer.appendChild(paginationContainer);
 }

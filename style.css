@@ -1155,3 +1155,23 @@ body {
 #pauseMenu button:hover {
   background-color: #7a7c7a; /* Couleur de fond verte au survol (vous pouvez ajuster) */
 }
+
+/* Ajoutez ces styles à votre fichier CSS ou dans une balise style de votre fichier HTML */
+
+.pagination {
+  margin-top: 10px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
