@@ -1166,12 +1166,12 @@ body {
   padding: 5px 10px;
   margin-right: 5px;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #57a0ee;
   color: #fff;
   border: none;
   border-radius: 3px;
 }
 
 .pagination button:hover {
-  background-color: #3e5369;
+  background-color: #0475ee;
 }
