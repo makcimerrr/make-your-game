@@ -36,7 +36,8 @@
     <div id="menu">
         <img id="logo" src="media/logo.ico" />
         <div class="menu-buttons">
-            <button class="button startBtn" onclick="startGame()">Start</button>
+            <button class="button startBtn" onclick="startGame()">Quick Play</button>
+            <button class="button startBtn" onclick="startGameStory()">Story Mode</button>
             <button class="button settingsBtn" onclick="showSettings()">Settings
                 <div class="openSettings">
                     <div class="line"></div>
@@ -56,19 +57,69 @@
                     <p id="difficulty-label">Easy</p>
                     <input type="range" id="difficulty-slider" min="1" max="4" step="1" value="1" />
                     <p id="speed-label">Speed: slow</p>
-                                        <!-- <button onclick="applyDifficulty()">Apply</button> -->
                 </div>
             </button>
-            <button class="button rankingBtn" onclick="showRanking()">Ranking</button>
-        </div>
-        <div id="rankingContainer">
-            <!-- Ranking will be displayed here -->
+            <button class="button rankingBtn" onclick="showRanking()">Ranking
+                <div class="openRanking">
+                    <div class="line"></div>
+                    <div id="rankingContainer"></div>
+                </div>
+            </button>
         </div>
     </div>
 
 
 
-    <div id="fail-screen">FAILED</div>
+
+    <div class="scenarioscreen">
+        <div class="dialbox">
+            <div class="dial dialdog">
+                <div class="intro dogintro haha"></div>
+                <p class="dialog">
+
+                    I'm really angry !!! <br> let's see what can i eat...</p>
+            </div>
+            <div class="dial dialbird">
+                <div class="intro bird affraid"></div>
+
+                <p class="dialog">You won't hit a single one of us</p>
+            </div>
+        </div>
+        <button class="story button startBtn" onclick="startGame()">Start</button>
+    </div>
+
+    <div class="endscreen">
+        <div class="dialbox">
+            <div class="dial dialdog">
+                <div class="intro dogintro haha"></div>
+                <p class="dialog">
+                    You fly so fast !!! i'm gonna eat grass.</p>
+            </div>
+            <div class="dial dialbird">
+                <div class="intro bird affraid"></div>
+
+                <p class="dialog">I told you haha !!!</p>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+    <div id="fail-screen">FAILED
+        <div id="usernameForm">
+            <label for="usernameInput">Enter your username:</label>
+            <p>to save your score in the scoreboard</p>
+            <input type="text" id="usernameInput" maxlength="5" placeholder="Max 5 characters" />
+            <button id="applyUsername" onclick="envApi()">Submit</button>
+            <div class="buttonDiv">
+                <button onclick="restart()">retry</button>
+                <button onclick="location.reload()">menu</button>
+            </div>
+        </div>
+    </div>
+
     <div class="mountain"></div>
 
     <div class="dirt">

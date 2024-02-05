@@ -8,6 +8,29 @@ body {
     font-family: 'Press Start 2P', system-ui;
 }
 
+
+/*//////////// INTRO///////////: */
+
+.scenarioscreen {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(22, 22, 22, 0.61);
+    z-index: 1000;
+    position: fixed;
+}
+
+.endscreen {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(22, 22, 22, 0.61);
+    z-index: 1000;
+    position: fixed;
+    display: none;
+    transition: all 1s ease-in-out;
+}
+
+
+
 /* /////menu///// */
 
 #fps-display {
@@ -38,6 +61,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     font-size: 100px;
     color: white;
 
@@ -121,7 +145,7 @@ body {
 }
 
 .dark-mode .button:hover {
-    background-color: #6b385e;
+    background-color: #ff00bf;
 }
 
 #score-form {
@@ -163,8 +187,12 @@ body {
     overflow: hidden;
 }
 
+.night-mode-btn:hover {
+    background-color: transparent;
+}
+
 .stars-btn {
-    transform: translateY(-5px);
+    transform: translateY(-5px) translateX(-13px);
 }
 
 .star {
@@ -215,13 +243,13 @@ body {
 }
 
 .cloud-btn {
-    translate: 5px;
     width: 36px;
     height: 26px;
     border-radius: 20px;
     display: flex;
-    overflow: hidden;
+    /*     overflow: hidden; */
     transition: all 0.5s ease-in-out;
+    /*     background-color: red; */
 }
 
 .cloud-btn2 {
@@ -235,7 +263,7 @@ body {
 }
 
 .cloud-btn2:nth-child(2) {
-    translate: -3px 15px;
+    translate: -14px 15px;
     animation: minicloud 4s linear infinite;
 
 }
@@ -499,6 +527,7 @@ body {
     position: fixed;
     display: flex;
     animation: cloudscroll 70s linear infinite;
+    transition: all 1s ease-in-out;
 }
 
 .cloud2 {
@@ -929,6 +958,108 @@ body {
     z-index: -5;
 }
 
+.intro {
+    position: fixed;
+}
+
+.haha {
+    height: 150px;
+    width: 180px;
+    background-image: url('media/bigdog.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    transform: translate(-300px) scale(150%);
+    animation: hahaDog 0.5s steps(1) infinite;
+}
+
+@keyframes hahaDog {
+    0% {
+        background-position: -530px -160px;
+    }
+
+    50% {
+        background-position: -710px -160px;
+    }
+}
+
+.affraid {
+    animation: affraid 0.5s steps(1) infinite;
+    height: 35px;
+    width: 35px;
+    background-image: url('media/bigdog.png');
+    scale: 400%;
+    background-position: -130px -225px;
+    right: 0;
+    translate: 250px;
+
+}
+
+.dialbox {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    translate: 50vw;
+    transform: translateX(-50%);
+
+}
+
+.dial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    border: 10px solid #f5f5dc;
+    background-color: #e8d0d0;
+}
+
+.dialog {
+    padding: 30px;
+    font-size: 20px;
+}
+
+@keyframes dialdogin {
+    0% {
+        translate: 0px -1300px;
+    }
+}
+
+.dialdog {
+    animation: dialdogin 2s ease-in-out;
+    height: 300px;
+    width: 300px;
+    border-radius: 10px
+}
+
+.dialbird {
+    translate: 0px -1300px;
+    height: 300px;
+    width: 300px;
+    border-radius: 10px;
+    animation: dialbirdin 2s 2s ease-in-out forwards;
+}
+
+@keyframes dialbirdin {
+    0% {
+        translate: 0px -1300px;
+    }
+
+    100% {
+        translate: 0px 0px;
+    }
+}
+
+@keyframes affraid {
+    0% {
+        transform: scaleX(-1);
+    }
+
+    50% {
+        transform: scaleX(-1) rotate(5deg);
+    }
+}
+
 .snif {
     animation: snifDog 0.5s steps(5) infinite;
 }
@@ -1034,17 +1165,28 @@ body {
     }
 }
 
-#rankingContainer {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f8f8f8;
+.openRanking {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    text-align: left;
+    line-height: 19px;
 }
 
-#rankingContainer h2 {
-    font-size: 20px;
-    /* Adjust the font size as needed */
-    margin-bottom: 10px;
+.openRanking.active {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.openRanking::-webkit-scrollbar {
+    width: 3px;
+}
+
+.openRanking::-webkit-scrollbar-thumb {
+    background-color: white;
+    /* Color of the thumb */
+    border-radius: 5px;
+    /* Rounded corners of the thumb */
 }
 
 #rankingContainer ul {
@@ -1055,8 +1197,7 @@ body {
 
 #rankingContainer li {
     font-size: 14px;
-    /* Adjust the font size as needed */
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .openSettings {
@@ -1082,7 +1223,7 @@ body {
 
 input[type="range"] {
     -webkit-appearance: none;
-    /*     width: 200px; */
+    width: auto;
     height: 10px;
     background-color: rgb(49, 129, 53);
     outline: none;
@@ -1119,4 +1260,90 @@ label {
 
 .openDifficulty.active {
     max-height: 200px;
+}
+
+#usernameForm {
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0.185);
+    z-index: 999;
+    height: auto;
+    width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+p {
+    font-size: 12px;
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    margin-bottom: 12px;
+}
+
+input {
+    pointer-events: all;
+    font-family: 'Press Start 2P', system-ui;
+    border: transparent;
+    background-color: #4caf50;
+    width: 300px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    color: white;
+    border-radius: 10px;
+    height: 35px;
+}
+
+input::placeholder {
+    color: white;
+}
+
+button {
+    font-family: 'Press Start 2P', system-ui;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.scenarioscreen {
+    display: none;
+    align-items: center;
+}
+
+@keyframes out {
+    0% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+.story {
+    position: fixed;
+    transform: translateX(-50%);
+    translate: 50vw 100vh;
+    animation: startin 1s 4s ease-in-out forwards;
+}
+
+@keyframes startin {
+    0% {
+        translate: 50vw 100vh;
+    }
+
+    100% {
+        translate: 50vw 20vh;
+    }
 }

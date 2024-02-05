@@ -5,48 +5,100 @@ const dog = document.querySelector(".dog");
 const silencedSound = new Audio("media/music/silenced.mp3");
 const hitmarkerSound = new Audio("media/music/hitmarker.wav");
 const quackSound = new Audio("media/music/quack.mp3");
+var augmentspeed = true;
+var storymode = false;
+const scenarioscreen = document.querySelector(".scenarioscreen")
 
 ////////////recup divs//////////////
 
 //////////////menu//////////////////
 function startGame() {
-  // Start moving ducks at regular intervals
-  nightModeBtn.style.opacity = 0;
-  const moveDucksInterval = setInterval(function () {
-    moveDuck(ducks);
-  }, speed);
-  setTimeout(() => {
-    clearInterval(moveDucksInterval);
-  }, 15000);
+  if (storymode === false) {
+    console.log("pas storymode")
 
-  startTime = Date.now();
-  menuDisapearInGame();
-  timerShowUp();
-  dogAnimation();
-  setTimeout(() => {
-    startCreatingDucks();
-    setInterval(getRandomValue, 1000);
-  }, 1000);
-  if (speed > 30) {
-    speed -= 10;
-    duckStartHeight -= 200;
-    console.log("next speed: " + speed);
-  } else if (speed > 10 && speed <= 30) {
-    speed -= 5;
-    duckStartHeight -= 200;
-    console.log("next speed: " + speed);
-  } else {
-    console.log("You are max speed");
+    nightModeBtn.style.opacity = 0;
+    const moveDucksInterval = setInterval(function () {
+      moveDuck(ducks);
+    }, speed);
+    setTimeout(() => {
+      clearInterval(moveDucksInterval);
+    }, 15000);
+
+    startTime = Date.now();
+    menuDisapearInGame();
+    timerShowUp();
+    dogAnimation();
+    setTimeout(() => {
+      startCreatingDucks();
+      setInterval(getRandomValue, 1000);
+    }, 1000);
+    if (augmentspeed === true) {
+      if (speed > 30) {
+        speed -= 10;
+        duckStartHeight -= 200;
+      } else if (speed > 10 && speed <= 30) {
+        speed -= 5;
+        duckStartHeight -= 200;
+      }
+    }
+
+    console.log(speed)
+    console.log(augmentspeed)
+    setTimeout(() => {
+      failed();
+    }, 11000);
   }
 
-  setTimeout(() => {
-    failed();
-  }, 11000);
+  if (storymode === true) {
+    console.log("sdddstorymode")
+    scenarioscreen.style.display = 'none';
+    const moveDucksInterval = setInterval(function () {
+      moveDuck(ducks);
+    }, speed);
+    setTimeout(() => {
+      clearInterval(moveDucksInterval);
+    }, 15000);
+
+    startTime = Date.now();
+    menuDisapearInGame();
+    timerShowUp();
+    dogAnimation();
+    setTimeout(() => {
+      startCreatingDucks();
+      setInterval(getRandomValue, 1000);
+    }, 1000);
+    if (augmentspeed === true) {
+      if (speed > 30) {
+        speed -= 10;
+        duckStartHeight -= 200;
+      } else if (speed > 10 && speed <= 30) {
+        speed -= 5;
+        duckStartHeight -= 200;
+      }
+    }
+
+    console.log(speed)
+    console.log(augmentspeed)
+
+    setTimeout(() => {
+      console.log(storymode)
+      failed();
+    }, 11000);
+
+
+  }
+}
+
+function startGameStory() {
+  nightModeBtn.style.opacity = 0;
+  storymode = true;
+  scenarioscreen.style.display = 'flex';
+  console.log("storymode")
+
 }
 
 function menuDisapearInGame() {
   //fait disparaitre le menu quand on clique sur start
-  console.log("menu disapear");
   menu.style.opacity = 0;
   grass.classList.toggle("paused");
 
@@ -55,18 +107,18 @@ function menuDisapearInGame() {
   }, 500);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const music = document.getElementById('music');
   const volumeSlider = document.getElementById('volumeSlider');
   const sfxSlider = document.getElementById('sfxSlider');
 
 
-  volumeSlider.addEventListener('input', function() {
+  volumeSlider.addEventListener('input', function () {
     const volume = this.value / 100;
     music.volume = volume;
   });
 
-  sfxSlider.addEventListener('input', function() {
+  sfxSlider.addEventListener('input', function () {
     const volume = this.value / 100;
     silencedSound.volume = volume;
     hitmarkerSound.volume = volume;
@@ -74,12 +126,70 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+const openSettingsDiv = document.querySelector('.openSettings');
+
 function showSettings() {
-  const openSettingsDiv = document.querySelector('.openSettings');
   openSettingsDiv.classList.toggle('active');
+  if (openDifficulty.classList.contains('active')) {
+    openDifficulty.classList.remove('active');
+  }
 };
 
+document
+  .getElementById("difficulty-slider")
+  .addEventListener("input", updateDifficultyLabel);
+const difficultyDiv = document.querySelector(".difficulty");
+const openDifficulty = document.querySelector('.openDifficulty');
 
+function setDifficulty() {
+  openDifficulty.classList.toggle('active');
+  if (openSettingsDiv.classList.contains('active')) {
+    openSettingsDiv.classList.remove('active');
+  }
+}
+
+
+function updateDifficultyLabel() {
+  const difficultySlider = document.getElementById("difficulty-slider");
+  const difficultyLabel = document.getElementById("difficulty-label");
+  const speedLabel = document.getElementById("speed-label");
+  const difficultyValue = parseInt(difficultySlider.value);
+  switch (difficultyValue) {
+    default:
+      difficultyLabel.textContent = "Easy";
+      speedLabel.textContent = "Speed: slow";
+      augmentspeed = false;
+      speed = 100;
+      break;
+    case 1:
+      difficultyLabel.textContent = "Easy";
+      speedLabel.textContent = "Speed: slow";
+      augmentspeed = false;
+      speed = 100;
+      break;
+    case 2:
+      difficultyLabel.textContent = "Medium";
+      speedLabel.textContent = "Speed: medium";
+      augmentspeed = false;
+
+      speed = 75;
+      break;
+    case 3:
+      difficultyLabel.textContent = "Hard";
+      speedLabel.textContent = "Speed: fast";
+      augmentspeed = false;
+
+      speed = 50;
+      break;
+    case 4:
+      difficultyLabel.textContent = "Extreme";
+      speedLabel.textContent = "Gonna be Hard";
+      augmentspeed = true;
+
+      speed = 100;
+      break;
+  }
+}
 
 //////////////game//////////////////
 
@@ -173,12 +283,6 @@ function createDuck(id, initialX, initialY) {
   });
 
   duck.addEventListener("click", function () {
-/*     setTimeout(() => {
-      silencedSound.volume = 1;
-    }, 50);
-    silencedSound.volume = 0.5;
- */
-    console.log(deadDucks, lastScore);
     if (!alreadyDead) {
       alreadyDead = true;
       hitmarkerSound.play();
@@ -209,7 +313,6 @@ function createDuck(id, initialX, initialY) {
         counterDog.addEventListener("click", function () {
           counterDog.classList.remove("double-duck");
           counterDog.classList.add("dead-dog");
-          console.log("feur");
           killedDog();
         });
       }
@@ -231,7 +334,6 @@ function createDuck(id, initialX, initialY) {
       }
 
       setTimeout(() => {
-        console.log("removed");
         removeDuck(duck);
       }, 2000);
     }
@@ -259,9 +361,7 @@ function startCreatingDucks() {
   setInterval(getRandomValue());
   i++;
   if (i < maxDuck) {
-    console.log("created duck");
     setTimeout(startCreatingDucks, 100);
-    console.log(i);
   }
   if (i === maxDuck - 1) {
     setTimeout(() => {
@@ -271,7 +371,6 @@ function startCreatingDucks() {
 }
 
 function moveDuck(ducks) {
-  console.log("moved");
   ducks.forEach((duck, index) => {
     /*     const maxX = gameContainer.offsetWidth - duckWidth;
     const maxY = gameContainer.offsetHeight - duckHeight; */
@@ -393,7 +492,6 @@ function timerShowUp() {
       dog.style.opacity = "1";
       setTimeout(() => {
         gameContainer.classList.remove("invincible");
-        console.log("operationel pour une deuxieme game");
         timer.textContent = `00:${seconde}`;
         startGame();
       }, 8000);
@@ -415,7 +513,6 @@ function timerShowUp() {
 }
 
 function menuDisapearInGame() {
-  console.log("menu disapear");
   menu.style.opacity = 0;
   grass.classList.toggle("paused");
 
@@ -423,6 +520,8 @@ function menuDisapearInGame() {
     menu.style.zIndex = -999;
   }, 500);
 }
+
+const endscreen = document.querySelector('.endscreen');
 
 function dogAnimation() {
   dog.classList.replace("snif", "find");
@@ -441,70 +540,80 @@ function failed() {
   lastDeadDucks = deadDucks;
 
   if (lastScore === deadDucks) {
-    failScreen.style.zIndex = 999;
-    nightModeBtn.style.opacity = 1;
-    envApi();
+    if (storymode == true) {
+      endscreen.style.display = 'flex'
+      setTimeout(() => {
+      endscreen.style.opacity = 0
+        
+      }, 5000)
+      setTimeout(() => {
+        endscreen.style.display = 'none'
+        failScreen.style.zIndex = 999;
+        nightModeBtn.style.opacity = 1;
+        butApply.style.backgroundColor = '#4caf50'
+        butApply.style.pointerEvents = 'auto'
+      }, 6000)
+    }
+    else {
+      failScreen.style.zIndex = 999;
+      nightModeBtn.style.opacity = 1;
+      butApply.style.backgroundColor = '#4caf50'
+      butApply.style.pointerEvents = 'auto'
+    }
+
   }
 
-  function envApi() {
-    const playerName = prompt("Entrez votre nom d'utilisateur:");
-    const playerData = {
-      username: playerName,
-      score: deadDucks,
-    };
+}
+const butApply = document.getElementById('applyUsername');
 
-    console.log(playerData);
+function envApi() {
+  const playerName = document.getElementById("usernameInput").value;
+  const playerData = {
+    username: playerName,
+    score: deadDucks,
+  };
 
-    fetch("http://127.0.0.1:8080/addscore", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(playerData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Réponse du serveur:", data);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de l'envoi des données:", error);
-      });
-  }
+  fetch("http://127.0.0.1:8080/addscore", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(playerData),
+  })
+    .then((response) => response.json())
+  butApply.style.backgroundColor = '#234725'
+  butApply.style.pointerEvents = 'none'
+
 }
 
+const openRanking = document.querySelector('.openRanking');
+
 function showRanking() {
+  openRanking.classList.toggle('active');
+
   fetch('http://127.0.0.1:8080/getscoreboard', {
-  method: 'GET', 
-})
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    updateRankingHTML(data);
+    method: 'GET',
   })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+    .then(response => response.json())
+    .then(data => {
+      updateRankingHTML(data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
 }
 
 function updateRankingHTML(rankingData) {
   var rankingContainer = document.getElementById('rankingContainer');
-
-  // Clear previous content in the container
   rankingContainer.innerHTML = '';
-
-  // Create and append elements to display ranking
-  var heading = document.createElement('h2');
-  heading.textContent = 'Ranking';
-
   var list = document.createElement('ul');
 
   for (var i = 0; i < Math.min(10, rankingData.length); i++) {
     var listItem = document.createElement('li');
     listItem.textContent = `${i + 1}. ${rankingData[i].username} - Score: ${rankingData[i].score}`;
     list.appendChild(listItem);
-}
-
-  rankingContainer.appendChild(heading);
+  }
   rankingContainer.appendChild(list);
 }
 
@@ -524,7 +633,6 @@ nightModeBtn.addEventListener("click", function () {
   const currentTime = new Date().getTime();
 
   if (currentTime - lastClickTime < 1000) {
-    console.log("Wait for 1 second before clicking again");
     return;
   }
 
@@ -538,10 +646,6 @@ nightModeBtn.addEventListener("click", function () {
     nightModeBtn.style.backgroundColor = "#001f54";
     document.body.classList.add("dark-mode"); // Ajoutez une classe au body pour le mode sombre
     menu.classList.add("flip");
-    /*     stbtn.classList.add('flipbtn')
-        sbtn.classList.add('flipbtn')
-        dbtn.classList.add('flipbtn')
-        rbtn.classList.add('flipbtn') */
     setTimeout(() => {
       stbtn.style.backgroundColor = "#6b387e";
       sbtn.style.backgroundColor = "#6b387e";
@@ -552,12 +656,7 @@ nightModeBtn.addEventListener("click", function () {
     }, 500);
     setTimeout(() => {
       menu.classList.remove("flip");
-      /*       stbtn.classList.remove('flipbtn')
-      sbtn.classList.remove('flipbtn')
-      dbtn.classList.remove('flipbtn')
-      rbtn.classList.remove('flipbtn') */
     }, 1000);
-    console.log("Night Mode activated");
     nightMode = true;
   } else {
     cloudBtn.style.transform = "translateX(0px)";
@@ -578,7 +677,6 @@ nightModeBtn.addEventListener("click", function () {
     setTimeout(() => {
       menu.classList.remove("flip");
     }, 1000);
-    console.log("Night Mode desactivated");
     nightMode = false;
   }
 });
@@ -602,64 +700,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-
-
-
-
-/* Menu Difficulty */
-// Ajoutez cet événement à votre script
-document
-  .getElementById("difficulty-slider")
-  .addEventListener("input", updateDifficultyLabel);
-  const difficultyDiv = document.querySelector(".difficulty");
-  
-/* function showDifficulty() {
-  difficultyDiv.style.display = "block";
-}
-
-function applyDifficulty() {
-  // Cacher la div "difficulty" après l'application de la difficulté (à ajuster selon vos besoins)
-  const difficultyDiv = document.querySelector(".difficulty");
-}
- */
-const openDifficulty = document.querySelector('.openDifficulty')
-
-function setDifficulty() {
-  openDifficulty.classList.toggle('active');
-/*   applyDifficulty() */
-}
-
-// Définissez la fonction updateDifficultyLabel
-function updateDifficultyLabel() {
-  const difficultySlider = document.getElementById("difficulty-slider");
-  const difficultyLabel = document.getElementById("difficulty-label");
-  const speedLabel = document.getElementById("speed-label");
-  const difficultyValue = parseInt(difficultySlider.value);
-  switch (difficultyValue) {
-    case 1:
-      difficultyLabel.textContent = "Easy";
-      speedLabel.textContent = "Speed: slow";
-      speed = 100;
-      break;
-    case 2:
-      difficultyLabel.textContent = "Medium";
-      speedLabel.textContent = "Speed: medium";
-      speed = 75;
-      break;
-    case 3:
-      difficultyLabel.textContent = "Hard";
-      speedLabel.textContent = "Speed: fast";
-      speed = 50;
-      break;
-    case 4:
-      difficultyLabel.textContent = "Extreme";
-      speedLabel.textContent = "Gonna be Hard";
-      break;
-    default:
-      difficultyLabel.textContent = "Easy";
-      speedLabel.textContent = "Speed: 100";
-      speed = 100;
-      break;
-  }
-}
