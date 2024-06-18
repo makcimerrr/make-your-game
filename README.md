@@ -23,7 +23,8 @@ Current State:
 
 | GAME A                                            | GAME B                                            | GAME C                                            |
 | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| ![](https://i.goopics.net/x2dktm.png) | ![](https://i.goopics.net/vxmvjd.png) | ![](https://i.goopics.net/c3h4fr.png) |
+| ![](./images/SCREENSHOTS/GAME%20A/SHOWCASE_1.png) | ![](./images/SCREENSHOTS/GAME%20B/SHOWCASE_1.png) | ![](./images/SCREENSHOTS/GAME%20C/SHOWCASE_1.png) |
+
 
 
 > *Keep up to date on the recent development by checking out the [Github](https://github.com/makcimerrr/make-your-gameJ "New Github").*
